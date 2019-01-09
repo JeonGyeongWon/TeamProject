@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>맛집메인</title>
+<title>맛집 메인 페이지</title>
 </head>
 <body>
-	<h2>맛집메인</h2>
+<h1>맛집 카테고리의 메인 페이지</h1>
+
 </body>
 </html>

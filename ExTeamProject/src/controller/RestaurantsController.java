@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import together.ActionForward;
 import together.Action;
 
-@WebServlet("*.food")
-public class FoodController extends HttpServlet{
+@WebServlet("*.rest")
+public class RestaurantsController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
