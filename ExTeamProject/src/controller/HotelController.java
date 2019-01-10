@@ -35,11 +35,11 @@ public class HotelController extends HttpServlet{
 		String command = uri.substring(ctx.length());
 		System.out.println(command);
 		
-		if(command=="/HotelMain.hotel"){	//메인페이지 이동은 별다른 작업이 없으므로 주소값만 지정한다.
+		if(command.equals("/HotelMain.hotel")){	//메인페이지 이동은 별다른 작업이 없으므로 주소값만 지정한다.
 			forward = new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath("hotel/hotelMain.jsp");
-		}else if(command=="각 요청 액션페이지"){
+		}else if(command.equals("각 요청 액션페이지")){
 			
 		}
 		

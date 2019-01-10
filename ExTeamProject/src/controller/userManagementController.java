@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import together.ActionForward;
 import together.Action;
 
-@WebServlet("*.re")
-public class RestaurantsController extends HttpServlet{
+@WebServlet("*.us")
+public class userManagementController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,28 +38,27 @@ public class RestaurantsController extends HttpServlet{
 		System.out.println("contextPath는 "+ctx+"입니다.");
 		System.out.println("command는 "+command+"입니다.");
 		
-		//header.jsp에서 [맛집]을 클릭할 때
-		if(command.equals("/RestaurantsMain.re")){
+		//header.jsp에서 
+		if(command.equals("/login.us")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("./restaurants/RestaurantsMain.jsp");
+			forward.setPath("./userManagement/login.jsp");
+			System.out.println("처리 완료");
 		}
 		//
-		else if(command.equals("각 요청 액션페이지")){
+		else if(command=="각 요청 액션페이지"){
 			
 		}
 		//
-		else if(command.equals("각 요청 액션페이지")){
+		else if(command=="각 요청 액션페이지"){
 			
 		}
 		
 		if(forward != null){
-			
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());	
 			}else{
-				RequestDispatcher dispatcher=
-						request.getRequestDispatcher(forward.getPath());
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 			
