@@ -17,7 +17,7 @@ public class ConnectionPool {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context)initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/디비이름");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/promotion");
 			con = ds.getConnection();
 			con.setAutoCommit(false);
 		} catch (Exception e) {
