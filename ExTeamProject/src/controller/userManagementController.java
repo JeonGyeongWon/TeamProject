@@ -39,19 +39,20 @@ public class userManagementController extends HttpServlet{
 		System.out.println("command는 "+command+"입니다.");
 		
 		//header.jsp에서 
-		if(command.equals("/login.us")){
+		if(command.equals("/loginPage.us")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./userManagement/login.jsp");
-			System.out.println("처리 완료");
 		}
 		//
-		else if(command=="각 요청 액션페이지"){
+		else if(command.equals("/loginPro.us")){
 			
 		}
 		//
-		else if(command=="각 요청 액션페이지"){
-			
+		else if(command.equals("/joinPage.us")){
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("./userManagement/join.jsp");
 		}
 		
 		if(forward != null){

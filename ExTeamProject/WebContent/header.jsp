@@ -41,8 +41,8 @@
 	<nav class="navbar navbar-expand-sm bg-light">
 		  <div class="container-fluid">
 		    	<ul class="nav navbar-nav navbar-right">
-			      <li class="nav-item"><a href="login.us">로그인</a></li> &nbsp;&nbsp;&nbsp;&nbsp;
-			      <li class="nav-item"><a href="#">회원가입</a></li>
+			      <li class="nav-item"><a href="loginPage.us">로그인</a></li> &nbsp;&nbsp;&nbsp;&nbsp;
+			      <li class="nav-item"><a href="joinPage.us">회원가입</a></li>
 			    </ul>
 		  </div>
 	</nav>
