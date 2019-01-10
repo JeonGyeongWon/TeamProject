@@ -74,7 +74,7 @@
             </form>
           </div>
           	
-        	<button class="btn btn-primary col-sm-4" onclick="fnRestaurants('RestaurantsMain.rest');">맛집</button>
+        	<button class="btn btn-primary col-sm-4" onclick="fnRestaurants('RestaurantsMain.re');">맛집</button>
 			<button class="btn btn-primary col-sm-4" onclick="fnHotel('HotelMain.hotel');">호텔</button>
 			<button class="btn btn-primary col-sm-3">관광지</button>
 			</div>
