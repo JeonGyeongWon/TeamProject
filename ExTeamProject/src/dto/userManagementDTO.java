@@ -4,11 +4,13 @@ public class userManagementDTO {
 	private int user_no;
 	private String user_email;
 	private String user_pass;
+	private String user_nickname;
 	private int user_birth;
 	private String user_gender;
 	private int user_point;
 	private String user_phone;
 	private int user_level;
+	
 	
 	public int getUser_no() {
 		return user_no;
@@ -27,6 +29,12 @@ public class userManagementDTO {
 	}
 	public void setUser_pass(String user_pass) {
 		this.user_pass = user_pass;
+	}
+	public String getUser_nickname() {
+		return user_nickname;
+	}
+	public void setUser_nickname(String user_nickname) {
+		this.user_nickname = user_nickname;
 	}
 	public int getUser_birth() {
 		return user_birth;
