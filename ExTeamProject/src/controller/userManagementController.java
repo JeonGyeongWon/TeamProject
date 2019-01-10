@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import together.ActionForward;
+import userManagement.loginAction;
 import together.Action;
 
-@WebServlet("*.us")
+@WebServlet("*.um")
 public class userManagementController extends HttpServlet{
 
 	@Override
@@ -38,18 +39,27 @@ public class userManagementController extends HttpServlet{
 		System.out.println("contextPath는 "+ctx+"입니다.");
 		System.out.println("command는 "+command+"입니다.");
 		
-		//header.jsp에서 
-		if(command.equals("/loginPage.us")){
+		//header.jsp에서 [로그인]버튼을 클릭했을 때 
+		if(command.equals("/loginPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./userManagement/login.jsp");
 		}
-		//
-		else if(command.equals("/loginPro.us")){
+		//login.jsp에서 [확인]버튼을 클릭했을 때
+		else if(command.equals("/loginPro.um")){
+			action = new loginAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.print("로그인 처리 과정 오류: ");
+				e.printStackTrace();
+			}
 			
+			forward.setRedirect(false);
+			forward.setPath("");
 		}
-		//
-		else if(command.equals("/joinPage.us")){
+		//header.jsp에서 [회원가입]버튼을 클릭했을 때
+		else if(command.equals("/joinPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./userManagement/join.jsp");

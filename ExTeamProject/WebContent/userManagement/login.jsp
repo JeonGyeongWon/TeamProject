@@ -51,13 +51,13 @@
 		<tr align="center">
 			<td colspan="2" align="center">
 				<br/>
-				<input type="submit" value="로그인">
-				<input type="reset" value="초기화">
+				<input type="submit" value="확    인">
+				<input type="reset" value="다시 입력">
 			</td>
 		</tr>
 	</table>
 	</form>
-	<p id="login_joinInfo">회원이 아니신가요? <a href="#">회원가입</a>하러 가기</p>
+	<p id="login_joinInfo">아직 회원이 아니신가요? <a href="joinPage.um">회원가입</a>하러 가기</p>
 </center>
 </body>
 </html>
