@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import together.ActionForward;
-import userManagement.loginAction;
+import userManagement.LoginAction;
+import userManagement.LogoutAction;
 import together.Action;
 
 @WebServlet("*.um")
-public class userManagementController extends HttpServlet{
+public class UserManagementController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,24 +40,44 @@ public class userManagementController extends HttpServlet{
 		System.out.println("contextPath는 "+ctx+"입니다.");
 		System.out.println("command는 "+command+"입니다.");
 		
+		//main화면으로 가기 위해 Controller중심처리
+		if(command.equals("/main.um")){
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("./index.jsp");
+		}
 		//header.jsp에서 [로그인]버튼을 클릭했을 때 
-		if(command.equals("/loginPage.um")){
+		else if(command.equals("/loginPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./userManagement/login.jsp");
 		}
 		//login.jsp에서 [확인]버튼을 클릭했을 때
 		else if(command.equals("/loginPro.um")){
-			action = new loginAction();
+			action = new LoginAction();
 			try {
+				System.out.println("loginPro.um까지는 넘어왔다");
 				forward = action.execute(request, response);
+				if(forward==null){
+					return;
+				}
+				System.out.println("loginPro.um의 forward가 저장되었다.");
 			} catch (Exception e) {
 				System.out.print("로그인 처리 과정 오류: ");
 				e.printStackTrace();
 			}
 			
-			forward.setRedirect(false);
-			forward.setPath("");
+		}
+		//
+		else if(command.equals("/logoutPro.um")){
+			action = new LogoutAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.print("로그아웃 처리 과정 오류: ");
+				e.printStackTrace();
+			}
+			
 		}
 		//header.jsp에서 [회원가입]버튼을 클릭했을 때
 		else if(command.equals("/joinPage.um")){

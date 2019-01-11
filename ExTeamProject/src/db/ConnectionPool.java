@@ -9,21 +9,21 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class ConnectionPool {
-	Connection con=null;
 	
+	Connection con;
+	DataSource ds;
 	
 	public Connection getConnection(){
-		
 		try {
 			Context initCtx = new InitialContext();
-			Context envCtx = (Context)initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/promotion");
+			ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/promotion");
 			con = ds.getConnection();
+			System.out.println("getConnection()메서드-커넥션풀 생성");
 			con.setAutoCommit(false);
 		} catch (Exception e) {
+			System.out.print("커넥션풀 얻기 실패: ");
 			e.printStackTrace();
 		}
-		
 		return con;
 	}
 	

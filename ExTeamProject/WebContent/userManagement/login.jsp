@@ -30,7 +30,7 @@
 <body>
 <center>
 	<h2 id="login_label">로그인</h2>
-	<form action="loginPro.us" method="post">
+	<form action="loginPro.um" method="post">
 	<table id="login_table">
 		<tr>
 			<th>

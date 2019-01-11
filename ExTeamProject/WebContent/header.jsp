@@ -39,19 +39,41 @@
 <body>
 
 
-
+<!-- 맨위 navbar -->
+<%
+	String user_email=null;
 	
-	<!-- 맨위 navbar -->
+	if(session.getAttribute("user_email")!=null){
+		user_email = (String) session.getAttribute("user_email");
+	}
+%>
+<%
+	if(user_email == null){
+		
+%>
 	<nav class="navbar navbar-expand-sm bg-light">
 		  <div class="container-fluid">
 		    	<ul class="nav navbar-nav navbar-right">
-			      <li class="nav-item"><a href="loginPage.um">로그인</a></li> &nbsp;&nbsp;&nbsp;&nbsp;
-			      <li class="nav-item"><a href="joinPage.um">회원가입</a></li>
+			      <li class="nav-item"><a href="./loginPage.um">로그인</a></li> |
+			      <li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
 			    </ul>
 		  </div>
 	</nav>
-
-
+<%		
+	}
+	else{
+%>
+	<nav class="navbar navbar-expand-sm bg-light">
+		  <div class="container-fluid">
+		    	<ul class="nav navbar-nav navbar-right">
+			      <li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li> |
+			      <li class="nav-item"><a href="#">회원정보수정</a></li>
+			    </ul>
+		  </div>
+	</nav>
+<%		
+	}
+%>
 		
 		<!-- 검색 버튼 및 각 페이지 이동 버튼 -->
 		<div class="container">
