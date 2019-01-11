@@ -16,9 +16,18 @@ import together.Action;
 @WebServlet("*.tourist")
 public class TouristController extends HttpServlet{
 
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doService(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doService(request, response);
+	}
 	
-	
-	protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	protected void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
 		Action action = null;
@@ -27,16 +36,17 @@ public class TouristController extends HttpServlet{
 		String ctx = request.getContextPath();
 		String command = uri.substring(ctx.length());
 		
+		System.out.println("URI는 "+uri+"입니다.");
+		System.out.println("contextPath는 "+ctx+"입니다.");
+		System.out.println("command는 "+command+"입니다.");	
 		
-		if(command=="/tourismMain.tourist"){
+		if(command.equals("/TourismMain.tourist")){
 			
-			//가장 맨위 action객체로 하위 action클래스 객체를 받는다.
-			action = new tourismMainAction();
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("tourist/TouristMain.jsp");
 			
-			//액션태그의 execute 메서드를 실행하여 Actionforward객체에 담는다.
-			forward = action.execute(request, response);
-			
-		}else if(command=="각 요청 액션페이지"){
+		}else if(command.equals("각 요청 액션페이지")){
 			
 		}
 		
@@ -61,17 +71,6 @@ public class TouristController extends HttpServlet{
 		
 	}
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
-	}
 	
 	
 	

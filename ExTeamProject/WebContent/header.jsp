@@ -30,6 +30,10 @@
 	function fnRestaurants(url){
 		location.href =	url+'';
 	}
+	function fnTourist(url) {
+		location.href = url+'';
+		
+	}
 </script>
 
 <body>
@@ -76,7 +80,7 @@
           	
         	<button class="btn btn-primary col-sm-4" onclick="fnRestaurants('RestaurantsMain.re');">맛집</button>
 			<button class="btn btn-primary col-sm-4" onclick="fnHotel('HotelMain.hotel');">호텔</button>
-			<button class="btn btn-primary col-sm-3">관광지</button>
+			<button class="btn btn-primary col-sm-3" onclick="fnTourist('TouristMain.tourist');">관광지</button>
 			</div>
       </div>
       <!-- jQuery -->
