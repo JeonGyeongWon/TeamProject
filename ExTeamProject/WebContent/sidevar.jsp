@@ -19,7 +19,11 @@
 	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- 다음 지도 api -->
+	
+	
 
 </head>
 <body>
@@ -28,7 +32,19 @@
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-			<h1 id="fh5co-logo"><a href="index.html"><img src="/ExTeamProject/images/logo.png" alt="Free HTML5 Bootstrap Website Template"></a></h1>
+			<h1 id="fh5co-logo" ></h1>
+			
+			<script>
+			var container = document.getElementById('fh5co-logo'); //지도를 담을 영역의 DOM 레퍼런스
+			var options = { //지도를 생성할 때 필요한 기본 옵션
+				center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+				level: 3 //지도의 레벨(확대, 축소 정도)
+			};
+		
+			var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+			</script>
+		
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
 					<li class="fh5co-active"><a href="index.html">Home</a></li>

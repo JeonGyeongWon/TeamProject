@@ -9,19 +9,18 @@
 </head>
 
 
-
-
-
 <body>
-<c:set var ="center" value="Main.jsp"/>
-
-<c:if test="${center != null }">
-	<c:set var="center" value="${requestScope.center }"/> 
-</c:if>
+	<c:set var="center" value="${param.center}"/>
+ 	
+ 	<c:out value="${center}"/>
+ 	
+ 	<c:if test="${center == null }">
+ 		<c:set var="center" value="Main.jsp"/>
+ 	</c:if>
 
 	 <jsp:include page="header.jsp"/>
 	 <jsp:include page="sidevar.jsp"/>
-	 <jsp:include page="<%=center %>"/>
+	 <jsp:include page="${center }"/> 
 	 <jsp:include page="footer.jsp"/>
 </body>
 </html>
