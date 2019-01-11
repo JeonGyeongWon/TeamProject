@@ -51,9 +51,23 @@ public class UserManagementController extends HttpServlet{
 			try {
 				System.out.println("loginPro.um까지는 넘어왔다");
 				forward = action.execute(request, response);
+				if(forward==null){
+					return;
+				}
 				System.out.println("loginPro.um의 forward가 저장되었다.");
 			} catch (Exception e) {
 				System.out.print("로그인 처리 과정 오류: ");
+				e.printStackTrace();
+			}
+			
+		}
+		//
+		else if(command.equals("/logoutPro.um")){
+			action = new LogoutAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.print("로그아웃 처리 과정 오류: ");
 				e.printStackTrace();
 			}
 			

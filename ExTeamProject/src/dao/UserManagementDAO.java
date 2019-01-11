@@ -15,6 +15,7 @@ import together.ActionForward;
 
 public class UserManagementDAO {
 
+	ConnectionPool cp;
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
@@ -22,14 +23,14 @@ public class UserManagementDAO {
 	
 	
 	public UserManagementDAO() {
-		new ConnectionPool();
+		cp = new ConnectionPool();	//각 메서드에서 반드시 con = cp.getConnection(); 해서 DB에 접속할 것.
 	}
 
 	public int userLogin(String user_email, String user_pass) {
 		int result = -1;
-		
 		try {
-			String sql = "select user_pass from promotion where user_email=?";
+			con = cp.getConnection();
+			String sql = "select user_pass from users where user_email=?";
 			pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, user_email);
 			rs = pstmt.executeQuery();
@@ -45,8 +46,10 @@ public class UserManagementDAO {
 		} catch (SQLException e) {
 			System.out.print("userLogin()메서드 내부 오류: ");
 			e.printStackTrace();
+		} finally {
+			cp.close(con, pstmt, rs);
 		}
-		
+		System.out.println("userLogin()의 리턴값은 " + result + "입니다.");
 		return result;
 	}
 

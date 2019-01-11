@@ -12,9 +12,6 @@ public class ConnectionPool {
 	
 	Connection con;
 	DataSource ds;
-	public ConnectionPool() {
-		getConnection();
-	}
 	
 	public Connection getConnection(){
 		try {
