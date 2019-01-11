@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserManagementDAO;
-import dto.UserManagementDTO;
+import food.dto.UserManagementDTO;
 import together.Action;
 import together.ActionForward;
 
