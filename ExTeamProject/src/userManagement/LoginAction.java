@@ -17,7 +17,7 @@ public class LoginAction implements Action{
 		request.setCharacterEncoding("UTF-8");
 		String user_email = request.getParameter("user_email");
 		String user_pass = request.getParameter("user_pass");
-		
+
 		UserManagementDAO umdao = new UserManagementDAO();
 		ActionForward forward = new ActionForward();
 		int result = umdao.userLogin(user_email, user_pass);
@@ -44,8 +44,8 @@ public class LoginAction implements Action{
 			forward.setRedirect(true);
 			forward.setPath("./main.um");
 		}
-		
+
 		return forward;
 	}
-	
+
 }
