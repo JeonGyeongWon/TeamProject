@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import together.ActionForward;
-import userManagement.loginAction;
+import userManagement.LoginAction;
 import together.Action;
 
 @WebServlet("*.um")
-public class userManagementController extends HttpServlet{
+public class UserManagementController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,16 +47,16 @@ public class userManagementController extends HttpServlet{
 		}
 		//login.jsp에서 [확인]버튼을 클릭했을 때
 		else if(command.equals("/loginPro.um")){
-			action = new loginAction();
+			action = new LoginAction();
 			try {
+				System.out.println("loginPro.um까지는 넘어왔다");
 				forward = action.execute(request, response);
+				System.out.println("loginPro.um의 forward가 저장되었다.");
 			} catch (Exception e) {
 				System.out.print("로그인 처리 과정 오류: ");
 				e.printStackTrace();
 			}
 			
-			forward.setRedirect(false);
-			forward.setPath("");
 		}
 		//header.jsp에서 [회원가입]버튼을 클릭했을 때
 		else if(command.equals("/joinPage.um")){

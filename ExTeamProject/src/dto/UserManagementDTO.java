@@ -1,14 +1,14 @@
 package dto;
 
-public class userManagementDTO {
+public class UserManagementDTO {
 	private int user_no;
 	private String user_email;
 	private String user_pass;
 	private String user_nickname;
 	private int user_birth;
 	private String user_gender;
-	private int user_point;
 	private String user_phone;
+	private int user_point;
 	private int user_level;
 	
 	
