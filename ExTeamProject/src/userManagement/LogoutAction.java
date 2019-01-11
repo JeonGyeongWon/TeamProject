@@ -1,4 +1,4 @@
-package controller;
+package userManagement;
 
 import java.io.PrintWriter;
 
@@ -17,7 +17,7 @@ public class LogoutAction implements Action {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		response.sendRedirect("./index.jsp");
+		response.sendRedirect("./main.um");
 		return null;
 	}
 

@@ -1,4 +1,4 @@
-package food.dto;
+package userManagement;
 
 public class UserManagementDTO {
 	private int user_no;

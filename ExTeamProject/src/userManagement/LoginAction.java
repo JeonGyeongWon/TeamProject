@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserManagementDAO;
-import food.dto.UserManagementDTO;
 import together.Action;
 import together.ActionForward;
 
@@ -43,7 +42,7 @@ public class LoginAction implements Action{
 			HttpSession session = request.getSession();
 			session.setAttribute("user_email", user_email);
 			forward.setRedirect(true);
-			forward.setPath("./index.jsp");
+			forward.setPath("./main.um");
 		}
 		
 		return forward;

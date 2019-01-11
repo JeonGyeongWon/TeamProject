@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import together.ActionForward;
 import userManagement.LoginAction;
+import userManagement.LogoutAction;
 import together.Action;
 
 @WebServlet("*.um")
@@ -39,8 +40,14 @@ public class UserManagementController extends HttpServlet{
 		System.out.println("contextPath는 "+ctx+"입니다.");
 		System.out.println("command는 "+command+"입니다.");
 		
+		//main화면으로 가기 위해 Controller중심처리
+		if(command.equals("/main.um")){
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("./index.jsp");
+		}
 		//header.jsp에서 [로그인]버튼을 클릭했을 때 
-		if(command.equals("/loginPage.um")){
+		else if(command.equals("/loginPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./userManagement/login.jsp");
