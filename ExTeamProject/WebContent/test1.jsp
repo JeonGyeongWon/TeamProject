@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="map" style="width:500px;height:400px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a415c6aaf8c6fffa82bc5bcb3134aa85a415c6aaf8c6fffa82bc5bcb3134aa85"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
@@ -19,6 +19,8 @@
 		};
 
 		var map = new daum.maps.Map(container, options);
+		
+		
 	</script>
 </body>
 </html>

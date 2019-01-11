@@ -21,9 +21,22 @@
 	<!-- Modernizr JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- 다음 지도 api -->
 	
 	
+	<%-- 토글 버튼을 위한 링크 --%>
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
+	
+	<script>
+		<!-- 지도 온오프시~ -->
+		
+		$("#ckmap").on("click", function() {
+			alert("지도 온~");
+		});
+		
+		
+	</script>
 
 </head>
 <body>
@@ -32,19 +45,13 @@
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-			<h1 id="fh5co-logo" ></h1>
-			
-			<script>
-			var container = document.getElementById('fh5co-logo'); //지도를 담을 영역의 DOM 레퍼런스
-			var options = { //지도를 생성할 때 필요한 기본 옵션
-				center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-				level: 3 //지도의 레벨(확대, 축소 정도)
-			};
-		
-			var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-		
-			</script>
-		
+		<div class="text-center">
+			<h1 id="" >지도검색</h1>
+			<label class="checkbox-inline">
+  				<input id="ckmap" type="checkbox" data-toggle="toggle">
+			</label>
+		</div>
+		<br>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
 					<li class="fh5co-active"><a href="index.html">Home</a></li>

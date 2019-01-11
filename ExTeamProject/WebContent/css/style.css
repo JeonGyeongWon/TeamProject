@@ -86,6 +86,13 @@ figure {
   -o-transition: 0.5s;
   transition: 0.5s;
 }
+
+#map {
+	width: 270px;
+	height: 5px;
+	
+}
+
 #fh5co-aside.border {
   border-right: 1px solid #e6e6e6;
 }
