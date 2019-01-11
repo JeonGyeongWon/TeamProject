@@ -50,7 +50,7 @@ public class UserManagementController extends HttpServlet{
 		else if(command.equals("/loginPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("index.jsp?center=/userManagement/login.jsp");
+			forward.setPath("index.jsp?center=/userManagement/login.jsp"); 
 		}
 		//login.jsp에서 [확인]버튼을 클릭했을 때
 		else if(command.equals("/loginPro.um")){
