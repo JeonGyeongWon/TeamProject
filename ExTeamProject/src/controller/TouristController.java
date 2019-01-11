@@ -40,7 +40,7 @@ public class TouristController extends HttpServlet{
 		System.out.println("contextPath는 "+ctx+"입니다.");
 		System.out.println("command는 "+command+"입니다.");	
 		
-		if(command.equals("/TourismMain.tourist")){
+		if(command.equals("/TouristMain.tourist")){
 			
 			forward = new ActionForward();
 			forward.setRedirect(false);
