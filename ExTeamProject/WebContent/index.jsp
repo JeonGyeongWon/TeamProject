@@ -20,7 +20,7 @@
 
 	 <jsp:include page="header.jsp"/>
 	 <jsp:include page="sidevar.jsp"/>
-	 <jsp:include page="${center }"/> 
+	 <jsp:include page="${center }"/>
 	 <jsp:include page="footer.jsp"/>
 </body>
 </html>

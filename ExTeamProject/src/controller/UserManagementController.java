@@ -50,7 +50,7 @@ public class UserManagementController extends HttpServlet{
 		else if(command.equals("/loginPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("./userManagement/login.jsp");
+			forward.setPath("index.jsp?center=/userManagement/login.jsp");
 		}
 		//login.jsp에서 [확인]버튼을 클릭했을 때
 		else if(command.equals("/loginPro.um")){
@@ -68,7 +68,7 @@ public class UserManagementController extends HttpServlet{
 			}
 			
 		}
-		//
+		//header.jsp에서 [로그아웃]버튼을 눌렀을 때
 		else if(command.equals("/logoutPro.um")){
 			action = new LogoutAction();
 			try {
@@ -83,7 +83,7 @@ public class UserManagementController extends HttpServlet{
 		else if(command.equals("/joinPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("./userManagement/join.jsp");
+			forward.setPath("index.jsp?center=/userManagement/join.jsp");
 		}
 		
 		if(forward != null){

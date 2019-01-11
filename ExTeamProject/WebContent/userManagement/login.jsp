@@ -30,7 +30,7 @@
 <body>
 <center>
 	<h2 id="login_label">로그인</h2>
-	<form action="loginPro.um" method="post">
+	<form action="./loginPro.um" method="post">
 	<table id="login_table">
 		<tr>
 			<th>
@@ -57,7 +57,7 @@
 		</tr>
 	</table>
 	</form>
-	<p id="login_joinInfo">아직 회원이 아니신가요? <a href="joinPage.um">회원가입</a>하러 가기</p>
+	<p id="login_joinInfo">아직 회원이 아니신가요? <a href="./joinPage.um">회원가입</a>하러 가기</p>
 </center>
 </body>
 </html>
