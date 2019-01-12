@@ -25,16 +25,16 @@ public class LoginAction implements Action{
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('아이디와 비밀번호를 다시 확인하세요.')");
-			out.println("location.back()");
-			out.println("<script>");
+			out.println("history.back()");
+			out.println("</script>");
 			return null;
 		}
 		else if(result == 0){
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('비밀번호가 일치하지 않습니다.')");
-			out.println("location.back()");
-			out.println("<script>");
+			out.println("history.back()");
+			out.println("</script>");
 			return null;
 		}
 		else if(result == 1){

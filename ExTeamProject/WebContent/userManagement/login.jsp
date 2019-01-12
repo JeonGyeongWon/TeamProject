@@ -5,6 +5,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
+<script type="text/javascript">
+	//로그인 유효성 검사를 위한 자바스크립트(추후 ajax로 변경 예정)
+	function check(){	//<form>태그(name=login_form)의 submit 발생 시
+		var login_form = document.login_form;
+		if(!login_form.user_email.value){	//user_email의 입력값이 없을 때
+			alert("이메일 주소를 입력해주십시오.");
+			login_form.user_email.focus();
+			
+			return false;
+		}
+		if(!login_form.user_pass.value){	//user_pass의 입력값이 없을 때
+			alert("비밀번호를 입력해주십시오.");
+			login_form.user_pass.focus();
+			
+			return false;
+		}
+		location.href="./loginPro.um";	//user_email과 user_pass 모두 입력값이 있을 때
+	}
+</script>
 <style type="text/css">
 	h2#login_label {
 		font-weight: bold;
@@ -30,11 +49,11 @@
 <body>
 <center>
 	<h2 id="login_label">로그인</h2>
-	<form action="./loginPro.um" method="post">
+	<form action="./loginPro.um" method="post" name="login_form" onsubmit="return check()">
 	<table id="login_table">
 		<tr>
 			<th>
-				아이디:
+				<label for="user_email">아이디:</label>
 			</th>
 			<td>
 				<input type="email" name="user_email" placeholder="이메일 입력.." size="20"/>
@@ -42,7 +61,7 @@
 		</tr>
 		<tr>
 			<th>
-				패스워드:
+				<label for="user_pass">패스워드:</label>
 			</th>
 			<td>
 				<input type="password" name="user_pass" placeholder="패스워드 입력.." size="20">

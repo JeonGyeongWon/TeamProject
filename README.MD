@@ -4,11 +4,10 @@
 
 2019-01-11 전경원 : 수정된내용~(추가된내용) 요렇게 적어주세요~~ 미완 (지도넣기)
 
-2019-01-11 고석주: (1)로그인 및 로그아웃 기능 구현(유효성검사X),
-<<<<<<< HEAD
+2019-01-11 고석주:	(1)로그인 및 로그아웃 기능 구현(유효성검사X),
 					(2)로그인, 회원가입 화면을 index.jsp의 center단에 출력하도록 설정,
 					(3)각 기능 실행 후 메인화면으로 이동할 때 Controller를 통해 이동하도록 처리
-=======
 					
 2019-01-11 조미라 : hotel_InsertForm.jsp 생성
->>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject.git
+
+2019-01-12 고석주: 	login.jsp 내부에 JavaScript로 로그인 유효성 검사 기능 구현(추후 ajax로 변경 예정)
