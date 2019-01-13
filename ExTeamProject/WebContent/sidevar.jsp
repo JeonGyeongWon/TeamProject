@@ -17,25 +17,40 @@
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+	<!-- 다음 지도관련 css -->
+	<link rel="stylesheet" href="css/DaumMap.css">
+	
+	
+	<!-- 토글버튼 css -->
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 	<!-- Modernizr JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	
 	
-	<%-- 토글 버튼을 위한 링크 --%>
-	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
+	
+	
 	
 	
 	<script>
-		<!-- 지도 온오프시~ -->
+		<!-- 지도 온오프시 -->
+	$(function(){
+			
+		 $("#Daum_map").hide();
 		
-		$("#ckmap").on("click", function() {
-			alert("지도 온~");
+		$('#chmap').change(function() {
+			  var ckmap = ($(this).prop('checked'));	//자바스크립트의 속성을 가져옴
+			  
+			  if(ckmap){
+				  $("#Daum_map").show();
+			  }else{
+				  $("#Daum_map").hide();
+			  }
 		});
 		
-		
+	});
 	</script>
 
 </head>
@@ -46,9 +61,9 @@
 		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
 		<div class="text-center">
-			<h1 id="" >지도검색</h1>
+			<h1>지도검색</h1>
 			<label class="checkbox-inline">
-  				<input id="ckmap" type="checkbox" data-toggle="toggle">
+			<input id="chmap" type="checkbox" data-toggle="toggle">
 			</label>
 		</div>
 		<br>
@@ -73,7 +88,21 @@
 
 		</aside>
 	
+			 <!-- 다음 api지도 -->	
+		<div id="Daum_map" class="col-md-12"></div>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b"></script>
+			<script>
+				var container = document.getElementById('Daum_map');
+				var options = {
+					center: new daum.maps.LatLng(35.17944, 129.07556), //최초 위치 부산으로 설정
+					level: 5
+				};
 		
+				var map = new daum.maps.Map(container, options);
+	</script>
+	
+	
+	</div>	
 		<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -89,6 +118,12 @@
 	<!-- Counters -->
 	<script src="js/jquery.countTo.js"></script>
 	
+	<%-- 토글 버튼을 위한 링크 --%>
+	<!--     인덱스에서 작업할때 충돌 일어남 평소 주석
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	 -->
 	
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>

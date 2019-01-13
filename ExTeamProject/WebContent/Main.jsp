@@ -18,6 +18,7 @@
 							<p>간략설명</p>
 						</a>
 					</div>
+						
 					<div class="col-md-3 work-item">
 						<a href="work.html">
 							<img src="images/work_2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">

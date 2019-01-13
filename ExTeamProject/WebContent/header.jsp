@@ -18,6 +18,8 @@
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+	
+	
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -76,6 +78,7 @@
 %>
 		
 		<!-- 검색 버튼 및 각 페이지 이동 버튼 -->
+		
 		<div class="container">
         <div class="row text-center">
           <div class="col-xl-9 mx-auto com-md-4">
@@ -105,6 +108,7 @@
 			<button class="btn btn-primary col-sm-3" onclick="fnTourist('TouristMain.tourist');">관광지</button>
 			</div>
       </div>
+      <br>
       <!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->

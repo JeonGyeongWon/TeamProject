@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<!-- Animate.css -->
+	
+
+	<!-- Modernizr JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 
@@ -20,7 +26,21 @@
 
 	 <jsp:include page="header.jsp"/>
 	 <jsp:include page="sidevar.jsp"/>
+	
 	 <jsp:include page="${center }"/>
+	 
 	 <jsp:include page="footer.jsp"/>
+
+
+	
+	
+	<%-- 토글 버튼을 위한 링크 --%>
+	<!-- MAIN JS -->
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>	
+
 </body>
+
+
 </html>
