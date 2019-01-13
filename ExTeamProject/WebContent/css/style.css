@@ -23,8 +23,17 @@ body {
     font-size: 16px;
   }
 }
+/* 버튼 위치 및 설정*/
+.buttonposition{
+	display: block;
+}
 
+/*헤더 포지션*/
+#headerdiv{
+ display: inline-block;
+ text-align: center;"
 
+}
 a {
   color: #da1212;
   -webkit-transition: 0.5s;

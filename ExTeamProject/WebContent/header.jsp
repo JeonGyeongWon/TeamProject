@@ -78,10 +78,9 @@
 %>
 		
 		<!-- 검색 버튼 및 각 페이지 이동 버튼 -->
-		
-		<div class="container">
-        <div class="row text-center">
+		 <div class="container">
           <div class="col-xl-9 mx-auto com-md-4">
+          
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form>
@@ -96,18 +95,18 @@
                 <div class="col-12 col-md-6 mb-2 mb-md-0">
                   <input type="email" class="form-control form-control-lg" placeholder="부산지역검색">
                 </div>
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-md-3 " >
                   <button type="submit" class="btn btn-block btn-lg btn-primary">검색</button> <br><br>
                 </div>
               </div>
             </form>
           </div>
-          	
-        	<button class="btn btn-primary col-sm-4" onclick="fnRestaurants('RestaurantsMain.re');">맛집</button>
-			<button class="btn btn-primary col-sm-4" onclick="fnHotel('HotelMain.hotel');">호텔</button>
-			<button class="btn btn-primary col-sm-3" onclick="fnTourist('TouristMain.tourist');">관광지</button>
+          	<div class="btn-group col-sm-8">
+	        	<button class="btn btn-primary col-sm-3 " onclick="fnRestaurants('RestaurantsMain.re');">맛집</button>
+				<button class="btn btn-primary col-sm-3 " onclick="fnHotel('HotelMain.hotel');">호텔</button>
+				<button class="btn btn-primary col-sm-3 " onclick="fnTourist('TouristMain.tourist');">관광지</button>
 			</div>
-      </div>
+			</div>
       <br>
       <!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
