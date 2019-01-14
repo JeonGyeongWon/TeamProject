@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1> 호텔로 등록하기</h1>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart-data">
 	<table>
 			<tr>
 				<td>호텔 번호</td>

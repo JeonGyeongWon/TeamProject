@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import together.ActionForward;
 import together.Action;
 
@@ -27,6 +29,7 @@ public class HotelController extends HttpServlet{
 	
 	protected void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	
 		
 		Action action = null;
 		ActionForward forward = null;
