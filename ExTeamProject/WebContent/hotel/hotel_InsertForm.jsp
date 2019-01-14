@@ -8,12 +8,18 @@
 </head>
 <body>
 	<h1> 호텔로 등록하기</h1>
-	<form action="" method="post">
+	<form action="InsertHotel.hotel" method="post" enctype="multipart/form-data">
 	<table>
-			<tr>
-				<td>호텔 번호</td>
-				<td><input type="text" name="h_no" id="h_no" required="required"></td>
-			</tr>
+	
+	h_name
+	h_content
+	h_addr
+	h_caution
+	h_rule
+	h_detail
+	h_regdate
+	h_img
+			
 			<tr>
 				<td>호텔 이름</td>
 				<td><input type="text" name="h_name" id="h_name" required="required"></td>
@@ -39,14 +45,15 @@
 				<td><input type="text" name="h_detail" id="h_detail"></td>
 			</tr>
 			<tr>
-				<td>작성날짜</td>
-				<td><input type="date" id="regdate"></td>
-			</tr>
-			<tr>
-				<td>호텔 이미지</td>
+				<td>호텔 이미지</td> <!-- 메인이미지 -->
 				<td><input type="file" name="h_img"> <input type="submit" value="업로드"></td>
 				<!-- http://bigmark.tistory.com/28 참고 -->
 			</tr>
+			
+			<!-- 
+				추후수정 -> 서브이미지파일 받는것 -> 다중업로드 -> 
+			
+			 -->
 		
 			<tr>
 				<td>편의시설</td>

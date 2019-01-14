@@ -1,6 +1,6 @@
 package hotel.dto;
 
-public class Facilities {
+public class FacilitiesDTO {
 
 	int h_no;
 	boolean wifi;

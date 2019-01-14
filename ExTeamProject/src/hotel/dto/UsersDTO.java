@@ -1,6 +1,6 @@
 package hotel.dto;
 
-public class Users {
+public class UsersDTO {
 
 	int user_no;
 	String user_email;

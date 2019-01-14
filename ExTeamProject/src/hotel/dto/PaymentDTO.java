@@ -1,6 +1,6 @@
 package hotel.dto;
 
-public class Payment {
+public class PaymentDTO {
 
 	boolean ckprice;
 	int user_no;
