@@ -2,7 +2,7 @@ package hotel.dto;
 
 import java.sql.Timestamp;
 
-public class Reservation {
+public class ReservationDTO {
 
 	int h_no;
 	int h_rno;

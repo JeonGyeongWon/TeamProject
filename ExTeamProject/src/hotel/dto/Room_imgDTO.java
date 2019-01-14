@@ -1,6 +1,6 @@
 package hotel.dto;
 
-public class Room_img {
+public class Room_imgDTO {
 
 	int h_no;
 	int h_rno;

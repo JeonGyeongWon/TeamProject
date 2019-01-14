@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import hotel.action.InsertHotelAction;
 import together.ActionForward;
 import together.Action;
 
@@ -42,8 +43,8 @@ public class HotelController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath("hotel/hotelMain.jsp");
-		}else if(command.equals("각 요청 액션페이지")){
-			
+		}else if(command.equals("/hotel/InsertHotel.hotel")){
+			action = new InsertHotelAction();
 		}
 		
 		if(forward != null){
