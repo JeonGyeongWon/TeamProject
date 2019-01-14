@@ -5,13 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 
 import db.ConnectionPool;
 import together.ActionForward;
+import userManagement.UserManagementDTO;
 
 public class UserManagementDAO {
 
@@ -49,8 +48,33 @@ public class UserManagementDAO {
 		} finally {
 			cp.close(con, pstmt, rs);
 		}
-		System.out.println("userLogin()의 리턴값은 " + result + "입니다.");
 		return result;
 	}
 
+	public UserManagementDTO getUserInfo(String user_email){
+		UserManagementDTO umdto = new UserManagementDTO();
+		try {
+			con = cp.getConnection();
+			String sql = "select user_no, user_pass, user_nickname, user_birth, user_gender, user_point, user_phone, user_level from users where user_email=?";
+			pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, user_email);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				umdto.setUser_no(rs.getInt("user_no"));
+				umdto.setUser_pass(rs.getString("user_pass"));
+				umdto.setUser_nickname(rs.getString("user_nickname"));
+				umdto.setUser_birth(rs.getInt("user_birth"));
+				umdto.setUser_gender(rs.getString("user_gender"));
+				umdto.setUser_point(rs.getInt("user_point"));
+				umdto.setUser_phone(rs.getString("user_phone"));
+				umdto.setUser_level(rs.getInt("user_level"));
+			}
+		} catch (Exception e) {
+			System.out.print("getUserInfo()메서드 내부 오류: ");
+			e.printStackTrace();
+		} finally {
+			cp.close(con, pstmt, rs);
+		}
+		return umdto;
+	}
 }
