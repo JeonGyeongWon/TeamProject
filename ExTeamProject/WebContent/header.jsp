@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,40 +42,23 @@
 
 
 <!-- 맨위 navbar -->
-<%
-	String user_email=null;
-	
-	if(session.getAttribute("user_email")!=null){
-		user_email = (String) session.getAttribute("user_email");
-	}
-%>
-<%
-	if(user_email == null){
-		
-%>
+	<c:if test="${session.user_email!=null}">
+		<c:set var="user_email" property="${session.user_email}"/>
+	</c:if>
 	<nav class="navbar navbar-expand-sm bg-light">
-		  <div class="container-fluid">
-		    	<ul class="nav navbar-nav navbar-right">
-			      <li class="nav-item"><a href="./loginPage.um">로그인</a></li> |
-			      <li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
-			    </ul>
-		  </div>
+		<div class="container-fluid">
+			<ul class="nav navbar-nav navbar-right">
+				<c:if test="${user_email == null}">
+					<li class="nav-item"><a href="./loginPage.um">로그인</a></li>
+					<li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
+				</c:if>
+				<c:if test="${user_email != null}">
+					<li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
+					<li class="nav-item"><a href="#">회원정보수정</a></li>
+				</c:if>
+			</ul>
+		</div>
 	</nav>
-<%		
-	}
-	else{
-%>
-	<nav class="navbar navbar-expand-sm bg-light">
-		  <div class="container-fluid">
-		    	<ul class="nav navbar-nav navbar-right">
-			      <li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li> |
-			      <li class="nav-item"><a href="#">회원정보수정</a></li>
-			    </ul>
-		  </div>
-	</nav>
-<%		
-	}
-%>
 		
 		<!-- 검색 버튼 및 각 페이지 이동 버튼 -->
 		 <div class="container">
