@@ -50,6 +50,29 @@
 			  }
 		});
 		
+		
+		// 지도옵션 선택(ajax처리)
+		$("input[name='ckopt']").on("change",function(){
+			
+			var ckopt = $(this).val();
+			
+			if(ckopt==1){	//맛집
+				alert('맛집');
+			
+			}else if(ckopt==2){	//관광지
+				alert('관광지');
+			}else if(ckopt==3){	//호텔
+				alert('호텔');
+			
+				$.
+			/*
+				
+			
+			*/
+			}
+			
+		});
+		
 	});
 	</script>
 
@@ -65,6 +88,11 @@
 			<label class="checkbox-inline">
 			<input id="chmap" type="checkbox" data-toggle="toggle">
 			</label>
+		</div>
+		<div class="text-center">
+			<input type="checkbox" name="ckopt" value="1">맛집
+			<input type="checkbox" name="ckopt" value="2">관광지
+			<input type="checkbox" name="ckopt" value="3">호텔
 		</div>
 		<br>
 			<nav id="fh5co-main-menu" role="navigation">
