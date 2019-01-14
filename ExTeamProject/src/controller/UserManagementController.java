@@ -87,7 +87,7 @@ public class UserManagementController extends HttpServlet{
 			forward.setRedirect(false);
 			forward.setPath("index.jsp?center=/userManagement/join.jsp");
 		
-		}else if(command.equals("/userManagement/JoinAction.um")){
+		}else if(command.equals("/JoinAction.um")){
 				
 				//회원가입 DB처리를 위한 Action객체 생성
 				action = new JoinAction();

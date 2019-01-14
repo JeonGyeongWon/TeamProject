@@ -31,12 +31,12 @@ public class JoinAction implements Action {
 		System.out.println(request.getParameter("user_email"));
 		System.out.println(request.getParameter("user_pass"));
 		System.out.println(request.getParameter("user_nickname"));
-		System.out.println(Integer.parseInt("user_birth"));
+		System.out.println(Integer.parseInt(request.getParameter("user_birth")));
 		System.out.println(request.getParameter("user_gender"));
 		mb.setUser_email(request.getParameter("user_email")); 
 		mb.setUser_pass(request.getParameter("user_pass"));
 		mb.setUser_nickname(request.getParameter("user_nickname"));
-		mb.setUser_birth(Integer.parseInt("user_birth"));
+		mb.setUser_birth(Integer.parseInt(request.getParameter("user_birth")));
 		mb.setUser_gender(request.getParameter("user_gender"));
 		
 		//회원가입 성공 여부를 담을 변수 선언
@@ -57,7 +57,7 @@ public class JoinAction implements Action {
 		ActionForward forward = new ActionForward();
 		
 		//Response.sendRedirect() 방식  <-- 노출함.
-		forward.setRedirect(true);
+		forward.setRedirect(false);
 		
 		//login.jsp 이동할 페이지 주소 저장
 		forward.setPath("/loginPage.um");

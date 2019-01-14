@@ -65,23 +65,39 @@ public class UserManagementDAO {
 		//회원가입 메소드 
 		public boolean insertMember(UserManagementDTO mb){
 			
-			Connection con = null;
+			con = null;
 			String sql = "";
-			PreparedStatement pstmt = null;
+			pstmt = null;
 			
 			//회원가입 성공 여부 저장
 			int result = 0;
 			
 			try {
 				con = getConnection(); //DB접속 객체 얻기 
-				sql = "insert into users(user_email,user_pass,user_nickname,user_birth,user_gender)"
-					+ "values(?,?,?,?,?,?)";
+				
+				/*
+					user_no int(11) AI PK 
+					user_email varchar(30) 
+					user_pass varchar(20) 
+					user_nickname varchar(10) 
+					user_birth int(6) 
+					user_gender varchar(1) 
+					user_point int(11) 
+					user_phone varchar(20) 
+					user_level int(1)
+				 */
+				
+				sql = "insert into users(user_email,user_pass,user_nickname,user_birth,user_gender,user_point,user_phone,user_level)"
+					+ "values(?,?,?,?,?,?,?,?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, mb.getUser_email());
 				pstmt.setString(2, mb.getUser_pass());
 				pstmt.setString(3, mb.getUser_nickname());
 				pstmt.setInt(4,mb.getUser_birth());
 				pstmt.setString(5, mb.getUser_gender());
+				pstmt.setInt(6, 0);
+				pstmt.setString(7, "");
+				pstmt.setInt(8, 1);
 				
 				
 				
