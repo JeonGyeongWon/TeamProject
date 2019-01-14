@@ -22,6 +22,7 @@ public class LoginAction implements Action{
 		ActionForward forward = new ActionForward();
 		int result = umdao.userLogin(user_email, user_pass);
 		if(result == -1){
+			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('아이디와 비밀번호를 다시 확인하세요.')");
@@ -30,6 +31,7 @@ public class LoginAction implements Action{
 			return null;
 		}
 		else if(result == 0){
+			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('비밀번호가 일치하지 않습니다.')");
