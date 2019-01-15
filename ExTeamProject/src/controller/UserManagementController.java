@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.UserManagementDTO;
 import together.ActionForward;
 import userManagement.JoinAction;
 import together.ActionForward;
 import userManagement.LoginAction;
 import userManagement.LogoutAction;
-import userManagement.UserManagementDTO;
+import userManagement.editUserInfoAction;
 import userManagement.getUserInfoAction;
 import together.Action;
 
@@ -75,7 +76,6 @@ public class UserManagementController extends HttpServlet{
 				System.out.print("로그아웃 처리 과정 오류: ");
 				e.printStackTrace();
 			}
-			
 		}
 		//header.jsp에서 [회원가입]버튼을 클릭했을 때
 		else if(command.equals("/joinPage.um")){
@@ -110,7 +110,13 @@ public class UserManagementController extends HttpServlet{
 		}
 		//edit.jsp에서 [수정]버튼을 클릭했을 때
 		else if(command.equals("/editPro.um")){
-//			action = new editUserInfoAction();
+			System.out.println("editPro.um으로 넘어왔습니다.");
+			action = new editUserInfoAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 //		if(forward != null){

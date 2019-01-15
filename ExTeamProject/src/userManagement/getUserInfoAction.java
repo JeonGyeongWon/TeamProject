@@ -18,7 +18,8 @@ public class getUserInfoAction implements Action {
 		
 		UserManagementDAO umdao = new UserManagementDAO();
 		//전달받은 user_email값을 getUserInfo()로 전달해 해당 회원정보를 가져와 DTO객체(umdto)에 저장한다.
-		UserManagementDTO umdto = umdao.getUserInfo(user_email);
+		dto.UserManagementDTO umdto = umdao.getUserInfo(user_email);
+		
 		
 		ActionForward forward = new ActionForward();
 		
