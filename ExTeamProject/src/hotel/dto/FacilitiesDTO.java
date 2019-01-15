@@ -15,6 +15,7 @@ public class FacilitiesDTO {
 	int elevator;
 	int health;
 	int etc;
+	
 	public int getH_no() {
 		return h_no;
 	}
