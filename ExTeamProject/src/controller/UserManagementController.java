@@ -84,63 +84,60 @@ public class UserManagementController extends HttpServlet{
 			forward.setPath("index.jsp?center=/userManagement/join.jsp");
 		
 		}
-		
+		else if(command.equals("/JoinAction.um")){
+			
+			//회원가입 DB처리를 위한 Action객체 생성
+			action = new JoinAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			//회원가입에 성공했을때.. 로그인 화면으로 이동하라라는 요청!
+		}
 		//header.jsp에서 [회원정보수정]버튼을 클릭했을 때
 		else if(command.equals("/editPage.um")){
 //			UserManagementDTO umdto = new getUserInfoAction();
 			action = new getUserInfoAction();
 			try {
 				forward = action.execute(request, response);
-				request.getAttribute("umdto");
+				UserManagementDTO umdto = (UserManagementDTO) request.getAttribute("umdto");
+				request.setAttribute("umdto", request.getAttribute("umdto"));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
-			
-			
-			
+		}
+		//edit.jsp에서 [수정]버튼을 클릭했을 때
+		else if(command.equals("/editPro.um")){
+//			action = new editUserInfoAction();
 		}
 		
-		if(forward != null){
-			if(forward.isRedirect()){
-				response.sendRedirect(forward.getPath());	
-			}else{
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
-				dispatcher.forward(request, response);
-			}
-		}else if(command.equals("/JoinAction.um")){
-				
-				//회원가입 DB처리를 위한 Action객체 생성
-				action = new JoinAction();
-				
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
-		
-				//회원가입에 성공했을때.. 로그인 화면으로 이동하라라는 요청!
-				
-		}else if(command.equals("/loginPage.um")){ //로그인페이지로 이동 시켜줘~ 라는 요청
-			
-			forward = new ActionForward();
-			
-			forward.setRedirect(false); 
-			
-			forward.setPath("./index.jsp?center=member/login.jsp");
-		
-			
-		}else if(command.equals("/Main.um")){//Main.jsp메이페이지 요청!
-		
-		forward = new ActionForward();
-		
-		forward.setRedirect(false); 
-		
-		forward.setPath("./Main.jsp");
-	
-		}
+//		if(forward != null){
+//			if(forward.isRedirect()){
+//				response.sendRedirect(forward.getPath());	
+//			}else{
+//				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+//				dispatcher.forward(request, response);
+//			}
+//		}else if(command.equals("/loginPage.um")){ //로그인페이지로 이동 시켜줘~ 라는 요청
+//			
+//			forward = new ActionForward();
+//			
+//			forward.setRedirect(false); 
+//			
+//			forward.setPath("./index.jsp?center=member/login.jsp");
+//		}
+//			
+//		else if(command.equals("/Main.um")){//Main.jsp메이페이지 요청!
+//		
+//		forward = new ActionForward();
+//		
+//		forward.setRedirect(false); 
+//		
+//		forward.setPath("./Main.jsp");
+//	
+//		}
 		
 		//뷰페이지로 이동 하는 역할
 		if(forward != null){
@@ -155,6 +152,6 @@ public class UserManagementController extends HttpServlet{
 				dispatcher.forward(request, response);
 			
 			}		
-		}
-	}
+		}	//if문-forward 전송 끝
+	}	//doService() 끝
 }

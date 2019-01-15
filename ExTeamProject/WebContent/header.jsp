@@ -53,19 +53,11 @@
 				</c:if>
 				<c:if test="${user_email != null}">
 					<li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
-<<<<<<< HEAD
 					<li class="nav-item"><a href="./editPage.um">회원정보수정</a></li>
-=======
-					<li class="nav-item"><a href="#">회원정보수정</a></li>
->>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject.git
 				</c:if>
 			</ul>
 		</div>
 	</nav>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject.git
 		
 		<!-- 검색 버튼 및 각 페이지 이동 버튼 -->
 		 <div class="container">

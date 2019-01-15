@@ -14,12 +14,14 @@ public class LoginAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		request.setCharacterEncoding("UTF-8");
 		String user_email = request.getParameter("user_email");
 		String user_pass = request.getParameter("user_pass");
 
 		UserManagementDAO umdao = new UserManagementDAO();
 		ActionForward forward = new ActionForward();
+		
 		int result = umdao.userLogin(user_email, user_pass);
 		if(result == -1){
 			response.setContentType("text/html; charset=UTF-8");
