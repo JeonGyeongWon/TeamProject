@@ -49,10 +49,12 @@
 		<div class="container-fluid">
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${user_email == null}">
+					<li class="nav-item"><a href="#">이미지업로드</a></li>
 					<li class="nav-item"><a href="./loginPage.um">로그인</a></li>
 					<li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
 				</c:if>
 				<c:if test="${user_email != null}">
+					<li class="nav-item"><a href="#">이미지업로드</a></li>
 					<li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
 					<li class="nav-item"><a href="#">회원정보수정</a></li>
 				</c:if>
