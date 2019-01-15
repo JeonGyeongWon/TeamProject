@@ -3,97 +3,99 @@ package hotel.dto;
 public class FacilitiesDTO {
 
 	int h_no;
-	boolean wifi;
-	boolean shampoo;
-	boolean closet;
-	boolean tv;
-	boolean aircon;
-	boolean hairdry;
-	boolean swim;
-	boolean wash_dry;
-	boolean parking;
-	boolean elevator;
-	boolean health;
-	boolean etc;
-	
+	int wifi;
+	int shampoo;
+	int closet;
+	int tv;
+	int aircon;
+	int hairdry;
+	int swim;
+	int wash_dry;
+	int parking;
+	int elevator;
+	int health;
+	int etc;
 	public int getH_no() {
 		return h_no;
 	}
 	public void setH_no(int h_no) {
 		this.h_no = h_no;
 	}
-	public boolean isWifi() {
+	public int getWifi() {
 		return wifi;
 	}
-	public void setWifi(boolean wifi) {
+	public void setWifi(int wifi) {
 		this.wifi = wifi;
 	}
-	public boolean isShampoo() {
+	public int getShampoo() {
 		return shampoo;
 	}
-	public void setShampoo(boolean shampoo) {
+	public void setShampoo(int shampoo) {
 		this.shampoo = shampoo;
 	}
-	public boolean isCloset() {
+	public int getCloset() {
 		return closet;
 	}
-	public void setCloset(boolean closet) {
+	public void setCloset(int closet) {
 		this.closet = closet;
 	}
-	public boolean isTv() {
+	public int getTv() {
 		return tv;
 	}
-	public void setTv(boolean tv) {
+	public void setTv(int tv) {
 		this.tv = tv;
 	}
-	public boolean isAircon() {
+	public int getAircon() {
 		return aircon;
 	}
-	public void setAircon(boolean aircon) {
+	public void setAircon(int aircon) {
 		this.aircon = aircon;
 	}
-	public boolean isHairdry() {
+	public int getHairdry() {
 		return hairdry;
 	}
-	public void setHairdry(boolean hairdry) {
+	public void setHairdry(int hairdry) {
 		this.hairdry = hairdry;
 	}
-	public boolean isSwim() {
+	public int getSwim() {
 		return swim;
 	}
-	public void setSwim(boolean swim) {
+	public void setSwim(int swim) {
 		this.swim = swim;
 	}
-	public boolean isWash_dry() {
+	public int getWash_dry() {
 		return wash_dry;
 	}
-	public void setWash_dry(boolean wash_dry) {
+	public void setWash_dry(int wash_dry) {
 		this.wash_dry = wash_dry;
 	}
-	public boolean isParking() {
+	public int getParking() {
 		return parking;
 	}
-	public void setParking(boolean parking) {
+	public void setParking(int parking) {
 		this.parking = parking;
 	}
-	public boolean isElevator() {
+	public int getElevator() {
 		return elevator;
 	}
-	public void setElevator(boolean elevator) {
+	public void setElevator(int elevator) {
 		this.elevator = elevator;
 	}
-	public boolean isHealth() {
+	public int getHealth() {
 		return health;
 	}
-	public void setHealth(boolean health) {
+	public void setHealth(int health) {
 		this.health = health;
 	}
-	public boolean isEtc() {
+	public int getEtc() {
 		return etc;
 	}
-	public void setEtc(boolean etc) {
+	public void setEtc(int etc) {
 		this.etc = etc;
 	}
+	
+	
+	
 	
 	
 	
