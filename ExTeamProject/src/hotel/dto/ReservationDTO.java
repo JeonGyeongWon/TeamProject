@@ -10,7 +10,7 @@ public class ReservationDTO {
 	Timestamp begindate;
 	Timestamp enddate;
 	int total_price;
-	boolean ckprice;
+	int ckprice;
 	Timestamp ckin;
 	Timestamp ckout;
 	
@@ -50,10 +50,11 @@ public class ReservationDTO {
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
-	public boolean isCkprice() {
+	
+	public int getCkprice() {
 		return ckprice;
 	}
-	public void setCkprice(boolean ckprice) {
+	public void setCkprice(int ckprice) {
 		this.ckprice = ckprice;
 	}
 	public Timestamp getCkin() {

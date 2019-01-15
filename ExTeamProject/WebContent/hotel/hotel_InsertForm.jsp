@@ -58,21 +58,25 @@
 			<tr>
 				<td>편의시설</td>
 				<td>
-					<input type="checkbox" name="wifi" id="wifi">무선인터넷
-					<input type="checkbox" name="tv" id="tv">TV
-					<input type="checkbox" name="aircon" id="aircon">에어컨
-					<input type="checkbox" name="wash_dry" id="wash_dry">세탁기
-					<input type="checkbox" name="closet" id="closet">옷장
-					<input type="checkbox" name="shampoo" id="shampoo">욕실용품
-					<input type="checkbox" name="hairdry" id="hairdry">헤어드라이어
-					<input type="checkbox" name="parking" id="parking">건물 내 무료 주차
-					<input type="checkbox" name="elevator" id="elevator">엘리베이터
-					<input type="checkbox" name="swim" id="swim">수영장
-					<input type="checkbox" name="health" id="health">피트니스센터
+					<input type="checkbox" name="wifi" id="wifi" value="true">무선인터넷
+					<input type="checkbox" name="tv" id="tv" value="true">TV
+					<input type="checkbox" name="aircon" id="aircon" value="true">에어컨
+					<input type="checkbox" name="wash_dry" id="wash_dry" value="true">세탁기
+					<input type="checkbox" name="closet" id="closet" value="true">옷장
+					<input type="checkbox" name="shampoo" id="shampoo" value="true">욕실용품
+					<input type="checkbox" name="hairdry" id="hairdry" value="true">헤어드라이어
+					<input type="checkbox" name="parking" id="parking" value="true">건물 내 무료 주차
+					<input type="checkbox" name="elevator" id="elevator" value="true">엘리베이터
+					<input type="checkbox" name="swim" id="swim" value="true">수영장
+					<input type="checkbox" name="health" id="health" value="true">피트니스센터
 				</td>
 			</tr>
 	</table>
 	</form>
+
+
+
+
 
 </body>
 </html>

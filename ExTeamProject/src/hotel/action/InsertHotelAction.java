@@ -13,6 +13,7 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 import dao.HotelDAO;
 import hotel.service.InsertHotelService;
+import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
 import together.Action;
 import together.ActionForward;
@@ -32,17 +33,33 @@ public class InsertHotelAction implements Action {
     	
     	MultipartRequest multi = new MultipartRequest(request, realpath,max, "utf-8",new DefaultFileRenamePolicy());
     	
-    	HotelDTO dto = new HotelDTO();
-    	dto.setH_name(multi.getParameter("h_name"));
-    	dto.setH_content(multi.getParameter("h_content"));
+    	HotelDTO Hdto = new HotelDTO();
+    	FacilitiesDTO fdto = new FacilitiesDTO();
+    	
+    	Hdto.setH_name(multi.getParameter("h_name"));
+    	Hdto.setH_content(multi.getParameter("h_content"));
     	multi.getParameter("h_addr");
     	multi.getParameter("h_caution");
     	multi.getParameter("h_rule");
     	multi.getParameter("h_detail");
     	
+    	fdto.setWifi(multi.getParameter("wifi"));
+    	wifi
+    	shampoo
+    	closet
+    	tv
+    	aircon
+    	hairdry
+    	swim
+    	wash_dry
+    	parking
+    	elevator
+    	health
+    	etc
+    	
     	InsertHotelService service = new InsertHotelService();
     	
-    	int result = service.insertIntoHotel(dto);
+    	int result = service.insertIntoHotel(Hdto);
     	
     	if(result ==0){
     		forward.setPath("/hotel/insertForm.jsp");
@@ -51,16 +68,7 @@ public class InsertHotelAction implements Action {
     		forward.setRedirect(false);
     		forward.setPath("/HotelMain.hotel");
     	}
-    	
-    	
-    	
     	//imgpath와 imgname을 나누기
-    	
-    	
-    	
-    	
-		
-		
 		
 		return null;
 	}

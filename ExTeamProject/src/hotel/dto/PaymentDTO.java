@@ -2,14 +2,15 @@ package hotel.dto;
 
 public class PaymentDTO {
 
-	boolean ckprice;
+	int ckprice;
 	int user_no;
 	int total_price;
 	
-	public boolean isCkprice() {
+	
+	public int getCkprice() {
 		return ckprice;
 	}
-	public void setCkprice(boolean ckprice) {
+	public void setCkprice(int ckprice) {
 		this.ckprice = ckprice;
 	}
 	public int getUser_no() {
