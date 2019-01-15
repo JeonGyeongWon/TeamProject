@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -11,6 +12,8 @@ import javax.naming.InitialContext;
 import db.ConnectionPool;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
+import hotel.dto.RoomDTO;
+import hotel.dto.UsersDTO;
 
 public class HotelDAO {
 	
@@ -82,33 +85,104 @@ public class HotelDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			if(pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if(con != null)
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			pool.close(con, pstmt, rs);
 		}
 		
 		return 0;
 		
 	}
 
-		
-		public int deleteHotel(HotelDTO hotel, FacilitiesDTO facilities){
+		//h_no로 조회된 hotel정보를 삭제하는 메서드
+		public int deleteHotel(HotelDTO hotel){
 			
+			String sql = "DELETE * FROM hotel WHERE h_no=?";
+			
+			
+			try {
+				pstmt.setInt(1, hotel.getH_no());
+				
+				pstmt=con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("deleteHotel()내에서 오류 "+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
 			
 			
 			return 0;
 			
 		}
+		
+		
+		//방 정보를 입력하는 메서드
+		public int insertRoom(RoomDTO room){
+			
+			String sql = "INSERT INTO room"
+					+ "(h_no, h_rno, personne, bed, bathroom, roomsize, weekprice, weekend_price, imgpath, imgname) "
+					+ "values(?,?,?,?,?,?,?,?,?,?)";
+			
+			int result = 0; //입력 성공 여부를 저장할 변수
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, room.getH_no());
+				pstmt.setInt(2, room.getH_rno());
+				pstmt.setInt(3, room.getPersonne());
+				pstmt.setInt(4, room.getBed());
+				pstmt.setInt(5, room.getBathroom());
+				pstmt.setString(6, room.getRoomsize());
+				pstmt.setInt(7, room.getWeekprice());
+				pstmt.setInt(8, room.getWeekend_price());
+				pstmt.setString(9, room.getImgpath());
+				pstmt.setString(10, room.getImgname());
+				
+				pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("insertRoom()메서드 내에서 오류 : "+e);
+			}
+			
+			return 0;
+		}
+		
+		
+		//회원으로 가입하는 유저의 정보를 입력하는 메서드(user_no, user_point, user_lever제외한 입력)
+		public int insertUser(UsersDTO user){
+			String sql = "INSERT INTO users(user_email, user_pass, user_nickname, user_birth, user_gender, user_phone) "
+					+ "values(?,?,?,?,?,?)";
+		
+			int result = 0;
+			
+			try {
+				pstmt=con.prepareStatement(sql);
+				
+				pstmt.setString(1, user.getUser_email());
+				pstmt.setString(2, user.getUser_pass());
+				pstmt.setString(3, user.getUser_nickname());
+				pstmt.setInt(4, user.getUser_birth());
+				pstmt.setString(5, user.getUser_gender());
+				pstmt.setString(6, user.getUser_phone());
+				
+				pstmt.executeUpdate();
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("insertUser()메서드 내에서 오류 "+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			
+			return 0;
+		}		
 	}
+
 	
 	
 	
