@@ -117,7 +117,10 @@ public class UserManagementDAO {
 	
 	// 아이디 중복체크
 	public int JoinCheck(String user_email) {
+		
+		
 		int check = 0;
+		
 		try {
 			con = cp.getConnection();
 			String sql = "select * from users where user_email=?";
@@ -136,4 +139,32 @@ public class UserManagementDAO {
 		}
 		return check;
 	} // JoinCheck() 끝
+	//비번찿기
+	public String findPw(String user_nickname,String user_email) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String findPw = null;
+		
+		try {
+			String sql= "select user_pass from users where user_nickname=? and user_email=?";
+
+			con = cp.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user_nickname);
+			pstmt.setString(2, user_email);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				findPw = rs.getString("user_pass");
+			
+		} catch (Exception sql) {
+			throw new RuntimeException(sql.getMessage());
+		} finally {
+			cp.close(con, pstmt, rs);
+		}
+		return findPw;
+	}		
 }
