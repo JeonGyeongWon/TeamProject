@@ -3,7 +3,7 @@ package tourist.dto;
 import java.sql.Timestamp;
 
 //tourist_board dto입니다.
-public class Tourist {
+public class TouristDTO {
 
 	int t_no; 
 	String t_name; 
@@ -82,6 +82,6 @@ public class Tourist {
 	}
 	public void setBestcount(int bestcount) {
 		this.bestcount = bestcount;
-	} 
+	}
 	
 }

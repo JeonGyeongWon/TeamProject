@@ -1,6 +1,6 @@
 package tourist.dto;
 
-public class Tourist_carlist {
+public class Tourist_carlistDTO {
 
 	int car_no; 
 	String car_name; 

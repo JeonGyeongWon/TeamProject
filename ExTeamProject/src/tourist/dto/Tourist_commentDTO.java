@@ -2,7 +2,7 @@ package tourist.dto;
 
 import java.sql.Timestamp;
 
-public class Tourist_comment {
+public class Tourist_commentDTO {
 
 	int t_no; 
 	int t_cno;  
@@ -53,6 +53,6 @@ public class Tourist_comment {
 	}
 	public void setBestcount(int bestcount) {
 		this.bestcount = bestcount;
-	} 
+	}
 	
 }

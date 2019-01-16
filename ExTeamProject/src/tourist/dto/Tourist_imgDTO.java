@@ -1,6 +1,6 @@
 package tourist.dto;
 
-public class Tourist_img {
+public class Tourist_imgDTO {
 
 	int t_no;  
 	String imgpath; 
@@ -23,6 +23,6 @@ public class Tourist_img {
 	}
 	public void setImgname(String imgname) {
 		this.imgname = imgname;
-	} 
+	}
 	
 }

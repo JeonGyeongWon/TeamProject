@@ -1,6 +1,6 @@
 package tourist.dto;
 
-public class Users {
+public class UsersDTO {
 
 	int user_no;
 	String user_email; 
@@ -65,6 +65,6 @@ public class Users {
 	}
 	public void setUser_level(int user_level) {
 		this.user_level = user_level;
-	} 
+	}
 	
 }

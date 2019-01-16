@@ -2,7 +2,7 @@ package tourist.dto;
 
 import java.sql.Timestamp;
 
-public class Tourist_carorder {
+public class Tourist_carorderDTO {
 
 	int orderid; 
 	int car_no; 
