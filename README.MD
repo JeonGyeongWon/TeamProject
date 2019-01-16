@@ -30,4 +30,4 @@
 
 2019-01-15 조미라 : HotelDAO 내 insertHotel(), deleteHotel(), insertUser() 구현 
 
-2019-01-15 김종민 : Tourist.dto 
+2019-01-15 김종민 : Tourist.dto 생성
