@@ -31,3 +31,5 @@
 2019-01-15 조미라 : HotelDAO 내 insertHotel(), deleteHotel(), insertUser() 구현 
 
 2019-01-15 김종민 : Tourist.dto 생성
+
+2019-01-16 이정한 : 비번찿기 이메일 중복확인 틀린구문수정 업 
