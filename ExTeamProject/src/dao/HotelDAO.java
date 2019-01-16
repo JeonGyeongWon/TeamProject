@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -25,6 +26,83 @@ public class HotelDAO {
 	public HotelDAO(){
 		con = pool.getConnection();
 	}
+	
+	
+	// 모든 호텔 정보를 가져오는 메서드 
+	public ArrayList<HotelDTO> allselectedHotel(){
+		
+		ArrayList<HotelDTO> list = new ArrayList<HotelDTO>();
+		String sql = "";
+		HotelDTO dto = new HotelDTO();
+		
+		try{
+			sql = "select * from hotel order by h_no desc";
+			pstmt=con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				dto.setH_addr(rs.getString("h_addr"));
+				dto.setH_bestcount(rs.getInt("bestcount"));
+				dto.setH_caution(rs.getString("h_caution"));
+				dto.setH_content(rs.getString("h_content"));
+				dto.setH_detail(rs.getString("h_detail"));
+				dto.setH_imgname(rs.getString("h_imgname"));
+				dto.setH_imgpath(rs.getString("h_imgpath"));
+				dto.setH_name(rs.getString("h_name"));
+				dto.setH_no(rs.getInt("h_no"));
+				dto.setH_regdate(rs.getTimestamp("regdate"));
+				dto.setH_rule(rs.getString("h_rule"));
+				dto.setUser_no(rs.getInt("user_no"));
+				list.add(dto);
+			}
+			
+		}catch(Exception e){
+			System.out.println("allselectedHotel에서"+e);
+		}finally{
+			pool.close(con, pstmt, rs);
+		}
+		return list;
+	}
+	
+	// 각 호텔 번호를 이용해 편의시설을 가져오는 메서드
+	public ArrayList<FacilitiesDTO> allselectedFacilities(int hotel_no){
+		ArrayList<FacilitiesDTO> list = new ArrayList<>();
+		FacilitiesDTO dto = new FacilitiesDTO();
+		String sql ="";
+		
+		try{
+			sql = "selct * from facilitiesDTO";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				dto.setAircon(rs.getInt("aircon"));
+				dto.setCloset(rs.getInt("closet"));
+				dto.setElevator(rs.getInt("elevator"));
+				dto.setEtc(rs.getString("etc"));
+				dto.setH_no(rs.getInt("h_no"));
+				dto.setHairdry(rs.getInt("hairdry"));
+				dto.setHealth(rs.getInt("health"));
+				dto.setParking(rs.getInt("parking"));
+				dto.setShampoo(rs.getInt("shampoo"));
+				dto.setSwim(rs.getInt("swim"));
+				dto.setTv(rs.getInt("tv"));
+				dto.setWash_dry(rs.getInt("wash_dry"));
+				dto.setWifi(rs.getInt("wifi"));
+				list.add(dto);
+			}
+			
+		}catch(Exception e){
+			System.out.println("allselectedFacilities에서"+e);
+		}finally{
+			pool.close(con, pstmt, rs);
+		}
+		return list;
+	}
+	
 	
 	// inserthotel메서드 내부에서 사용할 메서드
 	private void insertFaclities(FacilitiesDTO facilities){
@@ -81,6 +159,7 @@ public class HotelDAO {
 	
 	}
 	
+	//호텔 삽입 메서드
 	public int insertHotel(HotelDTO hdto, FacilitiesDTO fdto){
 		int result = 0;
 		String sql = "";
@@ -91,6 +170,20 @@ public class HotelDAO {
 			"values(?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt=con.prepareStatement(sql);
+			
+			
+			System.out.println(hdto.getH_name());
+			System.out.println(hdto.getH_content());
+			System.out.println(hdto.getH_addr());
+			System.out.println(hdto.getH_caution());
+			System.out.println(hdto.getH_rule());
+			System.out.println(hdto.getH_detail());
+			System.out.println(hdto.getH_imgpath());
+			System.out.println(hdto.getH_imgname());
+			System.out.println(hdto.getUser_no());
+			System.out.println(hdto.getH_bestcount());
+			
+			
 			
 			pstmt.setString(1, hdto.getH_name());
 			pstmt.setString(2, hdto.getH_content());
