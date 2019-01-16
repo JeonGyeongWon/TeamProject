@@ -3,6 +3,7 @@ package hotel.action;
 import java.io.File;
 import java.io.PrintWriter;
 import java.security.Provider.Service;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
@@ -40,6 +41,7 @@ public class InsertHotelAction implements Action {
 		String realpath = "E:\\upload";	//메인이미지 경로
 		String image = "";
 		String subimg = "";	//room 서브이미지
+		String roomimg =""; //room 메인이미지
     	int max = 50 * 1024 * 1024;
     	
     	MultipartRequest multi = new MultipartRequest(request, realpath,max, "utf-8",new DefaultFileRenamePolicy());
@@ -53,7 +55,7 @@ public class InsertHotelAction implements Action {
     	
     	String user_email = (String)session.getAttribute("user_email");
     	
-    	System.out.println(user_email);
+    	//System.out.println(user_email);
     	
     	/* 유저 정보를 넣기위한 udao 생성*/
     	UserManagementDAO udao = new UserManagementDAO();
@@ -80,16 +82,28 @@ public class InsertHotelAction implements Action {
     	
     	// 파일 업로드 관련 
     	Enumeration e = multi.getFileNames();
+    	ArrayList list = new ArrayList();
+    	while(e.hasMoreElements()){
+    		
+    		String ckimg = (String)e.nextElement();
+    		System.out.println("체크이미지 이름은~~ : "+ckimg);
+    		if(ckimg.equals("h_img0")){	//호텔 메인이미지
+    			image = "/"+multi.getFilesystemName(ckimg);
+    		}else if(ckimg.equals("h_img1")){	//룸 메인이미지
+    			roomimg = "/"+multi.getFilesystemName(ckimg);
+    		}else{	//룸 서브이미지
+    			subimg ="/"+multi.getFilesystemName(ckimg);
+    			list.add(subimg);
+    		}
     	
-    	if(e.hasMoreElements()){
-    		image = "/"+(String)e.nextElement();	//메인이미지 이름 
+    	
     	}
     	
     	Hdto.setH_imgpath(realpath);
     	Hdto.setH_imgname(image);	//메인이미지
     	
-    	System.out.println("메인이미지 경로"+realpath);
-    	System.out.println("메인이미지 이름"+image);
+    	System.out.println("호텔 메인이미지 경로"+realpath);
+    	System.out.println("호텔 메인이미지 이름"+image);
     	
     	/*호텔입력 종료*/
     	
@@ -145,33 +159,31 @@ public class InsertHotelAction implements Action {
     	dto.setWeekend_price(Integer.parseInt(multi.getParameter("weekend_price")));
     	dto.setWeekprice(Integer.parseInt(multi.getParameter("weekprice")));
     	
-    	e = multi.getFileNames();
     	
-    	realpath = "E:/upload/roomimage";
     	
-    	while(e.hasMoreElements()){
-    	 subimg += "/"+(String)e.nextElement()+",";
-    	 System.out.println(subimg);
-    	}
-    	
-    	String RoomMainImageArr[] = subimg.split(",");
-    	
-    	String RoomMainImage =  RoomMainImageArr[0];
     	
    
     	
     	dto.setImgpath(realpath);
-    	dto.setImgname(RoomMainImage);
+    	dto.setImgname((String)list.get(0));	//RoomMainImage
     	
     	System.out.println("방 메인이미지 경로"+realpath);
-    	System.out.println("방 메인이미지 이름"+subimg);
+    	System.out.println("방 메인이미지 이름"+roomimg);	//RoomMainImage
     	
     	Room_imgDTO RoomSub = new Room_imgDTO();
     	
-    	realpath="E:/upload/roomimage/roomsubimg";
+    	for(int i = 0; i<list.size(); i++){
+    		if(i==0){
+    			continue;
+    		}
+    		subimg += (String)list.get(i);
+    	}
     	
     	RoomSub.setImgname(subimg);
     	RoomSub.setImgpath(realpath);
+    	
+    	System.out.println("방 서브이미지 경로"+realpath);
+    	System.out.println("방 서브이미지 이름"+subimg);
     	
     	
     	

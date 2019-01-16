@@ -18,10 +18,10 @@ $(function(){
 		
 		
 		
-		$("#subimg").append("서브이미지 선택!! 최대5개 ");
+		$("#subimg").html("서브이미지 선택!! 최대5개 ");
 		
-		for(var i=0; i<5; i++ ){
-		var file = "<input type='file' name='h_img'"+i+">";
+		for(var i=2; i<7; i++ ){
+		var file = "<input type='file' name='h_img"+i+"'>";
 		$("#subimg").append(file);
 		}
 		
@@ -92,9 +92,10 @@ function execDaumPostcode() {
 			</tr>
 			<tr>
 				<td>호텔 이미지</td> <!-- 메인이미지 -->
-				<td><input type="file" name="h_img"> </td>
+				<td><input type="file" name="h_img0"> </td>
 				<!-- http://bigmark.tistory.com/28 참고 -->
 			</tr>
+			
 			
 			<!-- 
 				추후수정 -> 서브이미지파일 받는것 -> 다중업로드 -> 
@@ -168,8 +169,8 @@ function execDaumPostcode() {
 				<td>주말가</td>
 				<td><input type="text" name="weekend_price"></td>
 				
-				<td>이미지</td>
-				<td id="appendTd"><input type="file" name="imgname" id="imgname" ></td>
+				<td>메인이미지[선택시 서브이미지 선택할수있게나옴]</td>
+				<td id="appendTd"><input type="file" name="h_img1" id="imgname" ></td>
 				
 			</tr>
 	
