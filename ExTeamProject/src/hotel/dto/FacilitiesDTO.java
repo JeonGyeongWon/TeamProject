@@ -2,20 +2,28 @@ package hotel.dto;
 
 public class FacilitiesDTO {
 
-	int h_no;
-	int wifi;
-	int shampoo;
-	int closet;
-	int tv;
-	int aircon;
-	int hairdry;
-	int swim;
-	int wash_dry;
-	int parking;
-	int elevator;
-	int health;
-	int etc;
+	private int h_no;
+	private int wifi;
+	private int shampoo;
+	private int closet;
+	private int tv;
+	private int aircon;
+	private int hairdry;
+	private int swim;
+	private int wash_dry;
+	private int parking;
+	private int elevator;
+	private int health;
+	private String etc;
 	
+	
+	
+	public String getEtc() {
+		return etc;
+	}
+	public void setEtc(String etc) {
+		this.etc = etc;
+	}
 	public int getH_no() {
 		return h_no;
 	}
@@ -88,12 +96,7 @@ public class FacilitiesDTO {
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	public int getEtc() {
-		return etc;
-	}
-	public void setEtc(int etc) {
-		this.etc = etc;
-	}
+	
 	
 	
 	

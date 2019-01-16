@@ -52,6 +52,7 @@
 					<li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
 				</c:if>
 				<c:if test="${user_email != null}">
+					<li class="nav-item"><a href="InsertHotelForm.hotel">호스트되어보기</a></li>	<!-- 잠깐 테스트를 위해 적어놨씁니다. -->
 					<li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
 					<li class="nav-item"><a href="./editPage.um">회원정보수정</a></li>
 				</c:if>

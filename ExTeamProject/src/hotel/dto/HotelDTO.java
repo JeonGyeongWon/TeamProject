@@ -17,6 +17,14 @@ public class HotelDTO {
 	int h_bestcount;
 	int user_no;
 	
+	
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+	
 	public int getH_no() {
 		return h_no;
 	}
@@ -83,6 +91,7 @@ public class HotelDTO {
 	public void setH_bestcount(int h_bestcount) {
 		this.h_bestcount = h_bestcount;
 	}
+	
 	
 	
 		

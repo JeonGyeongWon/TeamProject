@@ -33,7 +33,7 @@ public class HotelDAO {
 
 		try {
 			String sql1 = "INSERT INTO hotel"
-					+ "(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate, imgpath, imgname, bestcount) + "
+					+ "(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate, imgpath, imgname,user_no) "
 					+ "values(?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql1);
@@ -47,10 +47,14 @@ public class HotelDAO {
 			pstmt.setTimestamp(7, hotel.getH_regdate());
 			pstmt.setString(8, hotel.getH_imgpath());
 			pstmt.setString(9, hotel.getH_imgname());
-			pstmt.setInt(10, hotel.getH_bestcount());
+			pstmt.setInt(10, hotel.getUser_no());
 			
-			result = pstmt.executeUpdate(); //입력 성공시 1, 실패시 0 리턴
+		
+			pstmt.executeUpdate();
+			System.out.println("Hotel테이블  입력성공");
 			
+			
+					
 			String sql2 = "SELECT * FROM hotel order by h_no desc";
 			pstmt = con.prepareStatement(sql2);
 			
@@ -78,17 +82,19 @@ public class HotelDAO {
 			pstmt.setInt(10, facilities.getParking());
 			pstmt.setInt(11, facilities.getElevator());
 			pstmt.setInt(12, facilities.getHealth());
-			pstmt.setInt(13, facilities.getEtc());
+			pstmt.setString(13, facilities.getEtc());
 			
-			if(result != 0) return 1; //회원가입 성공하면 true리턴
-					
+			 //회원가입 성공하면 true리턴
+			System.out.println("Facilities테이블 입력성공");
+			result = pstmt.executeUpdate(); //입력 성공시 1, 실패시 0 리턴		
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			pool.close(con, pstmt, rs);
 		}
 		
-		return 0;
+		return result;
 		
 	}
 
