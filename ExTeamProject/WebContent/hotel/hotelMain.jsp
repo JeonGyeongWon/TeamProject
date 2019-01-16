@@ -10,6 +10,7 @@
 <body>
 	<h2>호텔메인</h2>
 	
+	<a href="../InsertHotelForm.hotel">호텔등록</a>
 	
 	
 </body>

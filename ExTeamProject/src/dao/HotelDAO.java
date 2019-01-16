@@ -22,80 +22,99 @@ public class HotelDAO {
 	ResultSet rs = null;
 	ConnectionPool pool = new ConnectionPool();
 	
-	public HotelDAO(){
-		con = pool.getConnection();
-	}
-
 	
-	public int insertHotel(HotelDTO hotel, FacilitiesDTO facilities){
-		
-		int result = 0; //입력 성공 여부를 저장할 변수
+	// inserthotel메서드 내부에서 사용할 메서드
+	private void insertFaclities(FacilitiesDTO facilities){
 
-		try {
-			String sql1 = "INSERT INTO hotel"
-					+ "(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate, imgpath, imgname,user_no) "
-					+ "values(?,?,?,?,?,?,?,?,?,?)";
-			
-			pstmt = con.prepareStatement(sql1);
-
-			pstmt.setString(1, hotel.getH_name());
-			pstmt.setString(2, hotel.getH_content());
-			pstmt.setString(3, hotel.getH_addr());
-			pstmt.setString(4, hotel.getH_caution());
-			pstmt.setString(5, hotel.getH_rule());
-			pstmt.setString(6, hotel.getH_detail());
-			pstmt.setTimestamp(7, hotel.getH_regdate());
-			pstmt.setString(8, hotel.getH_imgpath());
-			pstmt.setString(9, hotel.getH_imgname());
-			pstmt.setInt(10, hotel.getUser_no());
-			
+		int result = 0;
 		
-			pstmt.executeUpdate();
-			System.out.println("Hotel테이블  입력성공");
+	try{
+		
+		String sql2 = "SELECT * FROM hotel order by h_no desc";
+		pstmt = con.prepareStatement(sql2);
+		
+		rs = pstmt.executeQuery();
+		rs.next();
+		
+		int h_no = rs.getInt("h_no");
+		
+		
+		String sql3 = "INSERT INTO facilities"
+				+ "(h_no, wifi, shampoo, closet, tv, aircon, hairdry, swim, wash_dry, parking, elevator, health, etc)"
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				
+		pstmt=con.prepareStatement(sql3);
+		
+		pstmt.setInt(1, h_no);
+		pstmt.setInt(2, facilities.getWifi());
+		pstmt.setInt(3, facilities.getShampoo());
+		pstmt.setInt(4, facilities.getCloset());
+		pstmt.setInt(5, facilities.getTv());
+		pstmt.setInt(6, facilities.getAircon());
+		pstmt.setInt(7, facilities.getHairdry());
+		pstmt.setInt(8, facilities.getSwim());
+		pstmt.setInt(9, facilities.getWash_dry());
+		pstmt.setInt(10, facilities.getParking());
+		pstmt.setInt(11, facilities.getElevator());
+		pstmt.setInt(12, facilities.getHealth());
+		pstmt.setString(13, facilities.getEtc());
+		
+		result = pstmt.executeUpdate();
+		
+		if(result > 0){
+			System.out.println("Facilities테이블 삽입 성공");
+		}else{
+			System.out.println("Facilities테이블 삽입 실패");
+		}
+		
+		 //회원가입 성공하면 true리턴
+		
+	}catch(Exception e){
+		System.out.println("insertFacilities에서"+e);
+	}finally{
+		pool.close(con, pstmt, rs);
+	}
+	
+	
+	}
+	
+	public int insertHotel(HotelDTO hdto, FacilitiesDTO fdto){
+		int result = 0;
+		String sql = "";
+		
+		try{
+			con = pool.getConnection();
+			sql = "insert into hotel(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate,imgpath,imgname,user_no,bestcount) "+
+			"values(?,?,?,?,?,?,?,?,?,?,?)";
+			
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setString(1, hdto.getH_name());
+			pstmt.setString(2, hdto.getH_content());
+			pstmt.setString(3, hdto.getH_addr());
+			pstmt.setString(4, hdto.getH_caution());
+			pstmt.setString(5, hdto.getH_rule());
+			pstmt.setString(6, hdto.getH_detail());
+			pstmt.setTimestamp(7, null);
+			pstmt.setString(8,hdto.getH_imgpath());
+			pstmt.setString(9, hdto.getH_imgname());
+			pstmt.setInt(10,hdto.getUser_no());
+			pstmt.setInt(11, hdto.getH_bestcount());
+			
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+			System.out.println("호텔 테이블 삽입 성공");
+			
+			insertFaclities(fdto);
 			
 			
-					
-			String sql2 = "SELECT * FROM hotel order by h_no desc";
-			pstmt = con.prepareStatement(sql2);
-			
-			rs = pstmt.executeQuery();
-			rs.next();
-			
-			int h_no = rs.getInt("h_no");
-			
-			
-			String sql3 = "INSERT INTO facilities"
-					+ "(h_no, wifi, shampoo, closet, tv, aircon, hairdry, swim, wash_dry, parking, elevator, health, etc)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					
-			pstmt=con.prepareStatement(sql3);
-			
-			pstmt.setInt(1, h_no);
-			pstmt.setInt(2, facilities.getWifi());
-			pstmt.setInt(3, facilities.getShampoo());
-			pstmt.setInt(4, facilities.getCloset());
-			pstmt.setInt(5, facilities.getTv());
-			pstmt.setInt(6, facilities.getAircon());
-			pstmt.setInt(7, facilities.getHairdry());
-			pstmt.setInt(8, facilities.getSwim());
-			pstmt.setInt(9, facilities.getWash_dry());
-			pstmt.setInt(10, facilities.getParking());
-			pstmt.setInt(11, facilities.getElevator());
-			pstmt.setInt(12, facilities.getHealth());
-			pstmt.setString(13, facilities.getEtc());
-			
-			 //회원가입 성공하면 true리턴
-			System.out.println("Facilities테이블 입력성공");
-			result = pstmt.executeUpdate(); //입력 성공시 1, 실패시 0 리턴		
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch(Exception e){
+			System.out.println("insertHotel에서"+e);
 		}finally{
 			pool.close(con, pstmt, rs);
 		}
 		
 		return result;
-		
 	}
 
 		//h_no로 조회된 hotel정보를 삭제하는 메서드

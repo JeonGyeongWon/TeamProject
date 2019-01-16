@@ -56,11 +56,16 @@ public class InsertHotelAction implements Action {
     	
     	UserManagementDTO udto = udao.getUserInfo(user_email);
     	
+    	String addr = "";
+    	
+    	addr = multi.getParameter("addr1");
+    	addr += ","+multi.getParameter("addr2");
+    	addr += ","+multi.getParameter("addr3");
     	
     	Hdto.setUser_no(udto.getUser_no());
     	Hdto.setH_name(multi.getParameter("h_name"));
     	Hdto.setH_content(multi.getParameter("h_content"));
-    	Hdto.setH_addr(multi.getParameter("h_addr"));
+    	Hdto.setH_addr(addr);
     	Hdto.setH_caution(multi.getParameter("h_caution"));
     	Hdto.setH_rule(multi.getParameter("h_rule"));
     	Hdto.setH_detail(multi.getParameter("h_detail"));
@@ -122,6 +127,7 @@ public class InsertHotelAction implements Action {
     	
     	forward = new ActionForward();
     	
+    	///hotel/HotelMain.hotel
     	if(result){	
     		forward.setPath("./HotelMain.hotel");
     		forward.setRedirect(true);
@@ -129,7 +135,6 @@ public class InsertHotelAction implements Action {
     		forward.setRedirect(false);
     		forward.setPath("./InsertHotelForm.hotel");
     	}
-    	//imgpath와 imgname을 나누기
 	
 		return forward;
 	}
