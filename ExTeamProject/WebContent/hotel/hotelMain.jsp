@@ -8,10 +8,10 @@
 <title>호텔메인</title>
 </head>
 <body>
+<a href="../InsertHotelForm.hotel">호텔등록</a>
 	<h2>호텔메인</h2>
 	
-	<a href="../InsertHotelForm.hotel">호텔등록</a>
-	<a href="hotel_list.jsp">호텔보기 </a>
+
 	
 	
 </body>

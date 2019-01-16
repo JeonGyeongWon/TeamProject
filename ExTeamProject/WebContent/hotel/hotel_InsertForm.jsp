@@ -14,6 +14,18 @@
 <%--팝업창을 이용한 찾기를 가져옴--%>
 
 $(function(){
+	$("#room input[type=file]").on("change",function(){
+		
+		
+		
+		$("#subimg").append("서브이미지 선택!! 최대5개 ");
+		
+		for(var i=0; i<5; i++ ){
+		var file = "<input type='file' name='h_img'"+i+">";
+		$("#subimg").append(file);
+		}
+		
+	});
 	
 })
 
@@ -21,7 +33,7 @@ function execDaumPostcode() {
     	new daum.Postcode({ 
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
+                
                 // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var roadAddr = data.roadAddress; // 도로명 주소 변수
@@ -119,7 +131,54 @@ function execDaumPostcode() {
 			<tr>
 				<td><input type="submit" value="업로드"></td>
 			</tr>
+			
+		
+			
+			
 	</table>
+	
+	
+		<h2>방설정</h2>
+		<table id="room">
+			<tr>
+				<td>적정인원</td>
+				<td>
+				<select name="personnel">
+					<option value="2">2인이하</option>
+					<option value="4">4인이하</option>
+					<option value="6">6인이하</option>
+					<option value="8">8인이상</option>
+				</select>
+				</td>
+				<td>침대갯수</td>
+				<td><input type="text" name="bed"></td>
+				<td>화장실개수</td>
+				<td><input type="text" name="bathroom"></td>
+				<td>방사이즈</td>
+				<td>
+				<select name="roomsize">
+					<option value="싱글">싱글</option>
+					<option value="더블">더블</option>
+					<option value="트윈">트윈</option>
+					<option value="스위트">스위트</option>
+				</select>
+				</td>
+				<td>주중가</td>
+				<td><input type="text" name="weekprice"></td>
+				<td>주말가</td>
+				<td><input type="text" name="weekend_price"></td>
+				
+				<td>이미지</td>
+				<td id="appendTd"><input type="file" name="imgname" id="imgname" ></td>
+				
+			</tr>
+	
+		
+		</table>
+		
+		<div id='subimg'>
+		
+		</div>
 	</form>
 	
 	

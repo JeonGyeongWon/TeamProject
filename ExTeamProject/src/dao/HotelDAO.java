@@ -14,6 +14,7 @@ import db.ConnectionPool;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
 import hotel.dto.RoomDTO;
+import hotel.dto.Room_imgDTO;
 import hotel.dto.UsersDTO;
 
 public class HotelDAO {
@@ -47,8 +48,8 @@ public class HotelDAO {
 				dto.setH_caution(rs.getString("h_caution"));
 				dto.setH_content(rs.getString("h_content"));
 				dto.setH_detail(rs.getString("h_detail"));
-				dto.setH_imgname(rs.getString("h_imgname"));
-				dto.setH_imgpath(rs.getString("h_imgpath"));
+				dto.setH_imgname(rs.getString("imgname"));
+				dto.setH_imgpath(rs.getString("imgpath"));
 				dto.setH_name(rs.getString("h_name"));
 				dto.setH_no(rs.getInt("h_no"));
 				dto.setH_regdate(rs.getTimestamp("regdate"));
@@ -159,30 +160,56 @@ public class HotelDAO {
 	
 	}
 	
+	//1개의 호텔정보를 가져오는 메서드
+	
+	public HotelDTO oneHotelInfo(int h_no){
+		HotelDTO dto = new HotelDTO();
+		String sql ="";
+		
+		try{
+			
+			sql = "select * from hotel where h_no = ?";
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setInt(1, h_no);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				dto.setH_addr(rs.getString("h_addr"));
+				dto.setH_bestcount(rs.getInt("bestcount"));
+				dto.setH_caution(rs.getString("h_caution"));
+				dto.setH_content(rs.getString("h_content"));
+				dto.setH_detail(rs.getString("h_detail"));
+				dto.setH_imgname(rs.getString("h_imgname"));
+				dto.setH_imgpath(rs.getString("h_imgpath"));
+				dto.setH_name(rs.getString("h_name"));
+				dto.setH_no(rs.getInt("h_no"));
+				dto.setH_regdate(rs.getTimestamp("regdate"));
+				dto.setH_rule(rs.getString("h_rule"));
+				dto.setUser_no(rs.getInt("user_no"));
+			}
+		}catch(Exception e){
+			System.out.println("oneHotelInfo에서"+e);
+			
+		}finally{
+			pool.close(con, pstmt, rs);
+		}
+		
+		return dto;
+	}
+	
+	
 	//호텔 삽입 메서드
 	public int insertHotel(HotelDTO hdto, FacilitiesDTO fdto){
 		int result = 0;
 		String sql = "";
 		
 		try{
-			con = pool.getConnection();
 			sql = "insert into hotel(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate,imgpath,imgname,user_no,bestcount) "+
 			"values(?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt=con.prepareStatement(sql);
-			
-			
-			System.out.println(hdto.getH_name());
-			System.out.println(hdto.getH_content());
-			System.out.println(hdto.getH_addr());
-			System.out.println(hdto.getH_caution());
-			System.out.println(hdto.getH_rule());
-			System.out.println(hdto.getH_detail());
-			System.out.println(hdto.getH_imgpath());
-			System.out.println(hdto.getH_imgname());
-			System.out.println(hdto.getUser_no());
-			System.out.println(hdto.getH_bestcount());
-			
 			
 			
 			pstmt.setString(1, hdto.getH_name());
@@ -238,30 +265,83 @@ public class HotelDAO {
 			
 		}
 		
+		private int insertSubRoom_img(Room_imgDTO dto){
+			
+			int result=0;
+			String sql="";
+			
+			try{
+				
+				sql = "select * from room order by h_rno desc";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				rs.next();
+				
+				int h_rno=rs.getInt("h_rno");
+				int h_no =rs.getInt("h_no");
+				
+				
+				
+				sql = "insert into room_img value(?,?,?,?)";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, h_no);
+				pstmt.setInt(2, h_rno);
+				pstmt.setString(3, dto.getImgpath());
+				pstmt.setString(4, dto.getImgname());
+				
+				result = pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				System.out.println("insertSubRoom_img에서"+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			
+			return result;
+		}
 		
 		//방 정보를 입력하는 메서드
-		public int insertRoom(RoomDTO room){
+		public int insertRoom(RoomDTO room, Room_imgDTO roomsub){
 			
 			String sql = "INSERT INTO room"
-					+ "(h_no, h_rno, personne, bed, bathroom, roomsize, weekprice, weekend_price, imgpath, imgname) "
-					+ "values(?,?,?,?,?,?,?,?,?,?)";
+					+ "(h_no, personnel, bed, bathroom, roomsize, weekprice, weekend_price, imgpath, imgname) "
+					+ "values(?,?,?,?,?,?,?,?,?)";
 			
 			int result = 0; //입력 성공 여부를 저장할 변수
 			
 			try {
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, room.getH_no());
-				pstmt.setInt(2, room.getH_rno());
-				pstmt.setInt(3, room.getPersonne());
-				pstmt.setInt(4, room.getBed());
-				pstmt.setInt(5, room.getBathroom());
-				pstmt.setString(6, room.getRoomsize());
-				pstmt.setInt(7, room.getWeekprice());
-				pstmt.setInt(8, room.getWeekend_price());
-				pstmt.setString(9, room.getImgpath());
-				pstmt.setString(10, room.getImgname());
+				con = pool.getConnection();
 				
-				pstmt.executeUpdate();
+				String sql2 = "SELECT * FROM hotel order by h_no desc";
+				
+				pstmt=con.prepareStatement(sql2);
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				
+				int h_no = rs.getInt("h_no");
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, h_no);
+				pstmt.setInt(2, room.getPersonne());
+				pstmt.setInt(3, room.getBed());
+				pstmt.setInt(4, room.getBathroom());
+				pstmt.setString(5, room.getRoomsize());
+				pstmt.setInt(6, room.getWeekprice());
+				pstmt.setInt(7, room.getWeekend_price());
+				pstmt.setString(8, room.getImgpath());
+				pstmt.setString(9, room.getImgname());
+				
+				result = pstmt.executeUpdate();
+				
+				insertSubRoom_img(roomsub);
 				
 			} catch (SQLException e) {
 				e.printStackTrace();

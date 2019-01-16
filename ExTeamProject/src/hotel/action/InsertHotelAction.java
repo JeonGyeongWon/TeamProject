@@ -1,6 +1,7 @@
 package hotel.action;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.security.Provider.Service;
 import java.util.Enumeration;
 
@@ -19,6 +20,8 @@ import dto.UserManagementDTO;
 import hotel.service.InsertHotelService;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
+import hotel.dto.RoomDTO;
+import hotel.dto.Room_imgDTO;
 import together.Action;
 import together.ActionForward;
 
@@ -34,8 +37,9 @@ public class InsertHotelAction implements Action {
 		System.out.println(realpath);
 		*/
 		//가상경로 오류로 임시로 절대경로지정
-		String realpath = "D:\\upload";
+		String realpath = "E:\\upload";	//메인이미지 경로
 		String image = "";
+		String subimg = "";	//room 서브이미지
     	int max = 50 * 1024 * 1024;
     	
     	MultipartRequest multi = new MultipartRequest(request, realpath,max, "utf-8",new DefaultFileRenamePolicy());
@@ -51,9 +55,8 @@ public class InsertHotelAction implements Action {
     	
     	System.out.println(user_email);
     	
-    	
+    	/* 유저 정보를 넣기위한 udao 생성*/
     	UserManagementDAO udao = new UserManagementDAO();
-    	
     	UserManagementDTO udto = udao.getUserInfo(user_email);
     	
     	String addr = "";
@@ -62,6 +65,9 @@ public class InsertHotelAction implements Action {
     	addr += ","+multi.getParameter("addr2");
     	addr += ","+multi.getParameter("addr3");
     	
+    	
+    	
+    	/*호텔입력부분*/
     	Hdto.setUser_no(udto.getUser_no());
     	Hdto.setH_name(multi.getParameter("h_name"));
     	Hdto.setH_content(multi.getParameter("h_content"));
@@ -76,15 +82,18 @@ public class InsertHotelAction implements Action {
     	Enumeration e = multi.getFileNames();
     	
     	if(e.hasMoreElements()){
-    		image = "/"+(String)e.nextElement();
+    		image = "/"+(String)e.nextElement();	//메인이미지 이름 
     	}
+    	
     	Hdto.setH_imgpath(realpath);
-    	Hdto.setH_imgname(image);
+    	Hdto.setH_imgname(image);	//메인이미지
     	
-    	System.out.println(realpath);
-    	System.out.println(image);
+    	System.out.println("메인이미지 경로"+realpath);
+    	System.out.println("메인이미지 이름"+image);
     	
-
+    	/*호텔입력 종료*/
+    	
+    	/*편의시설 입력정보*/
     	if(multi.getParameter("wifi")!=null)
     	fdto.setWifi(Integer.parseInt(multi.getParameter("wifi")));
     	
@@ -124,14 +133,64 @@ public class InsertHotelAction implements Action {
     	
     	boolean result = service.insertIntoHotel(Hdto,fdto);
     	
+    	/*편의시설 입력종료 */
+    	
+    	/*Room정보 및 Room 서브이미지 입력*/
+    	RoomDTO dto = new RoomDTO();
+    	
+    	dto.setBathroom(Integer.parseInt(multi.getParameter("bathroom")));
+    	dto.setBed(Integer.parseInt(multi.getParameter("bed")));
+    	dto.setPersonne(Integer.parseInt(multi.getParameter("personnel")));
+    	dto.setRoomsize(multi.getParameter("roomsize"));
+    	dto.setWeekend_price(Integer.parseInt(multi.getParameter("weekend_price")));
+    	dto.setWeekprice(Integer.parseInt(multi.getParameter("weekprice")));
+    	
+    	e = multi.getFileNames();
+    	
+    	realpath = "E:/upload/roomimage";
+    	
+    	while(e.hasMoreElements()){
+    	 subimg += "/"+(String)e.nextElement()+",";
+    	 System.out.println(subimg);
+    	}
+    	
+    	String RoomMainImageArr[] = subimg.split(",");
+    	
+    	String RoomMainImage =  RoomMainImageArr[0];
+    	
+   
+    	
+    	dto.setImgpath(realpath);
+    	dto.setImgname(RoomMainImage);
+    	
+    	System.out.println("방 메인이미지 경로"+realpath);
+    	System.out.println("방 메인이미지 이름"+subimg);
+    	
+    	Room_imgDTO RoomSub = new Room_imgDTO();
+    	
+    	realpath="E:/upload/roomimage/roomsubimg";
+    	
+    	RoomSub.setImgname(subimg);
+    	RoomSub.setImgpath(realpath);
+    	
+    	
+    	
+    	service.insertIntoRoom(dto,RoomSub);
     	
     	forward = new ActionForward();
     	
     	///hotel/HotelMain.hotel
     	if(result){	
+    		PrintWriter out = response.getWriter();
+    		out.println("<script>");
+    		out.println("alert('호텔 및 방을 등록하였습니다')");
+    		out.println("</script>");
     		forward.setPath("../HotelMain.hotel");
-    		forward.setRedirect(true);
     	}else{	//수정
+    		PrintWriter out = response.getWriter();
+    		out.println("<script>");
+    		out.println("alert('호텔을 등록에 실패했습니다. 다시시도해보세요')");
+    		out.println("</script>");
     		forward.setRedirect(false);
     		forward.setPath("../InsertHotelForm.hotel");
     	}
