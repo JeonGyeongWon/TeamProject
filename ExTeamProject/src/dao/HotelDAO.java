@@ -22,6 +22,9 @@ public class HotelDAO {
 	ResultSet rs = null;
 	ConnectionPool pool = new ConnectionPool();
 	
+	public HotelDAO(){
+		con = pool.getConnection();
+	}
 	
 	// inserthotel메서드 내부에서 사용할 메서드
 	private void insertFaclities(FacilitiesDTO facilities){
@@ -175,37 +178,6 @@ public class HotelDAO {
 			return 0;
 		}
 		
-		
-		//회원으로 가입하는 유저의 정보를 입력하는 메서드(user_no, user_point, user_lever제외한 입력)
-		public int insertUser(UsersDTO user){
-			String sql = "INSERT INTO users(user_email, user_pass, user_nickname, user_birth, user_gender, user_phone) "
-					+ "values(?,?,?,?,?,?)";
-		
-			int result = 0;
-			
-			try {
-				pstmt=con.prepareStatement(sql);
-				
-				pstmt.setString(1, user.getUser_email());
-				pstmt.setString(2, user.getUser_pass());
-				pstmt.setString(3, user.getUser_nickname());
-				pstmt.setInt(4, user.getUser_birth());
-				pstmt.setString(5, user.getUser_gender());
-				pstmt.setString(6, user.getUser_phone());
-				
-				pstmt.executeUpdate();
-				
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("insertUser()메서드 내에서 오류 "+e);
-			}finally{
-				pool.close(con, pstmt, rs);
-			}
-			
-			
-			return 0;
-		}		
 	}
 
 	

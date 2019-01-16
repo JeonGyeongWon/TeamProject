@@ -129,11 +129,11 @@ public class InsertHotelAction implements Action {
     	
     	///hotel/HotelMain.hotel
     	if(result){	
-    		forward.setPath("./HotelMain.hotel");
+    		forward.setPath("../HotelMain.hotel");
     		forward.setRedirect(true);
     	}else{	//수정
     		forward.setRedirect(false);
-    		forward.setPath("./InsertHotelForm.hotel");
+    		forward.setPath("../InsertHotelForm.hotel");
     	}
 	
 		return forward;
