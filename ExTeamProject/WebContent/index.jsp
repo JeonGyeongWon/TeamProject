@@ -20,16 +20,14 @@
  	
  	<c:out value="${center}"/>
  	
- 	<c:if test="${center == null }">
+ 	<c:if test="${center == null}">
  		<c:set var="center" value="Main.jsp"/>
  	</c:if>
 
-	 <jsp:include page="header.jsp"/>
-	 <jsp:include page="sidevar.jsp"/>
-	
-	 <jsp:include page="${center }"/>
-	 
-	 <jsp:include page="footer.jsp"/>
+	<jsp:include page="header.jsp"/>
+	<jsp:include page="sidevar.jsp"/>
+	<jsp:include page="${center}"/>
+	<jsp:include page="footer.jsp"/>
 
 
 	

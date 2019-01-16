@@ -18,7 +18,7 @@ public class ConnectionPool {
 			Context initCtx = new InitialContext();
 			ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/promotion");
 			con = ds.getConnection();
-			System.out.println("getConnection()메서드-커넥션풀 생성");
+			System.out.println("ConnectionPool 생성");
 			con.setAutoCommit(false);
 		} catch (Exception e) {
 			System.out.print("커넥션풀 얻기 실패: ");

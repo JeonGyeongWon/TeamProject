@@ -2,7 +2,7 @@ package hotel.dto;
 
 import java.sql.Timestamp;
 
-public class Reservation {
+public class ReservationDTO {
 
 	int h_no;
 	int h_rno;
@@ -10,7 +10,7 @@ public class Reservation {
 	Timestamp begindate;
 	Timestamp enddate;
 	int total_price;
-	boolean ckprice;
+	int ckprice;
 	Timestamp ckin;
 	Timestamp ckout;
 	
@@ -50,10 +50,11 @@ public class Reservation {
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
-	public boolean isCkprice() {
+	
+	public int getCkprice() {
 		return ckprice;
 	}
-	public void setCkprice(boolean ckprice) {
+	public void setCkprice(int ckprice) {
 		this.ckprice = ckprice;
 	}
 	public Timestamp getCkin() {

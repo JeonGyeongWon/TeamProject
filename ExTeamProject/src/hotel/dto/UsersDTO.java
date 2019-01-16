@@ -1,16 +1,16 @@
-package userManagement;
+package hotel.dto;
 
-public class UserManagementDTO {
-	private int user_no;
-	private String user_email;
-	private String user_pass;
-	private String user_nickname;
-	private int user_birth;
-	private String user_gender;
-	private String user_phone;
-	private int user_point;
-	private int user_level;
-	
+public class UsersDTO {
+
+	int user_no;
+	String user_email;
+	String user_pass;
+	String user_nickname;
+	int user_birth;
+	String user_gender;
+	int user_point;
+	String user_phone;
+	int user_level;
 	
 	public int getUser_no() {
 		return user_no;
@@ -66,6 +66,7 @@ public class UserManagementDTO {
 	public void setUser_level(int user_level) {
 		this.user_level = user_level;
 	}
+	
 	
 	
 }

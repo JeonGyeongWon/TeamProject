@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.UserManagementDTO;
 import together.ActionForward;
 import userManagement.JoinAction;
 import together.ActionForward;
 import userManagement.LoginAction;
 import userManagement.LogoutAction;
+import userManagement.editUserInfoAction;
+import userManagement.getUserInfoAction;
 import together.Action;
 
 @WebServlet("*.um")
@@ -38,10 +41,6 @@ public class UserManagementController extends HttpServlet{
 		String ctx = request.getContextPath();
 		String command = uri.substring(ctx.length());
 		
-		System.out.println("URI는 "+uri+"입니다.");
-		System.out.println("contextPath는 "+ctx+"입니다.");
-		System.out.println("command는 "+command+"입니다.");
-		
 		//main화면으로 가기 위해 Controller중심처리
 		if(command.equals("/main.um")){
 			forward = new ActionForward();
@@ -58,12 +57,10 @@ public class UserManagementController extends HttpServlet{
 		else if(command.equals("/loginPro.um")){
 			action = new LoginAction();
 			try {
-				System.out.println("loginPro.um까지는 넘어왔다");
 				forward = action.execute(request, response);
 				if(forward==null){
 					return;
 				}
-				System.out.println("loginPro.um의 forward가 저장되었다.");
 			} catch (Exception e) {
 				System.out.print("로그인 처리 과정 오류: ");
 				e.printStackTrace();
@@ -79,7 +76,6 @@ public class UserManagementController extends HttpServlet{
 				System.out.print("로그아웃 처리 과정 오류: ");
 				e.printStackTrace();
 			}
-			
 		}
 		//header.jsp에서 [회원가입]버튼을 클릭했을 때
 		else if(command.equals("/joinPage.um")){
@@ -87,37 +83,67 @@ public class UserManagementController extends HttpServlet{
 			forward.setRedirect(false);
 			forward.setPath("index.jsp?center=/userManagement/join.jsp");
 		
-		}else if(command.equals("/JoinAction.um")){
-				
-				//회원가입 DB처리를 위한 Action객체 생성
-				action = new JoinAction();
-				
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
-		
-				//회원가입에 성공했을때.. 로그인 화면으로 이동하라라는 요청!
-				
-		}else if(command.equals("/loginPage.um")){ //로그인페이지로 이동 시켜줘~ 라는 요청
-			
-			forward = new ActionForward();
-			
-			forward.setRedirect(false); 
-			
-			forward.setPath("./index.jsp?center=member/login.jsp");
-		
-			
-		}else if(command.equals("/Main.um")){//Main.jsp메이페이지 요청!
-		
-		forward = new ActionForward();
-		
-		forward.setRedirect(false); 
-		
-		forward.setPath("./Main.jsp");
-	
 		}
+		else if(command.equals("/JoinAction.um")){
+			
+			//회원가입 DB처리를 위한 Action객체 생성
+			action = new JoinAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			//회원가입에 성공했을때.. 로그인 화면으로 이동하라라는 요청!
+		}
+		//header.jsp에서 [회원정보수정]버튼을 클릭했을 때
+		else if(command.equals("/editPage.um")){
+//			UserManagementDTO umdto = new getUserInfoAction();
+			action = new getUserInfoAction();
+			try {
+				forward = action.execute(request, response);
+				UserManagementDTO umdto = (UserManagementDTO) request.getAttribute("umdto");
+				request.setAttribute("umdto", request.getAttribute("umdto"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//edit.jsp에서 [수정]버튼을 클릭했을 때
+		else if(command.equals("/editPro.um")){
+			System.out.println("editPro.um으로 넘어왔습니다.");
+			action = new editUserInfoAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+//		if(forward != null){
+//			if(forward.isRedirect()){
+//				response.sendRedirect(forward.getPath());	
+//			}else{
+//				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+//				dispatcher.forward(request, response);
+//			}
+//		}else if(command.equals("/loginPage.um")){ //로그인페이지로 이동 시켜줘~ 라는 요청
+//			
+//			forward = new ActionForward();
+//			
+//			forward.setRedirect(false); 
+//			
+//			forward.setPath("./index.jsp?center=member/login.jsp");
+//		}
+//			
+//		else if(command.equals("/Main.um")){//Main.jsp메이페이지 요청!
+//		
+//		forward = new ActionForward();
+//		
+//		forward.setRedirect(false); 
+//		
+//		forward.setPath("./Main.jsp");
+//	
+//		}
 		
 		//뷰페이지로 이동 하는 역할
 		if(forward != null){
@@ -132,6 +158,6 @@ public class UserManagementController extends HttpServlet{
 				dispatcher.forward(request, response);
 			
 			}		
-		}
-	}
+		}	//if문-forward 전송 끝
+	}	//doService() 끝
 }

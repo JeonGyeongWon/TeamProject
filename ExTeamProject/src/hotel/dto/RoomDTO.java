@@ -1,6 +1,6 @@
 package hotel.dto;
 
-public class Room {
+public class RoomDTO {
 
 	int h_no;
 	int h_rno;

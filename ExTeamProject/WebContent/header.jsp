@@ -40,7 +40,6 @@
 
 <body>
 
-
 <!-- 맨위 navbar -->
 	<c:if test="${session.user_email!=null}">
 		<c:set var="user_email" property="${session.user_email}"/>
@@ -56,7 +55,7 @@
 				<c:if test="${user_email != null}">
 					<li class="nav-item"><a href="#">이미지업로드</a></li>
 					<li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
-					<li class="nav-item"><a href="#">회원정보수정</a></li>
+					<li class="nav-item"><a href="./editPage.um">회원정보수정</a></li>
 				</c:if>
 			</ul>
 		</div>
