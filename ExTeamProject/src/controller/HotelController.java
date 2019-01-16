@@ -51,6 +51,7 @@ public class HotelController extends HttpServlet{
 		else if(command.equals("/hotel/InsertHotel.hotel")){
 			action = new InsertHotelAction();
 			
+			
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){

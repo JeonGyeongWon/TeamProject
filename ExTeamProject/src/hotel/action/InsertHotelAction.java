@@ -34,7 +34,7 @@ public class InsertHotelAction implements Action {
 		System.out.println(realpath);
 		*/
 		//가상경로 오류로 임시로 절대경로지정
-		String realpath = "E:\\upload";
+		String realpath = "D:\\upload";
 		String image = "";
     	int max = 50 * 1024 * 1024;
     	
