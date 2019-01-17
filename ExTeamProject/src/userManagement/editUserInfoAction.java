@@ -36,7 +36,8 @@ public class editUserInfoAction implements Action{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('수정 실패')");
+			out.println("alert('회원정보 수정 실패')");
+			out.println("history.back()");
 			out.println("</script>");
 			return null;
 		} else if(result==0) {
@@ -52,9 +53,8 @@ public class editUserInfoAction implements Action{
 			out.println("<script>");
 			out.println("alert('정보가 정상적으로 수정되었습니다.')");
 			out.println("</script>");
-			
-			forward.setRedirect(true);
-			forward.setPath("./main.um");
+			forward.setRedirect(false);
+			forward.setPath("/main.um");
 		}
 		
 		return forward;

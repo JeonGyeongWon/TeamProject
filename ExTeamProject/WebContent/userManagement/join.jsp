@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	// 필수 입력정보인 이메일, 비밀번호가 입력되었는지 확인하는 함수
 	function checkValue() {
-		
+
 		if (!document.userInfo.user_email.value) {
 			alert("이메일을 입력하세요.");
 			document.userInfo.user_email.focus();
@@ -47,11 +47,14 @@
 		}
 		if (isNaN(document.userInfo.user_birth.value)) {
 			alert("생년월일은 반드시 숫자로만 입력해야 합니다. ex)941111");
+			document.userInfo.user_birth.focus();
 			return false;
 		}
 
 		if (document.userInfo.user_birth.value.length != 6) {
 			alert("생년월일은 반드시 6자 입력해야 합니다. ex)941111");
+			document.userInfo.user_birth.value = "";
+			document.userInfo.user_birth.focus();
 			return false;
 		}
 
@@ -63,7 +66,6 @@
 	}
 
 	function openIdChk() {
-
 		window.name = "parentForm";
 		window.open("./userManagement/emailCheckForm.jsp", "emailCheck",
 				"width=400, height=300, top=250, left=800");
@@ -85,7 +87,7 @@
 	<c:if test="${user_email != null}">
 		<script type="text/javascript">
 			alert("이미 로그인되어 있습니다.");
-			location.href = "../main.um";
+			location.href = "./main.um";
 		</script>
 	</c:if>
 

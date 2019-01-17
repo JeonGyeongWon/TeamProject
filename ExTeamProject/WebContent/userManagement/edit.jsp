@@ -16,14 +16,31 @@
 	function checkValue() {
 		if (!document.editUserInfo.user_pass.value) {
 			alert("비밀번호를 입력하세요.");
+			document.editUserInfo.user_pass.focus();
+			return false;
+		}
+		if (document.editUserInfo.user_pass.value.length < 4) {
+			alert("비밀번호는 4자이상 이어야합니다.");
+			document.editUserInfo.user_pass.focus();
 			return false;
 		}
 		if (!document.editUserInfo.user_nickname.value) {
 			alert("닉네임을 입력하세요.");
+			document.editUserInfo.user_nickname.focus();
 			return false;
 		}
 		if (!document.editUserInfo.user_birth.value) {
 			alert("생년월일을 입력하세요.");
+			return false;
+		}
+		if (isNaN(document.editUserInfo.user_birth.value)) {
+			alert("생년월일은 반드시 숫자로만 입력해야 합니다. ex)941111");
+			document.editUserInfo.user_birth.focus();
+			return false;
+		}
+		if (document.editUserInfo.user_birth.value.length != 6) {
+			alert("생년월일은 반드시 6자 입력해야 합니다. ex)941111");
+			document.editUserInfo.user_birth.focus();
 			return false;
 		}
 	}

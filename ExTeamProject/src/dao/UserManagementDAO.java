@@ -26,33 +26,30 @@ public class UserManagementDAO {
 	}
 
 	// 회원가입
-	public boolean insertMember(UserManagementDTO mb) {
+	public int insertMember(UserManagementDTO umdto) {
 		// 회원가입 성공 여부 저장
 		int result = 0;
 		try {
 			con = cp.getConnection();
 			String sql = "insert into users (user_email,user_pass,user_nickname,user_birth,user_gender,user_point,user_phone,user_level,bestcount) values (?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, mb.getUser_email());
-			pstmt.setString(2, mb.getUser_pass());
-			pstmt.setString(3, mb.getUser_nickname());
-			pstmt.setString(4, mb.getUser_birth());
-			pstmt.setString(5, mb.getUser_gender());
+			pstmt.setString(1, umdto.getUser_email());
+			pstmt.setString(2, umdto.getUser_pass());
+			pstmt.setString(3, umdto.getUser_nickname());
+			pstmt.setString(4, umdto.getUser_birth());
+			pstmt.setString(5, umdto.getUser_gender());
 			pstmt.setInt(6, 0);
 			pstmt.setString(7, "");
 			pstmt.setInt(8, 1);
 			pstmt.setInt(9, 0);
 			result = pstmt.executeUpdate(); // 회원가입 성공 하면 1을 리턴 실패시 0을 리턴
 			// 만약에 회원가입에 성공 하면 true리턴
-			if (result != 0) {
-				return true;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			cp.close(con, pstmt, rs);
 		}
-		return false;
+		return result;
 	} // insertMember() 끝
 
 	// 로그인
@@ -120,13 +117,6 @@ public class UserManagementDAO {
 		String user_birth = umdto.getUser_birth();
 		String user_gender = umdto.getUser_gender();
 		// String user_phone = umdto.getUser_phone();
-
-		System.out.println(user_email);
-		System.out.println(user_pass);
-		System.out.println(user_nickname);
-		System.out.println(user_birth);
-		System.out.println(user_gender);
-
 		try {
 			con = cp.getConnection();
 			String sql = "update users set user_pass=?, user_nickname=?, user_birth=?, user_gender=? where user_email=?";
@@ -146,9 +136,6 @@ public class UserManagementDAO {
 		return result;
 	}
 
-	
-	
-	
 	// 아이디 중복체크
 	public int JoinCheck(String user_email) {
 

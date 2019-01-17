@@ -60,9 +60,6 @@ public class UserManagementController extends HttpServlet{
 			action = new LoginAction();
 			try {
 				forward = action.execute(request, response);
-				if(forward==null){
-					return;
-				}
 			} catch (Exception e) {
 				System.out.print("userManagementController-로그인 처리 과정 오류: ");
 				e.printStackTrace();
@@ -90,7 +87,6 @@ public class UserManagementController extends HttpServlet{
 		else if(command.equals("/joinAction.um")){
 			//회원가입 DB처리를 위한 Action객체 생성
 			action = new JoinAction();
-			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -122,19 +118,18 @@ public class UserManagementController extends HttpServlet{
 			}
 		}
 		
-		//비밀번호 찾
-		else if(command.equals("/findPassPage.um")){//비밀번호찿기 페이지요청!
+		//비밀번호 찾기
+		else if(command.equals("/findPassPage.um")){//비밀번호 찾기 페이지요청!
 			forward = new ActionForward();
 			forward.setRedirect(false); 
 			forward.setPath("/userManagement/na_em_find.jsp");		
 		}
 		
-		
 		//뷰페이지로 이동 하는 역할
 		if(forward != null){
 			if(forward.isRedirect()){ //이동방식 여부 값이 true일때.. Response.sendRedirect()방식
 									
-				response.sendRedirect(forward.getPath()); 				
+				response.sendRedirect(forward.getPath());
 			
 			}else{//이동방식 여부값이 false일떄 .. RequestDispatcher  forward()방식 
 				
