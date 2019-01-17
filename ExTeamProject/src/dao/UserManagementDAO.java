@@ -78,7 +78,6 @@ public class UserManagementDAO {
 		} finally {
 			cp.close(con, pstmt, rs);
 		}
-		System.out.println("userLogin()의 리턴값은 " + result + "입니다.");
 		return result;
 	} // userLogin() 끝
 
@@ -110,17 +109,46 @@ public class UserManagementDAO {
 		return umdto;
 	} // getUserInfo() 끝
 
-	public int editUserInfo(){
-		System.out.println("editUserInfo()로 넘어왔습니다.");
-		return 0;
+	// 회원정보수정
+	public int editUserInfo(UserManagementDTO umdto) {
+		int result = 0;
+		String user_email = umdto.getUser_email();
+		String user_pass = umdto.getUser_pass();
+		String user_nickname = umdto.getUser_nickname();
+		int user_birth = umdto.getUser_birth();
+		String user_gender = umdto.getUser_gender();
+		// String user_phone = umdto.getUser_phone();
+
+		System.out.println(user_email);
+		System.out.println(user_pass);
+		System.out.println(user_nickname);
+		System.out.println(user_birth);
+		System.out.println(user_gender);
+
+		try {
+			con = cp.getConnection();
+			String sql = "update users set user_pass=?, user_nickname=?, user_birth=?, user_gender=? where user_email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user_pass);
+			pstmt.setString(2, user_nickname);
+			pstmt.setInt(3, user_birth);
+			pstmt.setString(4, user_gender);
+			pstmt.setString(5, user_email);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.print("editUserInfo()메서드 내부 오류: ");
+			e.printStackTrace();
+		} finally {
+			cp.close(con, pstmt, rs);
+		}
+		return result;
 	}
-	
+
 	// 아이디 중복체크
 	public int JoinCheck(String user_email) {
-		
-		
+
 		int check = 0;
-		
+
 		try {
 			con = cp.getConnection();
 			String sql = "select * from users where user_email=?";
@@ -139,32 +167,33 @@ public class UserManagementDAO {
 		}
 		return check;
 	} // JoinCheck() 끝
-	//비번찿기
-	public String findPw(String user_nickname,String user_email) {
+		// 비번찿기
+
+	public String findPw(String user_nickname, String user_email) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String findPw = null;
-		
+
 		try {
-			String sql= "select user_pass from users where user_nickname=? and user_email=?";
+			String sql = "select user_pass from users where user_nickname=? and user_email=?";
 
 			con = cp.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user_nickname);
 			pstmt.setString(2, user_email);
-			
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next())
+
+			if (rs.next())
 				findPw = rs.getString("user_pass");
-			
+
 		} catch (Exception sql) {
 			throw new RuntimeException(sql.getMessage());
 		} finally {
 			cp.close(con, pstmt, rs);
 		}
 		return findPw;
-	}		
+	}
 }

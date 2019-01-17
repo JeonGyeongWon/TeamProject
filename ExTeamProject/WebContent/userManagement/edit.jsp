@@ -1,4 +1,4 @@
-<%@page import="userManagement.UserManagementDTO"%>
+<%@page import="dto.UserManagementDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,11 +12,27 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!--Ajax를 위해서 공식사이트 에서 제공하는 jquery를 가져온다.  -->
 <script src="./js/bootstrap.js"></script>
+<script type="text/javascript">
+	function checkValue() {
+		if (!document.userInfo.user_pass.value) {
+			alert("비밀번호를 입력하세요.");
+			return false;
+		}
+		if (!document.userInfo.user_nickname.value) {
+			alert("닉네임을 입력하세요.");
+			return false;
+		}
+		if (!document.userInfo.user_birth.value) {
+			alert("생년월일을 입력하세요.");
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 	<c:if test="${session.user_email != null}">
 		<c:set var="user_email" property="${session.user_email}" />
-		<c:set var="umdto" property="${requestScope.umdto}" />
+		<jsp:useBean id="umdto" class="dto.UserManagementDTO" />
 	</c:if>
 	<c:if test="${user_email == null}">
 		<script type="text/javascript">
@@ -25,10 +41,6 @@
 		</script>
 	</c:if>
 	<c:if test="${user_email != null}">
-		<%-- <%
-		UserManagementDTO umdto = (UserManagementDTO) request.getAttribute("umdto");
-		String user_nickname = umdto.getUser_nickname();
-	%> --%>
 		<div class="container">
 			<form method="post" action="./editPro.um" name="userInfo"
 				onsubmit="return checkValue()">
@@ -46,7 +58,8 @@
 							</td>
 
 							<td colspan="2" style="text-align: left; vertical-align: middle;">
-								<span>${user_email}</span>
+								<span>${user_email}</span> <input type="hidden"
+								name="user_email" value="${user_email}">
 							</td>
 						</tr>
 						<tr>
@@ -55,23 +68,23 @@
 							</td>
 							<td colspan="2"><input class="form-control" type="password"
 								id="user_pass" name="user_pass" maxlength="20"
-								placeholder="비밀번호를 입력해주세요."></td>
+								placeholder="새 비밀번호를 입력해주세요."></td>
 						</tr>
 						<tr>
 							<td style="width: 110px;">
 								<h5>닉네임</h5>
 							</td>
-							<td colspan="2">
-								<input class="form-control" type="text" id="user_nickname" name="user_nickname" maxlength="20" value="${umdto.user_nickname}">
-							</td>
+							<td colspan="2"><input class="form-control" type="text"
+								id="user_nickname" name="user_nickname" maxlength="20"
+								value="${umdto.user_nickname}"></td>
 						</tr>
 						<tr>
 							<td style="width: 110px;">
 								<h5>생년월일</h5>
 							</td>
-							<td colspan="2">
-								<input class="form-control" type="text" id="user_birth" name="user_birth" maxlength="20" value="${umdto.user_birth}">
-							</td>
+							<td colspan="2"><input class="form-control" type="text"
+								id="user_birth" name="user_birth" maxlength="20"
+								value="${umdto.user_birth}"></td>
 						</tr>
 						<tr>
 							<td style="width: 110px;">
@@ -81,30 +94,32 @@
 								<div class="form-group"
 									style="text-align: center; margin: 0 auto;">
 									<div class="btn-group" data-toggle="buttons">
-									<c:if test="${umdto.user_gender == '남' }">
-										<label class="btn btn-primary active">
-											<input type="radio" name="user_Gender" autocomplete="on" value="남" checked="checked"> 남자
-										</label>
-										<label class="btn btn-primary">
-											<input type="radio" name="user_Gender" autocomplete="off" value="f"> 여자
-										</label>
-									</c:if>
-									<c:if test="${umdto.user_gender == '여' }">
-										<label class="btn btn-primary active">
-											<input type="radio" name="user_Gender" autocomplete="off" value="남" checked="checked"> 남자
-										</label>
-										<label class="btn btn-primary">
-											<input type="radio" name="user_Gender" autocomplete="on" value="f"> 여자
-										</label>
-									</c:if>
+										<c:if test="${umdto.user_gender == '남' }">
+											<label class="btn btn-primary active"> <input
+												type="radio" name="user_gender" autocomplete="on" value="남"
+												checked="checked"> 남자
+											</label>
+											<label class="btn btn-primary"> <input type="radio"
+												name="user_gender" autocomplete="off" value="여"> 여자
+											</label>
+										</c:if>
+										<c:if test="${umdto.user_gender == '여' }">
+											<label class="btn btn-primary active"> <input
+												type="radio" name="user_gender" autocomplete="off" value="남"
+												checked="checked"> 남자
+											</label>
+											<label class="btn btn-primary"> <input type="radio"
+												name="user_gender" autocomplete="on" value="여"> 여자
+											</label>
+										</c:if>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align: left;" colspan="3">
-								<h5 style="color: red;" id="validationCheck"></h5>
-								<input class="btn btn-primary pull-right" type="submit" value="수정">
+								<h5 style="color: red;" id="validationCheck"></h5> <input
+								class="btn btn-primary pull-right" type="submit" value="수정">
 							</td>
 						</tr>
 					</tbody>

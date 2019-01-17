@@ -62,7 +62,7 @@ public class UserManagementController extends HttpServlet{
 					return;
 				}
 			} catch (Exception e) {
-				System.out.print("로그인 처리 과정 오류: ");
+				System.out.print("userManagementController-로그인 처리 과정 오류: ");
 				e.printStackTrace();
 			}
 			
@@ -73,7 +73,7 @@ public class UserManagementController extends HttpServlet{
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.print("로그아웃 처리 과정 오류: ");
+				System.out.print("userManagementController-로그아웃 처리 과정 오류: ");
 				e.printStackTrace();
 			}
 		}
@@ -92,6 +92,7 @@ public class UserManagementController extends HttpServlet{
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
+				System.out.println("userManagementController-회원가입 처리 과정 오류: ");
 				e.printStackTrace();
 			}	
 			//회원가입에 성공했을때.. 로그인 화면으로 이동하라라는 요청!
@@ -110,40 +111,14 @@ public class UserManagementController extends HttpServlet{
 		}
 		//edit.jsp에서 [수정]버튼을 클릭했을 때
 		else if(command.equals("/editPro.um")){
-			System.out.println("editPro.um으로 넘어왔습니다.");
 			action = new editUserInfoAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
+				System.out.print("회원정보수정 처리 과정 오류: ");
 				e.printStackTrace();
 			}
 		}
-		
-//		if(forward != null){
-//			if(forward.isRedirect()){
-//				response.sendRedirect(forward.getPath());	
-//			}else{
-//				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
-//				dispatcher.forward(request, response);
-//			}
-//		}else if(command.equals("/loginPage.um")){ //로그인페이지로 이동 시켜줘~ 라는 요청
-//			
-//			forward = new ActionForward();
-//			
-//			forward.setRedirect(false); 
-//			
-//			forward.setPath("./index.jsp?center=member/login.jsp");
-//		}
-//			
-//		else if(command.equals("/Main.um")){//Main.jsp메이페이지 요청!
-//		
-//		forward = new ActionForward();
-//		
-//		forward.setRedirect(false); 
-//		
-//		forward.setPath("./Main.jsp");
-//	
-//		}
 		
 		//뷰페이지로 이동 하는 역할
 		if(forward != null){
