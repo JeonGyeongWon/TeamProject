@@ -118,7 +118,15 @@ public class UserManagementController extends HttpServlet{
 				System.out.print("회원정보수정 처리 과정 오류: ");
 				e.printStackTrace();
 			}
+		}else if(command.equals("/passPage.um")){//비밀번호찿기 페이지요청!
+			
+			forward = new ActionForward();
+			
+			forward.setRedirect(false); 
+			
+			forward.setPath("/userManagement/na_em_find.jsp");		
 		}
+		
 		
 		//뷰페이지로 이동 하는 역할
 		if(forward != null){
