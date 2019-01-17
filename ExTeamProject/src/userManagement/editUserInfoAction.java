@@ -18,7 +18,7 @@ public class editUserInfoAction implements Action{
 		String user_email = request.getParameter("user_email");
 		String user_nickname = request.getParameter("user_nickname");
 		String user_pass = request.getParameter("user_pass");
-		int user_birth = Integer.parseInt(request.getParameter("user_birth"));
+		String user_birth = request.getParameter("user_birth");
 		String user_gender = request.getParameter("user_gender");
 		
 		UserManagementDTO umdto = new UserManagementDTO();

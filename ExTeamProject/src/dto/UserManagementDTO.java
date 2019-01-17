@@ -1,16 +1,17 @@
 package dto;
 
 public class UserManagementDTO {
+
 	private int user_no;
 	private String user_email;
 	private String user_pass;
 	private String user_nickname;
-	private int user_birth;
+	private String user_birth;
 	private String user_gender;
 	private int user_point;
 	private String user_phone;
 	private int user_level;
-	
+	private int bestcount;
 	
 	public int getUser_no() {
 		return user_no;
@@ -36,10 +37,10 @@ public class UserManagementDTO {
 	public void setUser_nickname(String user_nickname) {
 		this.user_nickname = user_nickname;
 	}
-	public int getUser_birth() {
+	public String getUser_birth() {
 		return user_birth;
 	}
-	public void setUser_birth(int user_birth) {
+	public void setUser_birth(String user_birth) {
 		this.user_birth = user_birth;
 	}
 	public String getUser_gender() {
@@ -65,6 +66,12 @@ public class UserManagementDTO {
 	}
 	public void setUser_level(int user_level) {
 		this.user_level = user_level;
+	}
+	public int getBestcount() {
+		return bestcount;
+	}
+	public void setBestcount(int bestcount) {
+		this.bestcount = bestcount;
 	}
 	
 	

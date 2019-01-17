@@ -42,7 +42,7 @@ public class LoginAction implements Action{
 			return null;
 		}
 		else if(result == 1){
-			System.out.println("로그인 성공");
+			System.out.println("사용자("+user_email + ") 로그인");
 			HttpSession session = request.getSession();
 			session.setAttribute("user_email", user_email);
 			forward.setRedirect(true);

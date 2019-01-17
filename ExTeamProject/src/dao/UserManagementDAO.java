@@ -31,16 +31,17 @@ public class UserManagementDAO {
 		int result = 0;
 		try {
 			con = cp.getConnection();
-			String sql = "insert into users (user_email,user_pass,user_nickname,user_birth,user_gender,user_point,user_phone,user_level) values (?,?,?,?,?,?,?,?)";
+			String sql = "insert into users (user_email,user_pass,user_nickname,user_birth,user_gender,user_point,user_phone,user_level,bestcount) values (?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mb.getUser_email());
 			pstmt.setString(2, mb.getUser_pass());
 			pstmt.setString(3, mb.getUser_nickname());
-			pstmt.setInt(4, mb.getUser_birth());
+			pstmt.setString(4, mb.getUser_birth());
 			pstmt.setString(5, mb.getUser_gender());
 			pstmt.setInt(6, 0);
 			pstmt.setString(7, "");
 			pstmt.setInt(8, 1);
+			pstmt.setInt(9, 0);
 			result = pstmt.executeUpdate(); // 회원가입 성공 하면 1을 리턴 실패시 0을 리턴
 			// 만약에 회원가입에 성공 하면 true리턴
 			if (result != 0) {
@@ -86,7 +87,7 @@ public class UserManagementDAO {
 		UserManagementDTO umdto = new UserManagementDTO();
 		try {
 			con = cp.getConnection();
-			String sql = "select user_no, user_pass, user_nickname, user_birth, user_gender, user_point, user_phone, user_level from users where user_email=?";
+			String sql = "select user_no, user_pass, user_nickname, user_birth, user_gender, user_point, user_phone, user_level, bestcount from users where user_email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user_email);
 			rs = pstmt.executeQuery();
@@ -94,11 +95,12 @@ public class UserManagementDAO {
 				umdto.setUser_no(rs.getInt("user_no"));
 				umdto.setUser_pass(rs.getString("user_pass"));
 				umdto.setUser_nickname(rs.getString("user_nickname"));
-				umdto.setUser_birth(rs.getInt("user_birth"));
+				umdto.setUser_birth(rs.getString("user_birth"));
 				umdto.setUser_gender(rs.getString("user_gender"));
 				umdto.setUser_point(rs.getInt("user_point"));
 				umdto.setUser_phone(rs.getString("user_phone"));
 				umdto.setUser_level(rs.getInt("user_level"));
+				umdto.setBestcount(rs.getInt("bestcount"));
 			}
 		} catch (Exception e) {
 			System.out.print("getUserInfo()메서드 내부 오류: ");
@@ -115,7 +117,7 @@ public class UserManagementDAO {
 		String user_email = umdto.getUser_email();
 		String user_pass = umdto.getUser_pass();
 		String user_nickname = umdto.getUser_nickname();
-		int user_birth = umdto.getUser_birth();
+		String user_birth = umdto.getUser_birth();
 		String user_gender = umdto.getUser_gender();
 		// String user_phone = umdto.getUser_phone();
 
@@ -131,7 +133,7 @@ public class UserManagementDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user_pass);
 			pstmt.setString(2, user_nickname);
-			pstmt.setInt(3, user_birth);
+			pstmt.setString(3, user_birth);
 			pstmt.setString(4, user_gender);
 			pstmt.setString(5, user_email);
 			result = pstmt.executeUpdate();
@@ -144,6 +146,9 @@ public class UserManagementDAO {
 		return result;
 	}
 
+	
+	
+	
 	// 아이디 중복체크
 	public int JoinCheck(String user_email) {
 
@@ -167,8 +172,8 @@ public class UserManagementDAO {
 		}
 		return check;
 	} // JoinCheck() 끝
-		// 비번찿기
 
+	// 비밀번호 찾기
 	public String findPw(String user_nickname, String user_email) {
 
 		Connection con = null;
