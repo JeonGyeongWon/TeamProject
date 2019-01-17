@@ -52,14 +52,14 @@ p#login_joinInfo a {
 <script>
 	var width = 450; //폭
 	var height = 200;//높이
-	var winL = (screen.width - width) / 2; 
+	var winL = (screen.width - width) / 2;
 	var winT = (screen.height - height) / 2;
-	var property = "width=" + width + "," + "height=" + height + "," 
-					+ "left=" + winL + "," + "top=" + winT + " menubar=no";
-	
-function siteInfo2() {	
-	window.open('./passPage.um',"",property);
-}
+	var property = "width=" + width + "," + "height=" + height + "," + "left="
+			+ winL + "," + "top=" + winT + " menubar=no";
+
+	function siteInfo2() {
+		window.open('./findPassPage.um', "", property);
+	}
 </script>
 </head>
 <body>
@@ -97,7 +97,9 @@ function siteInfo2() {
 		<p id="login_joinInfo">
 			아직 회원이 아니신가요? <a href="./joinPage.um">회원가입</a>하러 가기
 		</p>
-		<p id="login_joinInfo">비밀번호를 모르시나요? <a href="javascript:siteInfo2()">비밀번호</a>찿기</p>
+		<p id="login_findPass">
+			비밀번호를 모르시나요? <a href="javascript:siteInfo2()">비밀번호</a>찾기
+		</p>
 	</center>
 </body>
 </html>

@@ -14,15 +14,15 @@
 <script src="./js/bootstrap.js"></script>
 <script type="text/javascript">
 	function checkValue() {
-		if (!document.userInfo.user_pass.value) {
+		if (!document.editUserInfo.user_pass.value) {
 			alert("비밀번호를 입력하세요.");
 			return false;
 		}
-		if (!document.userInfo.user_nickname.value) {
+		if (!document.editUserInfo.user_nickname.value) {
 			alert("닉네임을 입력하세요.");
 			return false;
 		}
-		if (!document.userInfo.user_birth.value) {
+		if (!document.editUserInfo.user_birth.value) {
 			alert("생년월일을 입력하세요.");
 			return false;
 		}
@@ -42,7 +42,7 @@
 	</c:if>
 	<c:if test="${user_email != null}">
 		<div class="container">
-			<form method="post" action="./editPro.um" name="userInfo"
+			<form method="post" action="./editPro.um" name="editUserInfo"
 				onsubmit="return checkValue()">
 				<table class="table table-bordered table-hover"
 					style="text-align: center; border: 1px solid #dddddd">

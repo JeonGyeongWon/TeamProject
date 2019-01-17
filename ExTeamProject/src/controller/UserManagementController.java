@@ -41,18 +41,20 @@ public class UserManagementController extends HttpServlet{
 		String ctx = request.getContextPath();
 		String command = uri.substring(ctx.length());
 		
-		//main화면으로 가기 위해 Controller중심처리
+		//main화면으로 이동할 때는 항상 Controller중심처리
 		if(command.equals("/main.um")){
 			forward = new ActionForward();
-			forward.setRedirect(false);
+			forward.setRedirect(true);
 			forward.setPath("./index.jsp");
 		}
+		
 		//header.jsp에서 [로그인]버튼을 클릭했을 때 
 		else if(command.equals("/loginPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("index.jsp?center=/userManagement/login.jsp"); 
 		}
+		
 		//login.jsp에서 [확인]버튼을 클릭했을 때
 		else if(command.equals("/loginPro.um")){
 			action = new LoginAction();
@@ -65,8 +67,8 @@ public class UserManagementController extends HttpServlet{
 				System.out.print("userManagementController-로그인 처리 과정 오류: ");
 				e.printStackTrace();
 			}
-			
 		}
+		
 		//header.jsp에서 [로그아웃]버튼을 눌렀을 때
 		else if(command.equals("/logoutPro.um")){
 			action = new LogoutAction();
@@ -77,15 +79,15 @@ public class UserManagementController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		
 		//header.jsp에서 [회원가입]버튼을 클릭했을 때
 		else if(command.equals("/joinPage.um")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("index.jsp?center=/userManagement/join.jsp");
-		
 		}
-		else if(command.equals("/JoinAction.um")){
-			
+		
+		else if(command.equals("/joinAction.um")){
 			//회원가입 DB처리를 위한 Action객체 생성
 			action = new JoinAction();
 			
@@ -95,11 +97,10 @@ public class UserManagementController extends HttpServlet{
 				System.out.println("userManagementController-회원가입 처리 과정 오류: ");
 				e.printStackTrace();
 			}	
-			//회원가입에 성공했을때.. 로그인 화면으로 이동하라라는 요청!
 		}
+		
 		//header.jsp에서 [회원정보수정]버튼을 클릭했을 때
 		else if(command.equals("/editPage.um")){
-//			UserManagementDTO umdto = new getUserInfoAction();
 			action = new getUserInfoAction();
 			try {
 				forward = action.execute(request, response);
@@ -109,6 +110,7 @@ public class UserManagementController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		
 		//edit.jsp에서 [수정]버튼을 클릭했을 때
 		else if(command.equals("/editPro.um")){
 			action = new editUserInfoAction();
@@ -118,12 +120,12 @@ public class UserManagementController extends HttpServlet{
 				System.out.print("회원정보수정 처리 과정 오류: ");
 				e.printStackTrace();
 			}
-		}else if(command.equals("/passPage.um")){//비밀번호찿기 페이지요청!
-			
+		}
+		
+		//비밀번호 찾
+		else if(command.equals("/findPassPage.um")){//비밀번호찿기 페이지요청!
 			forward = new ActionForward();
-			
 			forward.setRedirect(false); 
-			
 			forward.setPath("/userManagement/na_em_find.jsp");		
 		}
 		
