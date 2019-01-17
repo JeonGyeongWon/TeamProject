@@ -101,5 +101,7 @@
 					<div class="clearfix visible-md-block"></div>
 				</div>
 			</div>
+			</div>
+			
 </body>
 </html>

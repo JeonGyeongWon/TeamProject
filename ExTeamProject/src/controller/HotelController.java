@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import hotel.action.HotelMainAction;
 import hotel.action.InsertHotelAction;
 import together.ActionForward;
 import together.Action;
@@ -40,9 +41,12 @@ public class HotelController extends HttpServlet{
 		System.out.println(command);
 		
 		if(command.equals("/HotelMain.hotel")){	//메인페이지 이동은 별다른 작업이 없으므로 주소값만 지정한다.
-			forward = new ActionForward();
-			forward.setRedirect(true);
-			forward.setPath("hotel/hotelMain.jsp");
+			action = new HotelMainAction();
+			try{
+			forward = action.execute(request, response);
+			}catch(Exception e){
+				System.out.println("HotelMain.hotel(서블릿)"+e);
+			}
 		}else if(command.equals("/InsertHotelForm.hotel")){ //호텔 등록 폼으로 이동
 			forward = new ActionForward();	//위와 같음
 			forward.setRedirect(true);
