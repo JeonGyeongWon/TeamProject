@@ -1,11 +1,16 @@
 package hotel.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+import javax.imageio.stream.FileImageInputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,8 +46,8 @@ public class InsertHotelAction implements Action {
 		System.out.println(realpath);
 		*/
 		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
-		String savepath = rootPath + "/hotel/upload" ;
-		String realpath = "upload";
+		String savepath = rootPath + "/hotel/upload/" ;
+		String realpath = "upload/";
 		System.out.println(realpath);
 
 		
@@ -59,7 +64,8 @@ public class InsertHotelAction implements Action {
     	
     	HotelDTO Hdto = new HotelDTO();
     	FacilitiesDTO fdto = new FacilitiesDTO();
-    	
+    	RoomDTO dto = new RoomDTO();
+    	Room_imgDTO RoomSub = new Room_imgDTO();
     	
     	//user_no 값을 얻기 위한 session값을 가져옴
     	HttpSession session = request.getSession();
@@ -94,20 +100,58 @@ public class InsertHotelAction implements Action {
     	// 파일 업로드 관련 
     	Enumeration e = multi.getFileNames();
     	ArrayList list = new ArrayList();
-    	while(e.hasMoreElements()){
-    		
-    		String ckimg = (String)e.nextElement();
-    		System.out.println("체크이미지 이름은~~ : "+ckimg);
-    		if(ckimg.equals("h_img0")){	//호텔 메인이미지
-    			image = "/"+multi.getFilesystemName(ckimg);
-    		}else if(ckimg.equals("h_img1")){	//룸 메인이미지
-    			roomimg = "/"+multi.getFilesystemName(ckimg);
+    	
+    	
+    	FileInputStream fis = null;
+		FileOutputStream fos = null;
+		BufferedInputStream bis = null;
+		BufferedOutputStream bos = null;
+		int fileData = 0;
+		
+		//git이 저장되어있는곳 원래는 가상경로를 이용해야하나 제컴퓨터가 인식을 못하기에..... git으로 잡았습니다
+		// 현재 팀프로젝트 중이므로 workspace가아닌 git경로를 잡으셔야합니다.
+		String myoutpath ="C:/Users/ITWILL/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
+		
+		e= multi.getFileNames();
+		
+		while(e.hasMoreElements()){
+			String fileName = (String)e.nextElement();
+			String uploadfile = multi.getFilesystemName(fileName);
+			fis= new FileInputStream(savepath+uploadfile);
+			bis = new BufferedInputStream(fis);
+			
+			fos = new FileOutputStream(myoutpath+"/"+uploadfile);
+			bos = new BufferedOutputStream(fos);
+			
+			while((fileData=bis.read())!=-1){
+				bos.write(fileData);
+			}
+			if(fileName.equals("h_img0")){	//호텔 메인이미지
+    			image = multi.getFilesystemName(fileName);
+    		}else if(fileName.equals("h_img1")){	//룸 메인이미지
+    			roomimg = multi.getFilesystemName(fileName);
     		}else{	//룸 서브이미지
-    			subimg ="/"+multi.getFilesystemName(ckimg);
+    			subimg = multi.getFilesystemName(fileName)+",";
     			list.add(subimg);
     		}
+		}
     	
+		
+		
+		// 읽어들인 호텔메인, 방메인, 방 서브이미지를 나누는작업
+		// 제컴퓨터 경로문제때문에 이클립스내에 넣어두겠습니다!
+		
+		//	C:\Users\ITWILL\git\TeamProject\ExTeamProject\WebContent\hotel\\upload 제 git이 저장되어있는 공간입니다.
+		
+		//multi중복이 되지않기에 모두같은경로에 있음
+		// -> 삭제시에 파일도 같이 설정하게 해둘것! -> 메서드만들어놓겠습니다~
+		
     	
+    	for(int i = 0; i<list.size(); i++){
+    		if(i==0){
+    			continue;
+    		}
+    		subimg += (String)list.get(i);
     	}
     	
     	Hdto.setH_imgpath(realpath);
@@ -161,7 +205,7 @@ public class InsertHotelAction implements Action {
     	/*편의시설 입력종료 */
     	
     	/*Room정보 및 Room 서브이미지 입력*/
-    	RoomDTO dto = new RoomDTO();
+    	
     	
     	dto.setBathroom(Integer.parseInt(multi.getParameter("bathroom")));
     	dto.setBed(Integer.parseInt(multi.getParameter("bed")));
@@ -174,21 +218,16 @@ public class InsertHotelAction implements Action {
     	
     	
    
-    	
+    	dto.setImgname(roomimg);
     	dto.setImgpath(realpath);
-    	dto.setImgname((String)list.get(0));	//RoomMainImage
+    		//RoomMainImage
     	
     	System.out.println("방 메인이미지 경로"+realpath);
     	System.out.println("방 메인이미지 이름"+roomimg);	//RoomMainImage
     	
-    	Room_imgDTO RoomSub = new Room_imgDTO();
     	
-    	for(int i = 0; i<list.size(); i++){
-    		if(i==0){
-    			continue;
-    		}
-    		subimg += (String)list.get(i);
-    	}
+    	
+    	
     	
     	RoomSub.setImgname(subimg);
     	RoomSub.setImgpath(realpath);

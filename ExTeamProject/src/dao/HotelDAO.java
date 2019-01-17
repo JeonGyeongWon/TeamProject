@@ -24,9 +24,6 @@ public class HotelDAO {
 	ResultSet rs = null;
 	ConnectionPool pool = new ConnectionPool();
 	
-	public HotelDAO(){
-		con = pool.getConnection();
-	}
 	
 	
 	// 모든 호텔 정보를 가져오는 메서드 
@@ -37,6 +34,7 @@ public class HotelDAO {
 		HotelDTO dto = new HotelDTO();
 		
 		try{
+			con = pool.getConnection();
 			sql = "select * from hotel order by h_no desc";
 			pstmt=con.prepareStatement(sql);
 			
@@ -66,20 +64,57 @@ public class HotelDAO {
 		return list;
 	}
 	
+	
+	//각 호텔 번호를 이용해 룸 정보를 가져오는 메서드
+	public ArrayList<RoomDTO> allselectedRoom(int h_no) {
+		
+		String sql ="";
+		ArrayList<RoomDTO> list = new ArrayList<>();
+		try{
+			con = pool.getConnection();
+			sql = "select * from room where h_no =?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, h_no);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				RoomDTO dto = new RoomDTO();
+				dto.setH_rno(rs.getInt("h_rno"));
+				dto.setH_no(rs.getInt("h_no"));
+				dto.setBed(rs.getInt("bed"));
+				dto.setPersonne(rs.getInt("personnel"));
+				dto.setBathroom(rs.getInt("bathroom"));
+				dto.setRoomsize(rs.getString("roomsize"));
+				dto.setWeekprice(rs.getInt("weekprice"));
+				dto.setWeekend_price(rs.getInt("weekend_price"));
+				dto.setImgname(rs.getString("imgname"));
+				dto.setImgpath(rs.getString("imgpath"));
+				list.add(dto);
+			}
+		}catch(Exception e){
+			System.out.println("allselectedRoom에서"+e);
+		}finally{
+			pool.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	
 	// 각 호텔 번호를 이용해 편의시설을 가져오는 메서드
-	public ArrayList<FacilitiesDTO> allselectedFacilities(int hotel_no){
-		ArrayList<FacilitiesDTO> list = new ArrayList<>();
+	public FacilitiesDTO oneselectedFacilities(int h_no){
 		FacilitiesDTO dto = new FacilitiesDTO();
 		String sql ="";
 		
 		try{
-			sql = "selct * from facilitiesDTO";
+			con = pool.getConnection();
+			sql = "select * from facilities where h_no = ?";
 			
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setInt(1, h_no);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()){
+			if(rs.next()){
 				dto.setAircon(rs.getInt("aircon"));
 				dto.setCloset(rs.getInt("closet"));
 				dto.setElevator(rs.getInt("elevator"));
@@ -93,7 +128,6 @@ public class HotelDAO {
 				dto.setTv(rs.getInt("tv"));
 				dto.setWash_dry(rs.getInt("wash_dry"));
 				dto.setWifi(rs.getInt("wifi"));
-				list.add(dto);
 			}
 			
 		}catch(Exception e){
@@ -101,7 +135,7 @@ public class HotelDAO {
 		}finally{
 			pool.close(con, pstmt, rs);
 		}
-		return list;
+		return dto;
 	}
 	
 	
@@ -111,7 +145,7 @@ public class HotelDAO {
 		int result = 0;
 		
 	try{
-		
+		con = pool.getConnection();
 		String sql2 = "SELECT * FROM hotel order by h_no desc";
 		pstmt = con.prepareStatement(sql2);
 		
@@ -167,6 +201,7 @@ public class HotelDAO {
 		String sql ="";
 		
 		try{
+			con = pool.getConnection();
 			
 			sql = "select * from hotel where h_no = ?";
 			pstmt=con.prepareStatement(sql);
@@ -181,8 +216,8 @@ public class HotelDAO {
 				dto.setH_caution(rs.getString("h_caution"));
 				dto.setH_content(rs.getString("h_content"));
 				dto.setH_detail(rs.getString("h_detail"));
-				dto.setH_imgname(rs.getString("h_imgname"));
-				dto.setH_imgpath(rs.getString("h_imgpath"));
+				dto.setH_imgname(rs.getString("imgname"));
+				dto.setH_imgpath(rs.getString("imgpath"));
 				dto.setH_name(rs.getString("h_name"));
 				dto.setH_no(rs.getInt("h_no"));
 				dto.setH_regdate(rs.getTimestamp("regdate"));
@@ -206,6 +241,7 @@ public class HotelDAO {
 		String sql = "";
 		
 		try{
+			con = pool.getConnection();
 			sql = "insert into hotel(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate,imgpath,imgname,user_no,bestcount) "+
 			"values(?,?,?,?,?,?,?,?,?,?,?)";
 			
@@ -247,6 +283,7 @@ public class HotelDAO {
 			
 			
 			try {
+				con = pool.getConnection();
 				pstmt.setInt(1, hotel.getH_no());
 				
 				pstmt=con.prepareStatement(sql);
@@ -271,7 +308,7 @@ public class HotelDAO {
 			String sql="";
 			
 			try{
-				
+				con = pool.getConnection();
 				sql = "select * from room order by h_rno desc";
 				
 				pstmt = con.prepareStatement(sql);
@@ -350,6 +387,9 @@ public class HotelDAO {
 			
 			return 0;
 		}
+
+		
+		
 		
 	}
 

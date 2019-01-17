@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
 import hotel.action.InsertHotelAction;
 import together.ActionForward;
@@ -40,7 +41,7 @@ public class HotelController extends HttpServlet{
 		String command = uri.substring(ctx.length());
 		System.out.println(command);
 		
-		if(command.equals("/HotelMain.hotel")){	//메인페이지 이동은 별다른 작업이 없으므로 주소값만 지정한다.
+		if(command.equals("/HotelMain.hotel")){	// 메인페이지로 이동하는 주소 ( 호텔들을 뿌려주는곳)
 			action = new HotelMainAction();
 			try{
 			forward = action.execute(request, response);
@@ -52,10 +53,8 @@ public class HotelController extends HttpServlet{
 			forward.setRedirect(true);
 			forward.setPath("hotel/hotel_InsertForm.jsp");
 		}	
-		else if(command.equals("/hotel/InsertHotel.hotel")){
+		else if(command.equals("/hotel/InsertHotel.hotel")){	// 호텔 및 방 정보등을 DB에 넣는곳
 			action = new InsertHotelAction();
-			
-			
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){
@@ -63,6 +62,14 @@ public class HotelController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/HotelDetail.hotel")){
+			action = new HotelDetailAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				System.out.println("HotelDetail작업중"+e);
+				e.printStackTrace();
+			}
 		}
 		
 		if(forward != null){
