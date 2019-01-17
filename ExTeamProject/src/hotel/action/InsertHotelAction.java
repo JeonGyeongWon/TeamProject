@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.core.ApplicationContext;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
@@ -32,19 +34,28 @@ public class InsertHotelAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception   {
 		
 		ActionForward forward = null;
+		
 		/*
 		ServletContext context = request.getServletContext();
 		String realpath = context.getRealPath("/hotel/upload");
 		System.out.println(realpath);
 		*/
+		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
+		String savepath = rootPath + "/hotel/upload" ;
+		String realpath = "upload";
+		System.out.println(realpath);
+
+		
+		
+		
 		//가상경로 오류로 임시로 절대경로지정
-		String realpath = "E:\\upload";	//메인이미지 경로
+		//String realpath = "E:\\upload";	//메인이미지 경로
 		String image = "";
 		String subimg = "";	//room 서브이미지
 		String roomimg =""; //room 메인이미지
     	int max = 50 * 1024 * 1024;
     	
-    	MultipartRequest multi = new MultipartRequest(request, realpath,max, "utf-8",new DefaultFileRenamePolicy());
+    	MultipartRequest multi = new MultipartRequest(request, savepath,max, "utf-8",new DefaultFileRenamePolicy());
     	
     	HotelDTO Hdto = new HotelDTO();
     	FacilitiesDTO fdto = new FacilitiesDTO();
