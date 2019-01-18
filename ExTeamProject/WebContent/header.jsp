@@ -29,7 +29,7 @@
 	function fnHotel(url){
 		location.href =	url+'';
 	}
-	function fnRestaurants(url){
+	function fnFood(url){
 		location.href =	url+'';
 	}
 	function fnTourist(url) {
@@ -86,7 +86,7 @@
             </form>
           </div>
           	<div class="btn-group col-sm-8">
-	        	<button class="btn btn-primary col-sm-3 " onclick="fnRestaurants('RestaurantsMain.re');">맛집</button>
+	        	<button class="btn btn-primary col-sm-3 " onclick="fnFood('FoodMain.fo');">맛집</button>
 				<button class="btn btn-primary col-sm-3 " onclick="fnHotel('HotelMain.hotel');">호텔</button>
 				<button class="btn btn-primary col-sm-3 " onclick="fnTourist('TouristMain.tourist');">관광지</button>
 			</div>
