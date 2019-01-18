@@ -26,30 +26,6 @@
 		location.href = "./loginPro.um"; //user_email과 user_pass 모두 입력값이 있을 때
 	}
 </script>
-
-<<<<<<< HEAD
-table#login_table {
-	border: 5px double red;
-	padding: 10px;
-	margin: 10px;
-	border-radius: 11px;
-}
-
-p#login_joinInfo,
-p#login_findPass {
-	font-size: 0.8rem;
-}
-
-p#login_joinInfo a,
-p#login_findPass a {
-	font-weight: bold;
-	color: green;
-	text-decoration: none;
-	font-size: 1rem;
-}
-</style>
-=======
->>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject.git
 <script>
 	var width = 700; //폭
 	var height = 550;//높이
@@ -95,7 +71,7 @@ p#login_findPass a {
 		<p id="login_joinInfo" align="center">
 			아직 회원이 아니신가요? <a href="./joinPage.um">회원가입</a>하러 가기
 		</p>
-		<p id="login_joinInfo" align="center">비밀번호를 모르시나요? <a href="javascript:siteInfo2()">비밀번호</a>찿기</p>
+		<p id="login_findPass" align="center">비밀번호를 모르시나요? <a href="javascript:siteInfo2()">비밀번호</a>찾기</p>
 	</form>
 
 	
