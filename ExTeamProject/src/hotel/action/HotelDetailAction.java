@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.User;
+
+import dto.UserManagementDTO;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
 import hotel.dto.RoomDTO;
@@ -24,6 +27,7 @@ public class HotelDetailAction implements Action {
 		HotelDetailService service = new HotelDetailService();
 		
 		HotelDTO hdto = service.getBringoneHotelInfo(h_no);
+		int user_no = hdto.getUser_no();
 		FacilitiesDTO fdto = service.getBringAllFacilities(h_no);
 		ArrayList<RoomDTO> rlist = service.getBringAllRoomInfo(h_no);
 		

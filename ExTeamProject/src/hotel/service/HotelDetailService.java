@@ -3,6 +3,8 @@ package hotel.service;
 import java.util.ArrayList;
 
 import dao.HotelDAO;
+import dao.UserManagementDAO;
+import dto.UserManagementDTO;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
 import hotel.dto.RoomDTO;
@@ -30,6 +32,7 @@ public class HotelDetailService {
 		
 		return list;
 	}
+
 	
 	
 	

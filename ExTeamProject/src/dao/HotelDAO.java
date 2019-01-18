@@ -15,7 +15,7 @@ import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
 import hotel.dto.RoomDTO;
 import hotel.dto.Room_imgDTO;
-import hotel.dto.UsersDTO;
+import dto.UserManagementDTO;
 
 public class HotelDAO {
 	
