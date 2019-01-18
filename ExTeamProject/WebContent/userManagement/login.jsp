@@ -58,7 +58,7 @@ p#login_joinInfo a {
 					+ "left=" + winL + "," + "top=" + winT + " menubar=no";
 	
 function siteInfo2() {	
-	window.open('./passPage.um',"",property);
+	window.open('./findPassPage.um',"",property);
 }
 </script>
 </head>
