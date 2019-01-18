@@ -23,7 +23,7 @@ public class LogoutAction implements Action {
 		//session 전체를 만료시킨다.
 		session.invalidate();
 		
-		//main페이지로 보낸다.
+		//main페이지로 이동한다.
 		response.sendRedirect("./main.um");
 		
 		return null;

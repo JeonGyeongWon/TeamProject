@@ -38,11 +38,13 @@ table#login_table {
 	border-radius: 11px;
 }
 
-p#login_joinInfo {
+p#login_joinInfo,
+p#login_findPass {
 	font-size: 0.8rem;
 }
 
-p#login_joinInfo a {
+p#login_joinInfo a,
+p#login_findPass a {
 	font-weight: bold;
 	color: green;
 	text-decoration: none;

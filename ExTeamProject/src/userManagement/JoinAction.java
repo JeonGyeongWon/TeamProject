@@ -20,7 +20,7 @@ public class JoinAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		// request로 받는 데이터 한글 처리
+		// request로 받은 데이터 한글 처리
 		request.setCharacterEncoding("UTF-8");
 
 		// join.jsp에서 넘어온 request의 parameter값을 UserManagementDTO객체에 저장한다.
@@ -30,7 +30,7 @@ public class JoinAction implements Action {
 		umdto.setUser_nickname(request.getParameter("user_nickname"));
 		umdto.setUser_birth(request.getParameter("user_birth"));
 		umdto.setUser_gender(request.getParameter("user_gender"));
-//		umdto.setUser_phone(request.getParameter("user_phone"));
+//		umdto.setUser_phone(request.getParameter("user_phone"));		//전화번호 입력(선택사항)란 생성 시 사용 
 
 		// 회원가입 성공 여부를 담을 변수 선언
 		int result = 0;

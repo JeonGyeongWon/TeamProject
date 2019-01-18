@@ -13,7 +13,7 @@ import together.ActionForward;
 import together.Action;
 
 @WebServlet("*.re")
-public class RestaurantsController extends HttpServlet{
+public class FoodController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

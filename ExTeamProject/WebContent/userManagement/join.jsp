@@ -8,10 +8,9 @@
 <link rel="stylesheet" href="./css/bootstrap.css">
 <title></title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<!--Ajax를 위해서 공식사이트 에서 제공하는 jquery를 가져온다.  -->
 <script src="./js/bootstrap.js"></script>
 <script type="text/javascript">
-	// 필수 입력정보인 이메일, 비밀번호가 입력되었는지 확인하는 함수
+	//<form>태그로 전송할 값의 유효성 검사
 	function checkValue() {
 
 		if (!document.userInfo.user_email.value) {
@@ -65,6 +64,7 @@
 
 	}
 
+	//user_email 중복 확인창 열기
 	function openIdChk() {
 		window.name = "parentForm";
 		window.open("./userManagement/emailCheckForm.jsp", "emailCheck",
@@ -79,11 +79,12 @@
 	}
 </script>
 </head>
-
 <body>
+	<!-- 로그인 세션 -->
 	<c:if test="${session.user_email != null}">
 		<c:set var="user_email" property="${session.user_email}" />
 	</c:if>
+	<!-- 로그인 상태에서는 회원가입 기능을 사용할 수 없도록 막는다 -->
 	<c:if test="${user_email != null}">
 		<script type="text/javascript">
 			alert("이미 로그인되어 있습니다.");

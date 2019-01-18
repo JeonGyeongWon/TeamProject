@@ -27,11 +27,11 @@ public class UserManagementDAO {
 
 	// 회원가입
 	public int insertMember(UserManagementDTO umdto) {
-		// 회원가입 성공 여부 저장
-		int result = 0;
+		int result = 0;		//회원가입 여부를 판단하기 위해 리턴할 result변수
 		try {
 			con = cp.getConnection();
-			String sql = "insert into users (user_email,user_pass,user_nickname,user_birth,user_gender,user_point,user_phone,user_level,bestcount) values (?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into users (user_email,user_pass,user_nickname,user_birth,user_gender,user_point,user_phone,user_level,bestcount)"
+					+ " values (?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, umdto.getUser_email());
 			pstmt.setString(2, umdto.getUser_pass());
@@ -57,38 +57,43 @@ public class UserManagementDAO {
 		int result = -1;
 		try {
 			con = cp.getConnection();
-			String sql = "select user_pass from users where user_email=?";
+			String sql = "select user_pass"
+					+ " from users"
+					+ " where user_email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user_email);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				if ((rs.getString("user_pass")).equals(user_pass)) {
-					result = 1;
-				} else {
-					result = 0;
+			if (rs.next()) {											//사용자가 입력한 user_email값이 DB에 존재할 때
+				if ((rs.getString("user_pass")).equals(user_pass)) {	//사용자가 입력한 user_pass값이 select문의 검색값과 일치할 때	
+					result = 1;	//로그인 성공
+				} else {												//사용자가 입력한 user_pass값이 select문의 검색값과 일치하지 않을 때
+					result = 0;	//로그인 실패: user_email 일치, user_pass 불일치
 				}
-			} else {
-				result = -1;
+			} else {													//사용자가 입력한 user_email값이 DB에 존재하지 않을 때
+				result = -1;	//로그인 실패: user_email 불일치
 			}
 		} catch (SQLException e) {
 			System.out.print("userLogin()메서드 내부 오류: ");
 			e.printStackTrace();
 		} finally {
-			cp.close(con, pstmt, rs);
+			cp.close(con, pstmt, rs);	//자원해제
 		}
 		return result;
 	} // userLogin() 끝
 
 	// 회원정보수정을 위한 유저정보 검색
 	public UserManagementDTO getUserInfo(String user_email) {
-		UserManagementDTO umdto = new UserManagementDTO();
+		UserManagementDTO umdto = null;		//getUserInfoAction으로 리턴해야하기 때문에, UserManagementDTO객체를 담을 변수(umdto)를 선언한다.
 		try {
 			con = cp.getConnection();
-			String sql = "select user_no, user_pass, user_nickname, user_birth, user_gender, user_point, user_phone, user_level, bestcount from users where user_email=?";
+			String sql = "select user_no, user_pass, user_nickname, user_birth, user_gender, user_point, user_phone, user_level, bestcount"
+					+ " from users"
+					+ " where user_email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user_email);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
+			if (rs.next()) {											//검색 결과가 있을 때
+				umdto = new UserManagementDTO();						//결과값을 저장할 UserManagementDTO객체를 생성해 변수(umdto)에 저장한다.
 				umdto.setUser_no(rs.getInt("user_no"));
 				umdto.setUser_pass(rs.getString("user_pass"));
 				umdto.setUser_nickname(rs.getString("user_nickname"));
@@ -105,12 +110,12 @@ public class UserManagementDAO {
 		} finally {
 			cp.close(con, pstmt, rs);
 		}
-		return umdto;
+		return umdto;													//검색 결과값을 저장한 UserManagementDTO객체(umdto)를 리턴한다. 
 	} // getUserInfo() 끝
 
 	// 회원정보수정
-	public int editUserInfo(UserManagementDTO umdto) {
-		int result = 0;
+	public int editUserInfo(UserManagementDTO umdto) {	//수정된 회원정보를 담은 UserManagementDTO객체를 parameter값으로 받는다.
+		int result = 0;									//회원정보 수정 성공 여부를 판단하기 위해 리턴할 result변수
 		String user_email = umdto.getUser_email();
 		String user_pass = umdto.getUser_pass();
 		String user_nickname = umdto.getUser_nickname();
@@ -119,7 +124,9 @@ public class UserManagementDAO {
 		// String user_phone = umdto.getUser_phone();
 		try {
 			con = cp.getConnection();
-			String sql = "update users set user_pass=?, user_nickname=?, user_birth=?, user_gender=? where user_email=?";
+			String sql = "update users"
+					+ " set user_pass=?, user_nickname=?, user_birth=?, user_gender=?"
+					+ " where user_email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user_pass);
 			pstmt.setString(2, user_nickname);
@@ -143,7 +150,8 @@ public class UserManagementDAO {
 
 		try {
 			con = cp.getConnection();
-			String sql = "select * from users where user_email=?";
+			String sql = "select * from users"
+					+ " where user_email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user_email);
 			rs = pstmt.executeQuery();
@@ -169,7 +177,8 @@ public class UserManagementDAO {
 		String findPw = null;
 
 		try {
-			String sql = "select user_pass from users where user_nickname=? and user_email=?";
+			String sql = "select user_pass from users"
+					+ " where user_nickname=? and user_email=?";
 
 			con = cp.getConnection();
 			pstmt = con.prepareStatement(sql);
