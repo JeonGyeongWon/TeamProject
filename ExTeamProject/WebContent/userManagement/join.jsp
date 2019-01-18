@@ -68,7 +68,7 @@
 	function openIdChk() {
 		window.name = "parentForm";
 		window.open("./userManagement/emailCheckForm.jsp", "emailCheck",
-				"width=400, height=300, top=250, left=800");
+				"width=400, height=450, top=250, left=800");
 	}
 
 	// 아이디 입력창에 값 입력시 hidden에 user_emailUncheck를 세팅한다.

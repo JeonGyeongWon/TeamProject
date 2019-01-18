@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
+<link rel="stylesheet" href="./css/login.css">
 <script type="text/javascript">
 	//로그인 유효성 검사를 위한 자바스크립트(추후 ajax로 변경 예정)
 	function check() { //<form>태그(name=login_form)의 submit 발생 시
@@ -25,12 +26,8 @@
 		location.href = "./loginPro.um"; //user_email과 user_pass 모두 입력값이 있을 때
 	}
 </script>
-<style type="text/css">
-h2#login_label {
-	font-weight: bold;
-	color: blue;
-}
 
+<<<<<<< HEAD
 table#login_table {
 	border: 5px double red;
 	padding: 10px;
@@ -51,9 +48,11 @@ p#login_findPass a {
 	font-size: 1rem;
 }
 </style>
+=======
+>>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject.git
 <script>
-	var width = 450; //폭
-	var height = 200;//높이
+	var width = 700; //폭
+	var height = 550;//높이
 	var winL = (screen.width - width) / 2;
 	var winT = (screen.height - height) / 2;
 	var property = "width=" + width + "," + "height=" + height + "," + "left="
@@ -65,7 +64,6 @@ p#login_findPass a {
 </script>
 </head>
 <body>
-	<center>
 		<c:if test="${session.user_email != null}">
 			<c:set var="user_email" property="${session.user_email}" />
 		</c:if>
@@ -75,33 +73,32 @@ p#login_findPass a {
 				location.href = "../main.um";
 			</script>
 		</c:if>
-		<h2 id="login_label">로그인</h2>
-		<form action="./loginPro.um" method="post" name="login_form"
-			onsubmit="return check()">
+	<form class="signUp" id="signupForm" action="./loginPro.um" method="post" name="login_form" onsubmit="return check()">
+		<h2  class="signUpTitle" id="login_label" >로그인</h2>
+	
 			<table id="login_table">
 				<tr>
-					<th><label for="user_email">아이디:</label></th>
-					<td><input type="email" name="user_email"
-						placeholder="이메일 입력.." size="20" /></td>
+					<th><label for="user_email"></label></th>
+					<td><input class="signUpInput" type="email" name="user_email" placeholder="이메일 입력.." size="20" /></td>
 				</tr>
 				<tr>
-					<th><label for="user_pass">패스워드:</label></th>
-					<td><input type="password" name="user_pass"
-						placeholder="패스워드 입력.." size="20"></td>
+					<th><label for="user_pass"></label></th>
+					<td><input class="signUpInput" type="password" name="user_pass" placeholder="패스워드 입력.." size="20"></td>
 				</tr>
 				<tr align="center">
-					<td colspan="2" align="center"><br /> <input type="submit"
-						value="확    인"> <input type="reset" value="다시 입력">
+					<td colspan="2" align="center"><br /> 
+                      <input class="signUpButton" type="submit" value="확    인"> 
 					</td>
 				</tr>
 			</table>
-		</form>
-		<p id="login_joinInfo">
+		<br/>
+		<p id="login_joinInfo" align="center">
 			아직 회원이 아니신가요? <a href="./joinPage.um">회원가입</a>하러 가기
 		</p>
-		<p id="login_findPass">
-			비밀번호를 모르시나요? <a href="javascript:siteInfo2()">비밀번호</a>찾기
-		</p>
-	</center>
-</body>
-</html>
+		<p id="login_joinInfo" align="center">비밀번호를 모르시나요? <a href="javascript:siteInfo2()">비밀번호</a>찿기</p>
+	</form>
+
+	
+	</body>
+	</html>
+	

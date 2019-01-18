@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>비밀번호 찾기</title>
+<<<<<<< HEAD
 <!-- css파일연결 -->
 <link href="./css/can.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -25,7 +26,15 @@
 	}
 </script>
 </head>
+=======
+<link rel="stylesheet" href="./css/login.css">
+
+
+</head>
+
+>>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject.git
 <body>
+<<<<<<< HEAD
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td bgcolor="#999999" style="padding: 5px 10px;" class="white12bold">
@@ -83,4 +92,31 @@
 		</tr>
 	</table>
 </body>
+=======
+	<form class="signUp" id="signupForm" name="signupForm" method="post" action="userManagement/na_em_pro2.jsp">
+		<h2 class="signUpTitle" id="login_label">비밀번호 찿기</h2>
+			<table id="na_metable">
+				<tr>
+					<th><label for="name"></label></th>
+					<td><input class="signUpInput" name="mem_name" id="mem_name" placeholder="닉네임 입력" size="20" autofocus required></td>
+				</tr>
+				<tr>
+					<th><label for="email"></label></th>
+					<td><input class="signUpInput" type="text" name="mem_email" id="mem_email" placeholder="이메일 입력" size="20" required></td>
+				</tr>
+				<tr align="center">
+					<td colspan="2"><br /> 
+                      <input a href="javascript:pw_search();" class="signUpButton" type="submit" value="확    인">                                        
+					</td>
+				</tr>
+              <tr align="center">
+					<td colspan="2" align="center"><br /> 
+                      <input class="signUpButton2" type="button" value="닫기" onclick="window.close();">                
+					</td>
+				</tr>
+			</table>
+		</form>
+	
+	</body>
+>>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject.git
 </html>
