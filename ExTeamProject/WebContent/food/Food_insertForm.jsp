@@ -151,9 +151,7 @@ function execDaumPostcode() {
 		
 		</table>
 		
-		<div id='subimg'>
-		
-		</div>
+		<div id='subimg'></div>
 	</form>
 	
 	
