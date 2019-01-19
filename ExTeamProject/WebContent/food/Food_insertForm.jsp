@@ -113,20 +113,21 @@ function execDaumPostcode() {
 			<tr>
 				<td>맛집 테마</td>
 				<td>
-					<input type="checkbox" name="wifi" id="wifi" value="1">한식
-					<input type="checkbox" name="tv" id="tv" value="1">중식
-					<input type="checkbox" name="aircon" id="aircon" value="1">양식
-					<input type="checkbox" name="wash_dry" id="wash_dry" value="1">카페
-					<input type="checkbox" name="closet" id="closet" value="1">일식
-					<input type="checkbox" name="shampoo" id="shampoo" value="1">분식				
+					<input type="radio" name="bpood" id="kr" value="1">한식
+					<input type="radio" name="bpood" id="ch" value="2">중식
+					<input type="radio" name="bpood" id="fo" value="3">양식
+					<input type="radio" name="bpood" id="cf" value="4">카페
+					<input type="radio" name="bpood" id="jp" value="5">일식
+					<input type="radio" name="bpood" id="sk" value="6">분식		
+					
 				</td>
 			</tr>
 			<tr>
 				<td>부산의 맛</td>
 				<td>
-					<input type="checkbox" name="hairdry" id="hairdry" value="1">횟집
-					<input type="checkbox" name="parking" id="parking" value="1">밀면
-					<input type="checkbox" name="elevator" id="elevator" value="1">돼지국밥
+					<input type="radio" name="bpood" id="bsi" value="7">횟집
+					<input type="radio" name="bpood" id="bph" value="8">밀면
+					<input type="radio" name="bpood" id="bpp" value="9">돼지국밥
 				</td>
 			</tr>
 			<tr>
