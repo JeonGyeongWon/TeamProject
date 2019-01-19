@@ -7,7 +7,8 @@
 <title>맛집 메인 페이지</title>
 </head>
 <body>
-<h1>맛집 카테고리의 메인 페이지</h1>
+<h3>맛집 카테고리의 메인 페이지</h3>
 
+		<a href="../InsertFoodForm.fo">맛집등록</a>
 </body>
 </html>
