@@ -110,7 +110,12 @@ public class InsertHotelAction implements Action {
 		
 		//git이 저장되어있는곳 원래는 가상경로를 이용해야하나 제컴퓨터가 인식을 못하기에..... git으로 잡았습니다
 		// 현재 팀프로젝트 중이므로 workspace가아닌 git경로를 잡으셔야합니다.
-		String myoutpath ="C:/Users/ITWILL/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
+		
+		/* 학원저장경로 저장경로 */
+		//String myoutpath ="C:/Users/ITWILL/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
+		
+		//나으 노트북 저장경로
+		String myoutpath = "C:/Users/전경원/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
 		
 		e= multi.getFileNames();
 		
