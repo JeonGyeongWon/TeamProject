@@ -56,10 +56,11 @@ public class FoodController extends HttpServlet {
 			forward.setPath("index.jsp?center=/food/FoodMain.jsp");
 		}
 		//
-		else if (command.equals("각 요청 액션페이지")) {
-
+		else if (command.equals("/InsertFoodForm.fo")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("index.jsp?center=/food/Food_insertForm.jsp");
 		}
-		//
 		else if (command.equals("각 요청 액션페이지")) {
 
 		}
