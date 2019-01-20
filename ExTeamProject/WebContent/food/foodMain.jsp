@@ -9,7 +9,7 @@
 <body>
 	<center>
 		<h3>맛집 메인 페이지</h3>
-		<p><a href="./InsertFoodForm.fo">맛집등록</a></p>
+		<p><a href="./insertFoodPage.fo">맛집등록</a></p>
 	</center>
 </body>
 </html>
