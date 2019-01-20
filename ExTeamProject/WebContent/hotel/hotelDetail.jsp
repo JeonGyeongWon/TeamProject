@@ -60,7 +60,7 @@
 	
 	
 	.HotelInfoDiv{	
-		width:80%;
+		width:70%;
 	}
 	
 	
@@ -83,7 +83,7 @@
 	
 	<!--방정보-->
 	.roomInfo{
-		width:80%;
+		width:70%;
 		display: flow-root; <!--뭔지 모르겠지만 이거하니됬다. -->
 	}
 	
@@ -99,8 +99,21 @@
 	}
 	
 	#roomInfo{
-		width:80%;
+		width:70%;
 		display: flow-root; <!--뭔지 모르겠지만 이거하니됬다. -->
+	}
+	
+	#roomInfo2{
+		width:70%;
+		display: flow-root; <!--뭔지 모르겠지만 이거하니됬다. -->
+	}
+	
+	#reservation{
+		width: 95px;
+		text-align: center;
+		position: absolute;
+		top: 100px;
+		right: -96px;
 	}
 	
 	
@@ -115,14 +128,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<div id="ck">
-	dd
-	
-</div>
-request.setAttribute("hdto", hdto);
-		request.setAttribute("fdto", fdto);
-		request.setAttribute("rlist", rlist);
 		
 		<jsp:include page="../header.jsp"/>
 	<c:set var="hdto" value="${requestScope.hdto }"/>
@@ -249,20 +254,13 @@ request.setAttribute("hdto", hdto);
 				<div class="roomMainImg">
 					<img src="hotel/${room.imgpath }${room.imgname}">
 				</div>
-				<%-- 
-					int h_no;
-					int h_rno;
-					int personne;
-					int bed;
-					int bathroom;
-					String roomsize;
-					int weekprice;
-					int weekend_price;
-					String imgpath;
-					String imgname;
-				 --%>
+				
 			</c:forEach>	
 		</div> <!-- 컨테이너 종료 -->
+		
+			
+		
+		<%-- ajax를 통해 뿌려주는 부분 --%>
 			<div class="HotelMainDiv" >
 				
 				<div class="MainImgDiv" id="img1">
@@ -286,9 +284,29 @@ request.setAttribute("hdto", hdto);
 						<!-- 서브이미지 들어갈곳 -->
 					</div>
 				</div>
-			
+				
+				<hr/>
 			</div>
+			
+			<div class="container text-center">
+				<div id="roomInfo2">	
+				<%-- ajax를 통해 뿌려주는부분 --%>			
+				</div>
+			</div>
+			<%-- 종료 --%>
+			
+			<div id="reservation">
+				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+				
+			</div>
+			
 		
+				 
 		</c:otherwise>
 		
 	</c:choose>	
@@ -310,30 +328,43 @@ request.setAttribute("hdto", hdto);
 		$(function(){
 			
 			
+			var defalutTop = parseInt($("#reservation").css("top"));
+			//브라우저 (window)에 스크롤바가 이동될때마다.. (이벤트가 실행될때마다)
+			  $(window).on("scroll",function(){
+				  //스크롤바가 이동될때마다 스크로라의 이동 높이값을 반환하여 scv변수에 저장 
+				  var scv = $(window).scrollTop();
+				  
+				  
+				  //scroll바가 이동될때마다 <div id = "quick_menu">태그에 animate 메서드가 적용 
+				  //이때 scv변수값(스크롤바의 이동 높이값)을 top속성에 적용하여
+				  //1초만에 scroll바 이동 거리만큼 <div id = "quick_menu">태그가 이동되도록 함.
+				  //그리고 (index.html 처음 실행 했을때 문서 상단에서 퀵 메뉴의 여백거릿값)
+				  //defaultTop변수의 값을 더하여 상단에서 여백 거리만큼 떨어져서 이동되도록 함
+				  //이때 방문자가 스크롤을 위 아래로 계속해서 움직이면 애니메이트 메서드가 여러번 작동되어
+				  //큐에 에니메이트 메서드가 많이 쌓이게 되는데,
+				  //이를 방지 하기 위해서 stop()메서드를 적용하여 앞서 적용된 에니메이트 메소드는 정지되도록 해야함
+				  $("#reservation").stop().animate({top : scv+defalutTop+"px"},1000)
+				  
+				  
+			  })
+			
 			$(".roomMainImg img").on("click",function(){
-				
-				<%--var obj = new Object;
-				
-				
-				
+				var roomInfo = $("#roomInfo2");
+				<%-- ajax Json방식으로 주고받을때 ... 연구중 삭제 하셔도됩니다!~
+				var obj = new Object;
 				var h_rno = ${h_rno};
-				
 				json.h_rno = h_rno;
-				
-				var jsonData = JSON.stringify(json)
-				--%>
+				var jsonData = JSON.stringify(json)--%>
 					var h_rno = ${h_rno};
-					alert("h_rno값 : " + h_rno);
 					$.ajax({
 						type : "post",
-						url : "whyare.hotellllllll",
+						url : "BringRoomSubImg.hotel",
 						data : {
 							h_rno : h_rno
 						},
 						dataType :'json',
 						
 						success : function(roomsubimg){
-							$("#ck").append("ㅎㅇ");
 							var imgpath = roomsubimg.imgpath;
 							var imgname = roomsubimg.imgname.split(',');
 							$("#img1").html("<img src='hotel/"+imgpath+imgname[0]+"'>");
@@ -341,6 +372,13 @@ request.setAttribute("hdto", hdto);
 							$("#img3").html("<img src='hotel/"+imgpath+imgname[2]+"'>");
 							$("#img4").html("<img src='hotel/"+imgpath+imgname[3]+"'>");
 							$("#img5").html("<img src='hotel/"+imgpath+imgname[4]+"'>");
+							//위에 작업이후 roomInfo가 필요하다는걸 느껴서 변수는 그냥 roomsubimg로 통일했습니다. -> 실제로는 room정보도 같이넘어옵니다~
+							//action참고
+							roomInfo.html("침대개수 : "+roomsubimg.bed);
+							roomInfo.append("화장실개수 : "+roomsubimg.bathroom);
+							roomInfo.append("방의 갯수 : "+roomsubimg.roomsize+"<br>");
+							roomInfo.append("<h2>주중가 : "+roomsubimg.weekprice+"</h2><br>");
+							roomInfo.append("<h2>주말가 : "+roomsubimg.weekend_price+"</h2>");
 						},
 						error : function(err){
 							alert("에러");

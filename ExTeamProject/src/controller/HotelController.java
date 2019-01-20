@@ -74,7 +74,9 @@ public class HotelController extends HttpServlet{
 		}else if(command.equals("/BringRoomSubImg.hotel")){	//ajax 호텔
 			BringRoomSubImgAction ajax = new BringRoomSubImgAction();
 			try {
-				ajax.execute(request, response);
+				String roomsumimg = ajax.execute(request, response);
+				response.setContentType("text/html;charset=UTF-8");
+				response.getWriter().write(roomsumimg);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
