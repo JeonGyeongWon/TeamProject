@@ -33,6 +33,8 @@ public class BringRoomSubImgAction  {
 		values.append("{\"imgname\":\"" +subimg.getImgname() +"\",");
 		values.append("\"imgpath\":\"" +subimg.getImgpath() +"\",");
 		// 호텔번호, 호텔방번호, 메인이미지 경로, 이름은 필요없으므로 json으로 보내지않음
+		values.append("\"h_no\":\""+roomDto.getH_no()+"\",");
+		values.append("\"h_rno\":\""+roomDto.getH_rno()+"\",");
 		values.append("\"bed\":\""+roomDto.getBed()+"\",");
 		values.append("\"bathroom\":\""+roomDto.getBathroom()+"\",");
 		values.append("\"roomsize\":\""+roomDto.getRoomsize()+"\",");
@@ -41,6 +43,7 @@ public class BringRoomSubImgAction  {
 		}
 		System.out.println(values);
 		return values.toString();
+		
 	}
 
 }

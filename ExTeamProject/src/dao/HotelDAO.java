@@ -453,6 +453,45 @@ public class HotelDAO {
 			return dto;
 		}
 
+		//서브쿼리썼어요 햇갈리지마요~~ mysql에서는 서브쿼리값이 1줄보다 길면 any 사용 
+		public UserManagementDTO bringHotelManageInfo(int user_no) {
+			String sql = "";
+			
+			try{
+				con =pool.getConnection();
+				sql = "select *" 
+					+"from users"
+					+ "where user_no = any("
+					+ "select user_no"
+					+ "from hotel"
+					+ "where user_no = ?)";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, user_no);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					UserManagementDTO dto = new UserManagementDTO();
+					dto.setUser_no(rs.getInt("user_no"));
+					dto.setUser_pass(rs.getString("user_pass"));
+					dto.setUser_nickname(rs.getString("user_nickname"));
+					dto.setUser_birth(rs.getString("user_birth"));
+					dto.setUser_gender(rs.getString("user_gender"));
+					dto.setUser_point(rs.getInt("user_point"));
+					dto.setUser_phone(rs.getString("user_phone"));
+					dto.setUser_level(rs.getInt("user_level"));
+					dto.setBestcount(rs.getInt("bestcount"));
+					dto.setUser_email(rs.getString("user_email"));
+				}
+				
+			}catch(Exception e){
+			
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			return null;
+		}
+
 		
 		
 		

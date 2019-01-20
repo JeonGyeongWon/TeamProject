@@ -60,7 +60,8 @@
 	
 	
 	.HotelInfoDiv{	
-		width:70%;
+		width:65%;
+		display: inline-block;
 	}
 	
 	
@@ -83,7 +84,7 @@
 	
 	<!--방정보-->
 	.roomInfo{
-		width:70%;
+		width:65%;
 		display: flow-root; <!--뭔지 모르겠지만 이거하니됬다. -->
 	}
 	
@@ -99,21 +100,28 @@
 	}
 	
 	#roomInfo{
-		width:70%;
+		width:65%;
 		display: flow-root; <!--뭔지 모르겠지만 이거하니됬다. -->
 	}
 	
 	#roomInfo2{
-		width:70%;
+		width:65%;
 		display: flow-root; <!--뭔지 모르겠지만 이거하니됬다. -->
 	}
 	
+	
+	
 	#reservation{
-		width: 95px;
+		width: 35%;
+		height: 100%;
 		text-align: center;
-		position: absolute;
-		top: 100px;
-		right: -96px;
+		display : inline-block;
+		float :right;
+		border: 1px solid red;
+	}
+	
+	#reservation input{
+		width:45%;
 	}
 	
 	
@@ -130,6 +138,8 @@
 <body>
 		
 		<jsp:include page="../header.jsp"/>
+	
+		
 	<c:set var="hdto" value="${requestScope.hdto }"/>
 	
 	<c:set var="fdto" value="${requestScope.fdto }"/>
@@ -145,13 +155,15 @@
 		
 		
 		<c:otherwise>
+		<!-- 예약시에 사용될 h_no 셋팅 -->
+		<c:set var="h_no" value="${hdto.h_no }"/>
 			<div class="HotelMainDiv">
 				<div class="MainHotelImgDiv">
 					<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}">
 				</div>	 
 			</div>
 			
-		<div class="container text-center">
+		<div class="container">
 		
 			<div class="HotelInfoDiv">
 					<h2>호텔이름 : ${hdto.h_name }아아아글자수채우기이이이이</h2>
@@ -162,7 +174,34 @@
 					<p>세부사항 : ${hdto.h_detail }</p>	
 					
 					<hr/>
-				
+					
+			</div>		
+			<div id="reservation">
+						<h2>가격 </h2>
+						<span id="price"></span>
+						날짜<br>
+						<input type="date" placeholder="체크인"> -> <input type="date" placeholder="체크아웃">
+						
+						<c:choose>
+							<c:when test="${sessionScope.user_email !=null }">
+							예약자는 : ${sessionScope.user_email }
+							<button>예약하기</button><br>
+							<!-- 날짜선택시 표시될 총 가격이 들어갈공간 -->
+							
+							<span id="total_price"></span>
+							</c:when>
+							<c:otherwise>
+							로그인되지 않았습니다 로그인을 해주세요
+							</c:otherwise>
+						</c:choose>	
+						<br>
+						
+							
+						총가격은 ... : ajax사용						
+					</div>
+					
+					
+				<div class="HotelInfoDiv">
 				<h2 id="facilitiesMainH2">편의시설</h2>
 				<c:if test="${fdto.wifi == 1 }">
 					<div class="facilitiesDiv">
@@ -226,6 +265,10 @@
 				</c:if>
 					<hr>		
 		</div><!-- 편의시설 종료 -->
+		
+		
+		
+		
 		
 		
 		<div id="roomInfo">	
@@ -295,15 +338,6 @@
 			</div>
 			<%-- 종료 --%>
 			
-			<div id="reservation">
-				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-				ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-				
-			</div>
 			
 		
 				 
@@ -327,26 +361,9 @@
 		<%-- ajax처리를 통한 서브이미지 들고오기 --%>
 		$(function(){
 			
-			
-			var defalutTop = parseInt($("#reservation").css("top"));
-			//브라우저 (window)에 스크롤바가 이동될때마다.. (이벤트가 실행될때마다)
-			  $(window).on("scroll",function(){
-				  //스크롤바가 이동될때마다 스크로라의 이동 높이값을 반환하여 scv변수에 저장 
-				  var scv = $(window).scrollTop();
-				  
-				  
-				  //scroll바가 이동될때마다 <div id = "quick_menu">태그에 animate 메서드가 적용 
-				  //이때 scv변수값(스크롤바의 이동 높이값)을 top속성에 적용하여
-				  //1초만에 scroll바 이동 거리만큼 <div id = "quick_menu">태그가 이동되도록 함.
-				  //그리고 (index.html 처음 실행 했을때 문서 상단에서 퀵 메뉴의 여백거릿값)
-				  //defaultTop변수의 값을 더하여 상단에서 여백 거리만큼 떨어져서 이동되도록 함
-				  //이때 방문자가 스크롤을 위 아래로 계속해서 움직이면 애니메이트 메서드가 여러번 작동되어
-				  //큐에 에니메이트 메서드가 많이 쌓이게 되는데,
-				  //이를 방지 하기 위해서 stop()메서드를 적용하여 앞서 적용된 에니메이트 메소드는 정지되도록 해야함
-				  $("#reservation").stop().animate({top : scv+defalutTop+"px"},1000)
-				  
-				  
-			  })
+			// forEach 반복마다 h_rno값을 셋팅해놓았습니다. 밑에 ajax(방정보)와 예약시에 사용합니다.
+			var h_no = ${h_no};
+			var h_rno = ${h_rno};
 			
 			$(".roomMainImg img").on("click",function(){
 				var roomInfo = $("#roomInfo2");
@@ -355,7 +372,7 @@
 				var h_rno = ${h_rno};
 				json.h_rno = h_rno;
 				var jsonData = JSON.stringify(json)--%>
-					var h_rno = ${h_rno};
+					
 					$.ajax({
 						type : "post",
 						url : "BringRoomSubImg.hotel",
@@ -365,6 +382,8 @@
 						dataType :'json',
 						
 						success : function(roomsubimg){
+							
+							//서브이미지넣는 
 							var imgpath = roomsubimg.imgpath;
 							var imgname = roomsubimg.imgname.split(',');
 							$("#img1").html("<img src='hotel/"+imgpath+imgname[0]+"'>");
@@ -374,11 +393,16 @@
 							$("#img5").html("<img src='hotel/"+imgpath+imgname[4]+"'>");
 							//위에 작업이후 roomInfo가 필요하다는걸 느껴서 변수는 그냥 roomsubimg로 통일했습니다. -> 실제로는 room정보도 같이넘어옵니다~
 							//action참고
+							//방정보넣는곳
 							roomInfo.html("침대개수 : "+roomsubimg.bed);
 							roomInfo.append("화장실개수 : "+roomsubimg.bathroom);
 							roomInfo.append("방의 갯수 : "+roomsubimg.roomsize+"<br>");
 							roomInfo.append("<h2>주중가 : "+roomsubimg.weekprice+"</h2><br>");
 							roomInfo.append("<h2>주말가 : "+roomsubimg.weekend_price+"</h2>");
+							
+							//예약관련 정보넣는곳
+							$("#reservation #price").append("현재 선택하신 호텔의 주중가는 :"+roomsubimg.weekprice+"원 입니다.<br>");
+							$("#reservation #price").append("주말가는 : "+roomsubimg.weekend_price+"원 입니다<br>");
 						},
 						error : function(err){
 							alert("에러");
