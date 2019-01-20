@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import hotel.action.BringRoomSubImgAction;
 import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
 import hotel.action.InsertHotelAction;
@@ -68,6 +69,14 @@ public class HotelController extends HttpServlet{
 				forward = action.execute(request, response);
 			}catch(Exception e){
 				System.out.println("HotelDetail작업중"+e);
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BringRoomSubImg.hotel")){	//ajax 호텔
+			BringRoomSubImgAction ajax = new BringRoomSubImgAction();
+			try {
+				ajax.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

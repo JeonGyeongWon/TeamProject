@@ -388,6 +388,35 @@ public class HotelDAO {
 			return 0;
 		}
 
+
+		public Room_imgDTO bringRoomDto(int h_rno) {
+			
+			String sql = "";
+			Room_imgDTO dto = new Room_imgDTO();
+			try{
+				con = pool.getConnection();
+				sql = "select * from room_img where h_rno = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, h_rno);
+				
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()){
+					dto.setH_no(rs.getInt("h_no"));
+					dto.setH_rno(rs.getInt("h_rno"));
+					dto.setImgname(rs.getString("imgname"));
+					dto.setImgpath(rs.getString("imgpath"));
+				}
+			}catch(Exception e){
+				System.out.println("bringRoomDto에서");
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			return dto;
+		}
+
 		
 		
 		

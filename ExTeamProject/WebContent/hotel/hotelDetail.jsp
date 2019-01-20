@@ -15,6 +15,8 @@
 	<link rel="stylesheet" href="/ExTeamProject/css/owl.theme.default.min.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="/ExTeamProject/css/style.css">
+	
+	
 <style>
 	
 	
@@ -108,10 +110,16 @@
 
 </style>
 
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+
+<div id="ck">
+	dd
+	
+</div>
 request.setAttribute("hdto", hdto);
 		request.setAttribute("fdto", fdto);
 		request.setAttribute("rlist", rlist);
@@ -224,6 +232,8 @@ request.setAttribute("hdto", hdto);
 				<!-- 페이징처리해야함! -->
 				<!-- 지금은 임의로 5개 만들어놨음 나중에 1개만  -->	
 			<c:forEach var="room" items="${requestScope.rlist }">
+				<!-- ajax에 서브이미지를 가져오기 위한 data값을 전달하기위해 셋팅 -->
+				<c:set var ="h_rno" value="${room.h_rno }"/>
 				<div class="roomMainImg">
 					<img src="hotel/${room.imgpath }${room.imgname}">
 				</div>
@@ -252,43 +262,100 @@ request.setAttribute("hdto", hdto);
 					String imgname;
 				 --%>
 			</c:forEach>	
-		</div> 
+		</div> <!-- 컨테이너 종료 -->
+			<div class="HotelMainDiv" >
+				
+				<div class="MainImgDiv" id="img1">
+					<!-- 메인이미지 들어갈곳 -->
+				</div>
+				
+				<div class="subImgDiv">
+					<div class="subImg" id="img2">
+						<!-- 서브이미지 들어갈곳 -->	
+					</div>
+					<div class="subImg" id="img3">
+						<!-- 서브이미지 들어갈곳 -->
+					</div>
+				</div>
+				
+				<div class="subImgDiv">
+					<div class="subImg" id="img4">
+						<!-- 서브이미지 들어갈곳 -->
+					</div>
+					<div class="subImg" id="img5">
+						<!-- 서브이미지 들어갈곳 -->
+					</div>
+				</div>
 			
+			</div>
 		
 		</c:otherwise>
 		
 	</c:choose>	
 	
-	<%-- 
-		<div class="HotelMainDiv">
-				
-				<div class="MainImgDiv">
-					<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}">
-				</div>
-				
-				<div class="subImgDiv">
-					<div class="subImg">
-						<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}">
-					</div>
-					<div class="subImg">
-						<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}">
-					</div>
-				</div>
-				
-				<div class="subImgDiv">
-					<div class="subImg">
-						<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}">
-					</div>
-					<div class="subImg">
-						<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}">
-					</div>
-				</div>
-			
-			</div>
-	--%>
+	
+		
+	
 	
 	
 
 		
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	
+	<script type="text/javascript">
+	
+		<%-- ajax처리를 통한 서브이미지 들고오기 --%>
+		$(function(){
+			
+			
+			$(".roomMainImg img").on("click",function(){
+				
+				<%--var obj = new Object;
+				
+				
+				
+				var h_rno = ${h_rno};
+				
+				json.h_rno = h_rno;
+				
+				var jsonData = JSON.stringify(json)
+				--%>
+					var h_rno = ${h_rno};
+					alert("h_rno값 : " + h_rno);
+					$.ajax({
+						type : "post",
+						url : "whyare.hotellllllll",
+						data : {
+							h_rno : h_rno
+						},
+						dataType :'json',
+						
+						success : function(roomsubimg){
+							$("#ck").append("ㅎㅇ");
+							var imgpath = roomsubimg.imgpath;
+							var imgname = roomsubimg.imgname.split(',');
+							$("#img1").html("<img src='hotel/"+imgpath+imgname[0]+"'>");
+							$("#img2").html("<img src='hotel/"+imgpath+imgname[1]+"'>");
+							$("#img3").html("<img src='hotel/"+imgpath+imgname[2]+"'>");
+							$("#img4").html("<img src='hotel/"+imgpath+imgname[3]+"'>");
+							$("#img5").html("<img src='hotel/"+imgpath+imgname[4]+"'>");
+						},
+						error : function(err){
+							alert("에러");
+						}
+						
+																		
+						
+					});
+			});
+			
+			
+			
+		});
+		
+		
+	
+	</script>
 </html>
