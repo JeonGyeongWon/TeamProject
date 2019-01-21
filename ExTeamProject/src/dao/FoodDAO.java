@@ -96,6 +96,8 @@ public class FoodDAO {
 			String f_menu = fdto.getF_menu();
 			String f_content = fdto.getF_content();
 			String f_addr = fdto.getF_addr();
+			String f_imgname = fdto.getF_imgname();
+			String f_imgpath = fdto.getF_imgpath();
 			
 			pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, user_no);
@@ -106,8 +108,8 @@ public class FoodDAO {
 				pstmt.setString(6, f_addr);
 				pstmt.setString(7, "f_addr_latitude");		//주소-위도값 추후 변경
 				pstmt.setString(8, "f_addr_longitude");		//주소-경도값 추후 변경
-				pstmt.setString(9, "imgpath");				//이미지-경로값 추후 변경
-				pstmt.setString(10, "imgname");				//이미지-이름값 추후 변경
+				pstmt.setString(9, f_imgpath);				//이미지-경로값 추후 변경
+				pstmt.setString(10, f_imgname);				//이미지-이름값 추후 변경
 				pstmt.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
 				pstmt.setTimestamp(12, new Timestamp(System.currentTimeMillis()));
 				pstmt.setInt(13, 0);

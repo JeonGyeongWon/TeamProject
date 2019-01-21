@@ -1,10 +1,14 @@
 package food.Action;
 
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.FoodDAO;
 import dao.UserManagementDAO;
@@ -27,19 +31,35 @@ public class InsertFoodAction implements Action {
 		umdto = umdao.getUserInfo(user_email);
 		int user_no = umdto.getUser_no();
 		
+//		String path = request.getServletContext().getRealPath("/food/upload");
+		String path = request.getSession().getServletContext().getRealPath("/food/upload");
+		System.out.println("path는 "+path);
+		MultipartRequest multi = new MultipartRequest(request, path, 10*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
+		
 		//food_InsertForm.jsp에서 넘어온 데이터를 변수에 저장한다.
-		String f_name = request.getParameter("f_name");
-		String f_group = request.getParameter("f_group");
-		String f_menu = request.getParameter("f_menu");
-		String f_content = request.getParameter("f_content");
-		String addr1 = request.getParameter("addr1");
-		String addr2 = request.getParameter("addr2");
-		String addr3 = request.getParameter("addr3");
+		String f_name = multi.getParameter("f_name");
+		String f_group = multi.getParameter("f_group");
+		String f_menu = multi.getParameter("f_menu");
+		String f_content = multi.getParameter("f_content");
+		String addr1 = multi.getParameter("addr1");
+		String addr2 = multi.getParameter("addr2");
+		String addr3 = multi.getParameter("addr3");
 		String f_addr = null;
 		if(addr3 != null){
 			f_addr = addr1 + "/" + addr2 + "/" + addr3;
 		}else{
 			f_addr = addr1 + "/" + addr2;
+		}
+		
+		Enumeration e = multi.getParameterNames();
+		String fileName = null;
+		while(e.hasMoreElements()){
+			String name = (String) e.nextElement();
+			if(name.equals("f_img")){
+				System.out.println("name은 "+name);
+				fileName = multi.getFilesystemName(name);
+				System.out.println("fileName은 " + fileName);	
+			}
 		}
 		
 		FoodDTO fdto = new FoodDTO();
@@ -49,6 +69,8 @@ public class InsertFoodAction implements Action {
 		fdto.setF_menu(f_menu);
 		fdto.setF_content(f_content);
 		fdto.setF_addr(f_addr);
+		fdto.setF_imgname(fileName);
+		fdto.setF_imgpath("/food/upload");
 		
 		System.out.println("user_no: " + user_no);
 		System.out.println("f_name: " + f_name);

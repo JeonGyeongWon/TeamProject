@@ -65,8 +65,7 @@
 	</c:if>
 	<c:if test="${user_email != null}">
 		<h1>맛집 등록하기</h1>
-		<!-- <form action="./insertFoodPro.fo" method="post" enctype="multipart/form-data"> -->
-		<form action="./insertFoodPro.fo" method="post">
+		<form action="./insertFoodPro.fo" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>작성자</td>
@@ -108,7 +107,7 @@
 				<tr>
 					<td>맛집 이미지</td>
 					<!-- 메인이미지 -->
-					<td><input type="file" name="f_img0"></td>
+					<td><input type="file" name="f_img"></td>
 					<!-- http://bigmark.tistory.com/28 참고 -->
 				</tr>
 				<tr>
