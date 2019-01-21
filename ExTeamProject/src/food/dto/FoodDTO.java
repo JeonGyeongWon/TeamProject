@@ -4,27 +4,9 @@ import java.sql.Timestamp;
 
 public class FoodDTO {
 
-	/*
-		f_no	int(11)
-		user_no	int(11)
-		f_name	varchar(100)
-		f_detail	varchar(1000)
-		f_menu	varchar(500)
-		f_content	varchar(4000)
-		f_group	int(11)
-		f_addr	varchar(1000)
-		f_addr_latitude	varchar(100)
-		f_addr_longitude	varchar(100)
-		f_imgpath	varchar(1000)
-		f_imgname	varchar(1000)
-		f_regdate	timestamp
-		f_latestupdate	timestamp
-		f_bestcount	int(11)
-	*/
 	private int f_no;
 	private int user_no;
 	private String f_name;
-	private String f_detail;
 	private String f_menu;
 	private String f_content;
 	private String f_group;
@@ -54,12 +36,6 @@ public class FoodDTO {
 	}
 	public void setF_name(String f_name) {
 		this.f_name = f_name;
-	}
-	public String getF_detail() {
-		return f_detail;
-	}
-	public void setF_detail(String f_detail) {
-		this.f_detail = f_detail;
 	}
 	public String getF_menu() {
 		return f_menu;
