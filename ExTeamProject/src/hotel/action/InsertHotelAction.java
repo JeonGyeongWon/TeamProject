@@ -45,13 +45,10 @@ public class InsertHotelAction implements Action {
 		String realpath = context.getRealPath("/hotel/upload");
 		System.out.println(realpath);
 		*/
-		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
-		String savepath = rootPath + "/hotel/upload/" ;
-		String realpath = "upload/";
+		String rootPath = request.getSession().getServletContext().getRealPath("/") ; //웹컨텍스트경로까지
+		String savepath = rootPath + "/hotel/upload/" ;	//실제파일이 올라가는곳
+		String realpath = "upload/";	//DB저장공간
 		System.out.println(realpath);
-
-		
-		
 		
 		//가상경로 오류로 임시로 절대경로지정
 		//String realpath = "E:\\upload";	//메인이미지 경로
@@ -212,6 +209,8 @@ public class InsertHotelAction implements Action {
     	fdto.setHealth(Integer.parseInt(multi.getParameter("health")));
     
     	fdto.setEtc(multi.getParameter("etc"));
+    	
+    	
     	
     	InsertHotelService service = new InsertHotelService();
     	

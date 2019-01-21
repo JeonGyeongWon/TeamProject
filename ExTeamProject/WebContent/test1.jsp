@@ -1,3 +1,6 @@
+<%@page import="hotel.dto.HotelDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.HotelDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,124 +10,70 @@
 
 <body>
 
-<%-- 후에 뿌려줄때 사용할 다음 지도 api  
-<p style="margin-top:-12px">
-    <em class="link">
-        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-            혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
-        </a>
-    </em>
-</p>
+<%
+	HotelDAO dao = new HotelDAO();
+	ArrayList<HotelDTO> list = dao.allselectedHotel();
+	
+	
+%>
+
 <div id="map" style="width:100%;height:350px;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b"></script>
 <script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
         center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
-    };  
+    };
 
-// 지도를 생성합니다    
-var map = new daum.maps.Map(mapContainer, mapOption); 
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new daum.maps.services.Geocoder();
+var list = new Array( , 'Ipsum', 'Dolor' );
 
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === daum.maps.services.Status.OK) {
-
-        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new daum.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-</script>
---%>
-
-<input type="text" id="sample5_address" placeholder="주소" style="width:1000px;">
-<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-
-
-<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b&libraries=services"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script>
-
-$(function(){
-	
-	var wedo;
-	var gyungdo;
-	
-	
-});
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
-        };
-
-    //지도를 미리 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new daum.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
-
-
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = data.address; // 최종 주소 변수
-
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
-                // 주소로 상세 정보를 검색
-                    // 정상적으로 검색이 완료됐으면
-
-                    	
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        
-                        gyungdo = result.y;
-                        wedo = result.x;
-                        
-                        alert(wedo);
-                        alert(gyungdo);
-                        
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                    }
-                });
-            }
-        }).open();
+for(var i =0; i<list.size; i++){
+	alert(list[i]);
+}
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+    {
+        title: '카카오', 
+        latlng: new daum.maps.LatLng(33.450705, 126.570677)
+    },
+    {
+        title: '생태연못', 
+        latlng: new daum.maps.LatLng(33.450936, 126.569477)
+    },
+    {
+        title: '텃밭', 
+        latlng: new daum.maps.LatLng(33.450879, 126.569940)
+    },
+    {
+        title: '근린공원',
+        latlng: new daum.maps.LatLng(33.451393, 126.570738)
     }
-</script>
+];
 
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new daum.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new daum.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
+</script>
 
 </body>
 </html>

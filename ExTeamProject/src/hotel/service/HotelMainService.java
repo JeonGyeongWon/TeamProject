@@ -10,6 +10,7 @@ public class HotelMainService {
 	public ArrayList<HotelDTO>getBringAllHotelInfo(){
 		
 		HotelDAO dao = new HotelDAO();
+		
 		ArrayList<HotelDTO> list = dao.allselectedHotel();
 		for(int i =0; i<list.size(); i++){
 			HotelDTO dto = list.get(i);

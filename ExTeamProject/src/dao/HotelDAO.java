@@ -53,6 +53,8 @@ public class HotelDAO {
 				dto.setH_regdate(rs.getTimestamp("regdate"));
 				dto.setH_rule(rs.getString("h_rule"));
 				dto.setUser_no(rs.getInt("user_no"));
+				dto.setHardness(rs.getDouble("Hardness"));
+				dto.setLatitude(rs.getDouble("Latitude"));
 				list.add(dto);
 			}
 			
@@ -223,6 +225,8 @@ public class HotelDAO {
 				dto.setH_regdate(rs.getTimestamp("regdate"));
 				dto.setH_rule(rs.getString("h_rule"));
 				dto.setUser_no(rs.getInt("user_no"));
+				dto.setHardness(rs.getDouble("Hardness"));
+				dto.setLatitude(rs.getDouble("Latitude"));
 			}
 		}catch(Exception e){
 			System.out.println("oneHotelInfo에서"+e);

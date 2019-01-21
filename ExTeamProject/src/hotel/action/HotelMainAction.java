@@ -15,18 +15,17 @@ public class HotelMainAction implements Action {
 	//호텔메인에서 호텔이미지들을 뿌려주는 액션클래스
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		ActionForward forward = new ActionForward();
 		
-		
 		HotelMainService service = new HotelMainService();
-		
 		ArrayList<HotelDTO> list = service.getBringAllHotelInfo();
 		
 		request.setAttribute("list", list);
 		
 		forward.setRedirect(false);
-		forward.setPath("./index.jsp?center=hotel/hotelMain.jsp");
 		
+		forward.setPath("./index.jsp?center=hotel/hotelMain.jsp");
 		return forward;
 		
 	}

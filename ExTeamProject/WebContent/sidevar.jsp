@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,6 +31,9 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	
+	<!-- 다음지도를 위한 cdn -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b"></script>
+	
 	
 	
 	
@@ -47,6 +51,7 @@
 			  
 			  if(ckmap){
 				  $("#Daum_map").show();
+				  
 			  }else{
 				  $("#Daum_map").hide();
 			  }
@@ -76,10 +81,20 @@
 		});
 		
 	});
+	
 	</script>
 
 </head>
 <body>
+	
+	<c:if test="${requestScope.list !=null }">
+		<c:set var="list" value="${requestScope.list }"/>
+		널아님
+	</c:if>
+	<c:if test="${requestScope.list == null }">
+		널
+	</c:if>
+	
 	<!-- sidebar -->
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
@@ -123,7 +138,7 @@
 		
 		
 		
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b"></script>
+			
 			<script>
 				var container = document.getElementById('Daum_map');
 				var options = {
@@ -133,33 +148,6 @@
 		
 				var map = new daum.maps.Map(container, options);
 				
-				// 주소-좌표 변환 객체를 생성합니다
-				var geocoder = new daum.maps.services.Geocoder();
-
-				// 주소로 좌표를 검색합니다
-				geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-
-				    // 정상적으로 검색이 완료됐으면 
-				     if (status === daum.maps.services.Status.OK) {
-
-				        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-				        // 결과값으로 받은 위치를 마커로 표시합니다
-				        var marker = new daum.maps.Marker({
-				            map: map,
-				            position: coords
-				        });
-
-				        // 인포윈도우로 장소에 대한 설명을 표시합니다
-				        var infowindow = new daum.maps.InfoWindow({
-				            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-				        });
-				        infowindow.open(map, marker);
-
-				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-				        map.setCenter(coords);
-				    } 
-				});
 	</script>
 	
 	
