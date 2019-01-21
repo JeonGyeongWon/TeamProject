@@ -80,10 +80,11 @@ public class InsertHotelAction implements Action {
     	
     	String addr = "";
     	
-    	addr = multi.getParameter("addr1");
-    	addr += ","+multi.getParameter("addr2");
-    	addr += ","+multi.getParameter("addr3");
+    	addr = multi.getParameter("addr");
     	
+    	//위도 경도
+    	Long latitude = Long.parseLong(multi.getParameter("Latitude"));
+    	Long hardness = Long.parseLong(multi.getParameter("Hardness"));
     	
     	
     	/*호텔입력부분*/
@@ -95,6 +96,9 @@ public class InsertHotelAction implements Action {
     	Hdto.setH_rule(multi.getParameter("h_rule"));
     	Hdto.setH_detail(multi.getParameter("h_detail"));
     	Hdto.setH_regdate(null);
+    	Hdto.setHardness(hardness);
+    	Hdto.setLatitude(latitude);
+    	
     	
     	
     	// 파일 업로드 관련 
@@ -112,10 +116,10 @@ public class InsertHotelAction implements Action {
 		// 현재 팀프로젝트 중이므로 workspace가아닌 git경로를 잡으셔야합니다.
 		
 		/* 학원저장경로 저장경로 */
-		//String myoutpath ="C:/Users/ITWILL/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
+		String myoutpath ="C:/Users/ITWILL/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
 		
 		//나으 노트북 저장경로
-		String myoutpath = "C:/Users/전경원/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
+		//String myoutpath = "C:/Users/전경원/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
 		
 		e= multi.getFileNames();
 		
