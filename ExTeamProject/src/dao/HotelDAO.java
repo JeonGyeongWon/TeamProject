@@ -242,7 +242,7 @@ public class HotelDAO {
 		
 		try{
 			con = pool.getConnection();
-			sql = "insert into hotel(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate,imgpath,imgname,user_no,bestcount) "+
+			sql = "insert into hotel(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate,imgpath,imgname,user_no,bestcount,Latitude,Hardness) "+
 			"values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt=con.prepareStatement(sql);
@@ -259,8 +259,8 @@ public class HotelDAO {
 			pstmt.setString(9, hdto.getH_imgname());
 			pstmt.setInt(10,hdto.getUser_no());
 			pstmt.setInt(11, hdto.getH_bestcount());
-			pstmt.setLong(12, hdto.getLatitude());
-			pstmt.setLong(13, hdto.getHardness());
+			pstmt.setDouble(12, hdto.getLatitude());
+			pstmt.setDouble(13, hdto.getHardness());
 			
 			result = pstmt.executeUpdate();
 			System.out.println(result);

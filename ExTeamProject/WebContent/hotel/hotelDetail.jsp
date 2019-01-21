@@ -345,6 +345,12 @@
 			<%-- 종료 --%>
 			
 			
+			
+			<c:if test="${requestScope.udto !=null }">
+				${udto. }
+			
+			</c:if>
+			
 		
 				 
 		</c:otherwise>

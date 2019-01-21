@@ -11,5 +11,10 @@
 	${param.test }
 	${param.test2 }
 	${param.test3 }
+	
+	<%
+		double d = 127.01593273664581;
+		out.println(d);
+	%>
 </body>
 </html>

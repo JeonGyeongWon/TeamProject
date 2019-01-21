@@ -83,8 +83,14 @@ public class InsertHotelAction implements Action {
     	addr = multi.getParameter("addr");
     	
     	//위도 경도
-    	Long latitude = Long.parseLong(multi.getParameter("Latitude"));
-    	Long hardness = Long.parseLong(multi.getParameter("Hardness"));
+    	System.out.println(multi.getParameter("Latitude"));
+    	System.out.println(multi.getParameter("Hardness"));
+    	
+    	Double latitude = Double.parseDouble(multi.getParameter("Latitude"));
+    	Double hardness = Double.parseDouble(multi.getParameter("Hardness"));
+    	
+    	System.out.println(latitude);
+    	System.out.println(hardness);
     	
     	
     	/*호텔입력부분*/

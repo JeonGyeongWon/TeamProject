@@ -17,20 +17,21 @@ public class HotelDTO {
 	String h_imgname;
 	int h_bestcount;
 	int user_no;
-	private Long Latitude;
-	private Long Hardness;
+	private double Latitude;
+	private double Hardness;
 	
 	
-	public Long getLatitude() {
+	
+	public double getLatitude() {
 		return Latitude;
 	}
-	public void setLatitude(Long latitude) {
+	public void setLatitude(double latitude) {
 		Latitude = latitude;
 	}
-	public Long getHardness() {
+	public double getHardness() {
 		return Hardness;
 	}
-	public void setHardness(Long hardness) {
+	public void setHardness(double hardness) {
 		Hardness = hardness;
 	}
 	public int getUser_no() {
