@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import hotel.dto.RoomDTO;
 import hotel.dto.Room_imgDTO;
 import hotel.service.BringRoomSubImgService;
@@ -42,6 +44,8 @@ public class BringRoomSubImgAction  {
 		values.append("\"weekend_price\":\""+roomDto.getWeekend_price()+"\"}");
 		}
 		System.out.println(values);
+		
+ 		
 		return values.toString();
 		
 	}
