@@ -43,6 +43,8 @@
 <!-- 맨위 navbar -->
 	<c:if test="${session.user_email!=null}">
 		<c:set var="user_email" property="${session.user_email}"/>
+		<c:set var="user_no" property="${session.user_no}"/>				<!-- 다른 작업에 참조키로 사용할 수 있도록 user_no를 세션에 저장한다. -->
+		<c:set var="user_nickname" property="${session.user_nickname}"/>
 	</c:if>
 	<nav class="navbar navbar-expand-sm bg-light">
 		<div class="container-fluid">
@@ -53,6 +55,7 @@
 					<li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
 				</c:if>
 				<c:if test="${user_email != null}">
+					<li class="nav-item">${user_nickname}(${user_email})님 환영합니다.</li>
 					<li class="nav-item"><a href="#">이미지업로드</a></li>
 					<li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
 					<li class="nav-item"><a href="./editPage.um">회원정보수정</a></li>

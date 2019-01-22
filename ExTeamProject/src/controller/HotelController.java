@@ -14,6 +14,7 @@ import com.oreilly.servlet.MultipartRequest;
 import hotel.action.BringRoomSubImgAction;
 import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
+import hotel.action.InsertCommentAction;
 import hotel.action.InsertHotelAction;
 import together.ActionForward;
 import together.Action;
@@ -80,10 +81,22 @@ public class HotelController extends HttpServlet{
 				response.setContentType("text/html;charset=UTF-8");
 				response.getWriter().write(roomsumimg);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(command.equals("/InsertComment.hotel")){
+			action = new InsertCommentAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("InsertComment작업 중"+e);
+				e.printStackTrace();
+			}
+			
+			
 		}
+			
+		
+		
 		
 		if(forward != null){
 			

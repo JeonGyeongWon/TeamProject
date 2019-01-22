@@ -344,13 +344,28 @@
 			</div>
 			<%-- 종료 --%>
 			
+			<c:if test="${requestScope.udto != null }">
+				$
+			</c:if>
 			
+<<<<<<< HEAD
+			<%--댓글달기 --%>
+			<div id="commList">
+				아이디 <input text="text"	id="user_no">
+				댓글 <textarea rows="3" cols="30" id="content"></textarea>
+				
+				<br>
+				<input type="button" value="등록" onclick="addcomments()"/>
+				
+			</div>
+=======
 			
 			<c:if test="${requestScope.udto !=null }">
 				${udto. }
 			
 			</c:if>
 			
+>>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject
 		
 				 
 		</c:otherwise>
@@ -366,6 +381,143 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript">
+	
+		<%--댓글 관련 function--%>
+		function getXHR(){
+			if(window.XMLHttpRequest){
+				return new XMLHttpRequest();
+			}else{
+				return new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		
+		var xhr=null;
+		function addComments(){
+			
+			//1. xhr객체 얻기
+			xhr = getXHR();
+			
+			//2.콜백 메소드 설정하기 
+			xhr.onreadystatechange=callback;
+			
+			//3. open함수로 초기화 설정
+			xhr.open("POST","comm.do?cmd=insert",true);
+			
+			//4. send함수로 서버에 요청(post방식일 때)
+			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//사용자가 입력한 아이디와 댓글 얻어오기
+			
+			var user_no = document.getElementById("user_no").value;
+			var h_c_no =document.getElementById("h_c_no").value;
+			
+			var param="user_no="+user_no+"&h_c_no="+h_c_no;
+			
+			//send메소드를 호출하면서 파라미터 전송하기
+			xhr.send(param);
+		}
+		
+			function callback(){
+				if(xhr.readyState ==4 && xhr.status==200){
+					var xml=xhr.responseXML;
+					var result=xml.getElementsByTagName("info")[0].firstChild.nodeValue;
+					
+					if(result == "success"){ 
+						alert('등록 성공');
+						getList();
+					}else{
+						alert('등록 실패');
+					}
+				}//if문 끝
+			}//callback() end
+			
+			function getList(){
+				xhr=getXHR();
+				xhr.onreadystatechange = showList;
+				xhr.open("get","comm.do?cmd=list",true);
+				xhr.send(null);
+			}
+		
+			//댓글 div안의 내용들 제거 메소드
+			function listRemove(){
+				
+				//commList의 자식 div갯수 얻어오기(컬렉션 타입)
+				var childs = document.getElementById("commList").childNodes;
+				
+				//commList의 자식 div들 제거하기
+				for(var i=child.length -1; i>=0; i--){
+					
+					//childs배열의 i번째 요소 참조값 얻어오기
+					var char=childs.item(i);
+					
+					//commList에서 child제거하기
+					document.getElementById("commList").removeChild(child);
+				}
+			} //listRemove() end
+		
+			
+			//가져온 데이터를 개행하기 위해서는 \n을 <br>로 바꾸는 메서드(textarea에서 개행은 \n으로 db에 저장)
+			// str1문자열에서 str2를 str3로 바꾸기. replace(str1, str2, str3)
+			function replace(str1, str2, str3){
+				var ch="";
+				var chstr="";
+				for(var i=0; i<str1.length; i++){
+					ch=str1.charAt(i);
+					
+					if(ch==str2){ //str2: '\n'
+						chstr=chstr+str3;
+					}else{
+						chstr=chstr+ch;
+					}
+				}
+				return chstr;
+			}
+			
+			
+			//정상적으로 작동하면(chr.readyState==4 && xhr.status==200)
+			//기존 화면의 <div>삭제하고 불러와 표시
+			
+			function showList(){
+				if(xhr.readyState == 4 && xhr.status ==200){
+					//commList의 자식 div모두 제거
+					listRemove();
+					
+					var xml = xhr.responseXML;
+					var len=xml.getElementsByTagName("user_no").length;
+					
+					if(len>0){
+						for(var i=0; i<len; i++){
+							var id=xml.getElementsByName("user_no")[i].firstChild.nodeValue;
+							var comments = xml.gegetElementsByTagName("content")[i].firstChild.nodeValue;
+							
+							comments = replace(comments, '\n','<br>');
+							var txt = "작성자 : "+ id + "<br>"+ "댓글 : " +comments;	
+							
+							
+							//내용을 담을 div생성하기
+							var div=document.createElement("div");
+							
+							//생성된 div에 내용 담기
+							div.innerHTML=txt;
+							div.style.width="300px";
+							div.style.height="80px";
+							div.style.border="1px solid blue";
+							div.style.marginTop="8px";
+							
+							
+							//전체 댓글을 담을 div의 참조값 얻어오기
+							var commList = document.getElementById("commList");
+							
+							//댓글 div에 생성된 div추가하기
+							commList.appendChild(div);
+						}
+					}
+					
+					
+				}
+			}
+			
+			
 	
 		<%-- ajax처리를 통한 서브이미지 들고오기 --%>
 		$(function(){
