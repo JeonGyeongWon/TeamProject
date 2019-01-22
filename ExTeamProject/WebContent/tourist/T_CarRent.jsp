@@ -19,10 +19,10 @@
 			<tr>
 				<td>
 				차량검색
-				<select>
-					<option>소형</option>
-					<option>중형</option>
-					<option>대형</option>
+				<select name="car_category">
+					<option value="small">소형</option>
+					<option value="middle">중형</option>
+					<option value="big">대형</option>
 				</select>
 				<input type="submit" value="차량검색">
 				</td>

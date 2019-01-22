@@ -3,9 +3,11 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import db.ConnectionPool;
+import tourist.dto.TouristDTO;
 import tourist.dto.Tourist_carlistDTO;
 
 public class TouristDAO {
@@ -63,6 +65,8 @@ public class TouristDAO {
 		
 		return carlistV;
 	}
+
+
 	
 	
 	
