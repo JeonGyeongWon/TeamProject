@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import org.apache.catalina.connector.Request;
 
 import db.ConnectionPool;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
+import hotel.dto.Hotel_commentDTO;
 import hotel.dto.RoomDTO;
 import hotel.dto.Room_imgDTO;
 import dto.UserManagementDTO;
@@ -498,6 +500,79 @@ public class HotelDAO {
 			return null;
 		}
 
+		public int insertComment(Hotel_commentDTO cdto){
+			con=pool.getConnection();
+			PreparedStatement pstmt = null;
+					
+			String sql = "INSERT INTO hotel_comment(h_no, h_o_no,subject,content,regdate,bestcount,user_no)"
+					+ "VALUES(?,?,?,?,?,?,?)";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cdto.getH_no());
+				pstmt.setInt(2, cdto.getH_c_no());
+				pstmt.setString(3, cdto.getSubject());
+				pstmt.setString(4, cdto.getContent());
+				pstmt.setTimestamp(5, null);
+				pstmt.setInt(6, cdto.getBestcount());
+				pstmt.setInt(7, cdto.getUser_no());
+				
+				int request = pstmt.executeUpdate();
+
+				return request;
+				
+			} catch (SQLException e) {
+				System.out.println("insertComment()메서드 내에서 오류 +e");
+				return -1;
+				
+			}finally{
+				try {
+					pstmt.close();
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}//insertComment()메소드 끝
+		
+		
+		public ArrayList<Hotel_commentDTO> getCommentList(){
+			
+			ArrayList<Hotel_commentDTO> list = new ArrayList<>();
+				
+			try {
+				con=pool.getConnection();
+				String sql = "SELECT * FROM hotel_comment";
+				pstmt=con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				
+				
+				while(rs.next()){
+					Hotel_commentDTO cdto = new Hotel_commentDTO();
+					
+					cdto.setH_no(rs.getInt("h_no"));
+					cdto.setH_c_no(rs.getInt("h_c_no"));
+					cdto.setSubject(rs.getString("subject"));
+					cdto.setContent(rs.getString("content"));
+					cdto.setRegdate(rs.getTimestamp("regdate"));
+					cdto.setBestcount(rs.getInt("bestcount"));
+					cdto.setUser_no(rs.getInt("user_no"));
+					
+					list.add(cdto);
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("getCommentList()메서드 내에서 오류 "+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			return list;
+			
+		} //getCommentList()메서드 끝
+		
+		
+		
 		
 		
 		
