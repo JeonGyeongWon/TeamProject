@@ -9,6 +9,7 @@ import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
 import hotel.dto.RoomDTO;
 import hotel.dto.Room_imgDTO;
+import hotel.dto.UsersDTO;
 
 public class HotelDetailService {
 	
@@ -31,6 +32,13 @@ public class HotelDetailService {
 		ArrayList<RoomDTO> list = dao.allselectedRoom(h_no);
 		
 		return list;
+	}
+
+	public UserManagementDTO bringHotelManageInfo(int user_no) {
+	
+		UserManagementDTO dto = dao.bringHotelManageInfo(user_no);
+		
+		return dto;
 	}
 
 	

@@ -2,6 +2,7 @@ package hotel.dto;
 
 import java.sql.Timestamp;
 
+
 public class HotelDTO {
 
 	int h_no;
@@ -16,8 +17,23 @@ public class HotelDTO {
 	String h_imgname;
 	int h_bestcount;
 	int user_no;
+	private double Latitude;
+	private double Hardness;
 	
 	
+	
+	public double getLatitude() {
+		return Latitude;
+	}
+	public void setLatitude(double latitude) {
+		Latitude = latitude;
+	}
+	public double getHardness() {
+		return Hardness;
+	}
+	public void setHardness(double hardness) {
+		Hardness = hardness;
+	}
 	public int getUser_no() {
 		return user_no;
 	}

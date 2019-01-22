@@ -53,6 +53,8 @@ public class HotelDAO {
 				dto.setH_regdate(rs.getTimestamp("regdate"));
 				dto.setH_rule(rs.getString("h_rule"));
 				dto.setUser_no(rs.getInt("user_no"));
+				dto.setHardness(rs.getDouble("Hardness"));
+				dto.setLatitude(rs.getDouble("Latitude"));
 				list.add(dto);
 			}
 			
@@ -223,6 +225,8 @@ public class HotelDAO {
 				dto.setH_regdate(rs.getTimestamp("regdate"));
 				dto.setH_rule(rs.getString("h_rule"));
 				dto.setUser_no(rs.getInt("user_no"));
+				dto.setHardness(rs.getDouble("Hardness"));
+				dto.setLatitude(rs.getDouble("Latitude"));
 			}
 		}catch(Exception e){
 			System.out.println("oneHotelInfo에서"+e);
@@ -242,8 +246,8 @@ public class HotelDAO {
 		
 		try{
 			con = pool.getConnection();
-			sql = "insert into hotel(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate,imgpath,imgname,user_no,bestcount) "+
-			"values(?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into hotel(h_name, h_content, h_addr, h_caution, h_rule, h_detail, regdate,imgpath,imgname,user_no,bestcount,Latitude,Hardness) "+
+			"values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt=con.prepareStatement(sql);
 			
@@ -259,6 +263,8 @@ public class HotelDAO {
 			pstmt.setString(9, hdto.getH_imgname());
 			pstmt.setInt(10,hdto.getUser_no());
 			pstmt.setInt(11, hdto.getH_bestcount());
+			pstmt.setDouble(12, hdto.getLatitude());
+			pstmt.setDouble(13, hdto.getHardness());
 			
 			result = pstmt.executeUpdate();
 			System.out.println(result);
@@ -386,6 +392,110 @@ public class HotelDAO {
 			}
 			
 			return 0;
+		}
+
+
+		public Room_imgDTO bringRoom_imgDto(int h_rno) {
+			
+			String sql = "";
+			Room_imgDTO dto = new Room_imgDTO();
+			try{
+				con = pool.getConnection();
+				sql = "select * from room_img where h_rno = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, h_rno);
+				
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()){
+					dto.setH_no(rs.getInt("h_no"));
+					dto.setH_rno(rs.getInt("h_rno"));
+					dto.setImgname(rs.getString("imgname"));
+					dto.setImgpath(rs.getString("imgpath"));
+				}
+			}catch(Exception e){
+				System.out.println("bringRoom_imgDto에서"+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			return dto;
+		}
+
+
+		//방정보를 가져옴 
+		public RoomDTO bringRoomDto(int h_rno) {
+			
+			RoomDTO dto = new RoomDTO();
+			String sql = "";
+			try{
+				con = pool.getConnection();
+				sql = "select * from room where h_rno = ?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, h_rno);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					dto.setBathroom(rs.getInt("bathroom"));
+					dto.setBed(rs.getInt("bed"));
+					dto.setH_no(rs.getInt("h_no"));
+					dto.setH_rno(rs.getInt("h_rno"));
+					dto.setImgname(rs.getString("imgname"));
+					dto.setImgpath(rs.getString("imgpath"));
+					dto.setPersonne(rs.getInt("personnel"));
+					dto.setRoomsize(rs.getString("roomsize"));
+					dto.setWeekend_price(rs.getInt("weekend_price"));
+					dto.setWeekprice(rs.getInt("weekprice"));
+				}
+			}catch(Exception e){
+				System.out.println("bringRoomDto에서"+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			return dto;
+		}
+
+		//서브쿼리썼어요 햇갈리지마요~~ mysql에서는 서브쿼리값이 1줄보다 길면 any 사용 
+		public UserManagementDTO bringHotelManageInfo(int user_no) {
+			String sql = "";
+			
+			try{
+				con =pool.getConnection();
+				sql = "select *" 
+					+"from users"
+					+ "where user_no = any("
+					+ "select user_no"
+					+ "from hotel"
+					+ "where user_no = ?)";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, user_no);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					UserManagementDTO dto = new UserManagementDTO();
+					dto.setUser_no(rs.getInt("user_no"));
+					dto.setUser_pass(rs.getString("user_pass"));
+					dto.setUser_nickname(rs.getString("user_nickname"));
+					dto.setUser_birth(rs.getString("user_birth"));
+					dto.setUser_gender(rs.getString("user_gender"));
+					dto.setUser_point(rs.getInt("user_point"));
+					dto.setUser_phone(rs.getString("user_phone"));
+					dto.setUser_level(rs.getInt("user_level"));
+					dto.setBestcount(rs.getInt("bestcount"));
+					dto.setUser_email(rs.getString("user_email"));
+				}
+				
+			}catch(Exception e){
+			
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			return null;
 		}
 
 		

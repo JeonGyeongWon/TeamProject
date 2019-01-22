@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import hotel.action.BringRoomSubImgAction;
 import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
 import hotel.action.InsertHotelAction;
@@ -36,9 +37,10 @@ public class HotelController extends HttpServlet{
 		
 		Action action = null;
 		ActionForward forward = null;
-		String uri = request.getRequestURI();
-		String ctx = request.getContextPath();
-		String command = uri.substring(ctx.length());
+		
+		String uri = request.getRequestURI(); //http://localhost:8181/ExTeamProject/HotelMain.hotel
+		String ctx = request.getContextPath();	//http://localhost:8181/ExTeamProject
+		String command = uri.substring(ctx.length());///HotelMain.hotel
 		System.out.println(command);
 		
 		if(command.equals("/HotelMain.hotel")){	// 메인페이지로 이동하는 주소 ( 호텔들을 뿌려주는곳)
@@ -48,6 +50,7 @@ public class HotelController extends HttpServlet{
 			}catch(Exception e){
 				System.out.println("HotelMain.hotel(서블릿)"+e);
 			}
+			///InsertHotel.hotel
 		}else if(command.equals("/InsertHotelForm.hotel")){ //호텔 등록 폼으로 이동
 			forward = new ActionForward();	//위와 같음
 			forward.setRedirect(true);
@@ -68,6 +71,16 @@ public class HotelController extends HttpServlet{
 				forward = action.execute(request, response);
 			}catch(Exception e){
 				System.out.println("HotelDetail작업중"+e);
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BringRoomSubImg.hotel")){	//ajax 호텔
+			BringRoomSubImgAction ajax = new BringRoomSubImgAction();
+			try {
+				String roomsumimg = ajax.execute(request, response);
+				response.setContentType("text/html;charset=UTF-8");
+				response.getWriter().write(roomsumimg);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -45,13 +45,10 @@ public class InsertHotelAction implements Action {
 		String realpath = context.getRealPath("/hotel/upload");
 		System.out.println(realpath);
 		*/
-		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
-		String savepath = rootPath + "/hotel/upload/" ;
-		String realpath = "upload/";
+		String rootPath = request.getSession().getServletContext().getRealPath("/") ; //웹컨텍스트경로까지
+		String savepath = rootPath + "/hotel/upload/" ;	//실제파일이 올라가는곳
+		String realpath = "upload/";	//DB저장공간
 		System.out.println(realpath);
-
-		
-		
 		
 		//가상경로 오류로 임시로 절대경로지정
 		//String realpath = "E:\\upload";	//메인이미지 경로
@@ -80,10 +77,17 @@ public class InsertHotelAction implements Action {
     	
     	String addr = "";
     	
-    	addr = multi.getParameter("addr1");
-    	addr += ","+multi.getParameter("addr2");
-    	addr += ","+multi.getParameter("addr3");
+    	addr = multi.getParameter("addr");
     	
+    	//위도 경도
+    	System.out.println(multi.getParameter("Latitude"));
+    	System.out.println(multi.getParameter("Hardness"));
+    	
+    	Double latitude = Double.parseDouble(multi.getParameter("Latitude"));
+    	Double hardness = Double.parseDouble(multi.getParameter("Hardness"));
+    	
+    	System.out.println(latitude);
+    	System.out.println(hardness);
     	
     	
     	/*호텔입력부분*/
@@ -95,6 +99,9 @@ public class InsertHotelAction implements Action {
     	Hdto.setH_rule(multi.getParameter("h_rule"));
     	Hdto.setH_detail(multi.getParameter("h_detail"));
     	Hdto.setH_regdate(null);
+    	Hdto.setHardness(hardness);
+    	Hdto.setLatitude(latitude);
+    	
     	
     	
     	// 파일 업로드 관련 
@@ -110,7 +117,12 @@ public class InsertHotelAction implements Action {
 		
 		//git이 저장되어있는곳 원래는 가상경로를 이용해야하나 제컴퓨터가 인식을 못하기에..... git으로 잡았습니다
 		// 현재 팀프로젝트 중이므로 workspace가아닌 git경로를 잡으셔야합니다.
+		
+		/* 학원저장경로 저장경로 */
 		String myoutpath ="C:/Users/ITWILL/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
+		
+		//나으 노트북 저장경로
+		//String myoutpath = "C:/Users/전경원/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
 		
 		e= multi.getFileNames();
 		
@@ -197,6 +209,8 @@ public class InsertHotelAction implements Action {
     	fdto.setHealth(Integer.parseInt(multi.getParameter("health")));
     
     	fdto.setEtc(multi.getParameter("etc"));
+    	
+    	
     	
     	InsertHotelService service = new InsertHotelService();
     	

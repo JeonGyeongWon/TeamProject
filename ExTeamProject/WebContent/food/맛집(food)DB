@@ -1,0 +1,49 @@
+최신 업데이트: 2019-01-21
+작성자: 고석주
+
+→	1.아래의 SQL구문을 수정 없이 사용해주세요.
+	2.테이블 생성 SQL구문은 DB작업에 사용되는 SQL구문과 직접 연관되어 있습니다.
+		수정은 '작성자'를 통해 팀장님께 문의해주세요.
+
+CREATE TABLE food(
+ f_no INT PRIMARY KEY AUTO_INCREMENT,	-- 맛집 고유번호
+ user_no INT NOT NULL,					-- 회원번호(참조: users 테이블)
+ f_name VARCHAR(100) NOT NULL,			-- 맛집(식당) 이름
+ f_group VARCHAR(10) NOT NULL,			-- 맛집 분류 카테고리
+ f_menu VARCHAR(500) NOT NULL,			-- 추천메뉴
+ f_content VARCHAR(4000) NOT NULL,		-- 맛집 상세 설명
+ f_addr VARCHAR(1000) NOT NULL,			-- 주소
+ f_addr_latitude VARCHAR(100),			-- 주소(위도)
+ f_addr_longitude VARCHAR(100),			-- 주소(경도)
+ f_imgpath VARCHAR(1000),				-- 맛집 이미지 경로
+ f_imgname VARCHAR(1000),				-- 맛집 이미지 이름
+ f_regdate TIMESTAMP NOT NULL,			-- 게시글 등록일
+ f_latestupdate TIMESTAMP NOT NULL,		-- 게시글 최신 수정일
+ f_bestcount INT NOT NULL default 0		-- 게시글 조회수
+)ENGINE InnoDB;
+
+CREATE TABLE f_reservation (
+f_reser_no INT PRIMARY KEY AUTO_INCREMENT,
+user_no INT REFERENCES users(user_no) ON DELETE CASCADE ON UPDATE CASCADE,
+f_reser_originalPrice INT NOT NULL,
+f_reser_realPayment INT NOT NULL,
+f_reser_regdate TIMESTAMP NOT NULL,
+f_reser_usedate TIMESTAMP NOT NULL
+)ENGINE InnoDB;
+
+
+CREATE TABLE f_comment(
+f_cno INT PRIMARY KEY AUTO_INCREMENT,
+f_no INT REFERENCES restaurants(r_no) ON DELETE CASCADE ON UPDATE CASCADE,
+user_no INT REFERENCES users(user_no) ON DELETE CASCADE ON UPDATE CASCADE,
+f_c_subject VARCHAR(50) NOT NULL,
+f_c_content VARCHAR(500) NOT NULL,
+f_c_regdate TIMESTAMP NOT NULL,
+f_c_bestcount INT DEFAULT 0 NOT NULL
+)ENGINE InnoDB;
+
+CREATE TABLE f_img(
+f_no INT REFERENCES restaurants(r_no) ON DELETE CASCADE ON UPDATE CASCADE,
+f_imgpath VARCHAR(1000) NOT NULL,
+f_imgname VARCHAR(1000) NOT NULL
+)ENGINE InnoDB;

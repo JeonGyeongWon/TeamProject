@@ -57,7 +57,7 @@ public class UserManagementDAO {
 		int result = -1;
 		try {
 			con = cp.getConnection();
-			String sql = "select user_pass"
+			String sql = "select user_no, user_pass"
 					+ " from users"
 					+ " where user_email=?";
 			pstmt = con.prepareStatement(sql);
@@ -66,6 +66,7 @@ public class UserManagementDAO {
 			if (rs.next()) {											//사용자가 입력한 user_email값이 DB에 존재할 때
 				if ((rs.getString("user_pass")).equals(user_pass)) {	//사용자가 입력한 user_pass값이 select문의 검색값과 일치할 때	
 					result = 1;	//로그인 성공
+					
 				} else {												//사용자가 입력한 user_pass값이 select문의 검색값과 일치하지 않을 때
 					result = 0;	//로그인 실패: user_email 일치, user_pass 불일치
 				}
