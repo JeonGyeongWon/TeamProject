@@ -198,10 +198,10 @@
 							<select name="personnel" >
 							</select>
 							<button>예약하기</button><br>
-							<input type = "hidden" name="total_price" value="">
+							<input type = "hidden" name="total_price" value="" id="total_price">
 							<!-- 날짜선택시 표시될 총 가격이 들어갈공간 -->
 							</form>
-							<span id="total_price"></span>
+							<span id="total_priceSpan"></span>
 							</c:when>
 							<c:otherwise>
 							로그인되지 않았습니다 로그인을 해주세요
@@ -210,7 +210,6 @@
 						<br>
 						
 							
-						총가격은 ... : ajax사용						
 					</div>
 					
 					
@@ -348,7 +347,6 @@
 				$
 			</c:if>
 			
-<<<<<<< HEAD
 			<%--댓글달기 --%>
 			<div id="commList">
 				아이디 <input text="text"	id="user_no">
@@ -513,8 +511,7 @@
 					
 				}
 			}
-			
-			
+
 	
 		<%-- ajax처리를 통한 서브이미지 들고오기 --%>
 		$(function(){
@@ -523,15 +520,16 @@
 			var total_price;
 			var ckin_date="";
 			//날짜 -> 숫자 변환시 임시로 담을 저장소 
-			var ckin_temp;
-			var ckout_date="";
-			//날짜 -> 숫자 변환시 임시로 담을 저장소
-			var ckout_temp;
 			
 			
 			
 			/*jquery ui (예약날짜관련)*/
-			var   minDate = new Date();
+			var ckdate;	//날짜계산시 이용
+			var enddate;
+			var day;	// <-  두날짜 차이 계산값
+			var weekend_price; /// ajax에서 가져올값
+			
+			minDate = new Date();
 		      $("#ckindate").datepicker({
 		         showAnim: 'drop',
 		         numberOfMonth: 1,
@@ -539,18 +537,15 @@
 		         dateFormat:'yy-mm-dd',
 		         onClose:function(selectedDate){
 		            $('#ckin').datepicker("option","minDate",selectedDate);
+		            ckdate = selectedDate	
+		            /*  selectedDate는 String타입! Date타입으로 변환이필요*/
+		            var date = ckdate.split("-");	// -단위 date를 짜름 차례대로 
+		            var year = date[0];
+		            var month = date[1];
+		            var day = date[2];
+		            ckdate = new Date(year,month,day);
 		            // 총가격을 구하기위한 처리
-		            
-		            ckin_temp = selectedDate.split("/");
-		            for(var i = 0; i<ckin_temp.length; i++){
-		            	ckin_date += (ckin_temp[i]);
-		            }
-		            var year = ckin_date.substr(0,2);
-		            var month = ckin_date.substr(2,2);
-		            var day = ckin_date.substr(4,2);
-		            ckin_date = new Date(year, month, day);
-
-		            //alert(typeof ckin_date);
+		             //ckdate = new date(selectedDate);	//date타입으로 생성
 		         }
 		      });
 		      
@@ -561,11 +556,18 @@
 		         dateFormat:'yy-mm-dd',
 		         onClose:function(selectedDate){
 		            $('#ckout').datepicker("option","maxDate",selectedDate);
-		            
-		            ckout_date = selectedDate.split("/");
-		            alert(ckout_date)
-		            
-		            alert(ckout_date - ckin_date);
+		             enddate = selectedDate;	//date타입으로 생성
+		            	
+		             var date = enddate.split("-");	// -단위 date를 짜름 차례대로 
+			         var year = date[0];
+			         var month = date[1];
+			         var day = date[2];
+			         
+			         enddate = new Date(year,month,day);
+			            
+		          	 day = (enddate.getTime() - ckdate.getTime()) /(1000*60*60*24);
+		          	$("#total_price").val(day*weekend_price);	//총가격을 input값으로 넣어줌
+					$("#total_priceSpan").html(day*weekend_price);	//총가격을 보여줄 span영역
 		         }
 		      });
 		/* jquery ui (예약날짜관련 종료)*/
@@ -615,6 +617,8 @@
 							//예약관련 정보넣는곳
 							$("#reservation #price").html("현재 선택하신 호텔의 주중가는 :"+roomsubimg.weekprice+"원 입니다.<br>");
 							$("#reservation #price").append("주말가는 : "+roomsubimg.weekend_price+"원 입니다<br>");
+							weekend_price = parseInt(roomsubimg.weekend_price); //String -> Int값 변경
+							
 							
 							var roomsize = roomsubimg.roomsize;
 							
@@ -638,6 +642,7 @@
 							/* 예약관련 type이 hidden 곳에 value값 셋팅하는곳*/
 							$("#reservation [name='h_rno']").val(roomsize.h_rno);
 							$("#reservation [name='h_no']").val(roomsize.h_no);
+							
 							
 						},
 						error : function(err){
