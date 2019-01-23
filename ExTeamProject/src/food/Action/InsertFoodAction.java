@@ -41,16 +41,8 @@ public class InsertFoodAction implements Action {
 		String f_group = multi.getParameter("f_group");
 		String f_menu = multi.getParameter("f_menu");
 		String f_content = multi.getParameter("f_content");
-		String addr1 = multi.getParameter("addr1");
-		String addr2 = multi.getParameter("addr2");
-		String addr3 = multi.getParameter("addr3");
-		String f_addr = null;
-		if(addr3 != null){
-			f_addr = addr1 + "/" + addr2 + "/" + addr3;
-		}else{
-			f_addr = addr1 + "/" + addr2;
-		}
-		
+		String f_addr =multi.getParameter("f_addr");
+	
 		Enumeration e = multi.getFileNames();
 		String fileName = null;
 		while(e.hasMoreElements()){

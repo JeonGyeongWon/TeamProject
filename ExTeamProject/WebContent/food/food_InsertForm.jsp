@@ -9,50 +9,9 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<!-- 다음주소찾기 ... -->
-<script type="text/javascript">
-	<%-- 서브이미지 1개 존재할 때, 추가 이미지 파일 업로드 공간 5개 확보 --%>
-	$(function() {
-		$("#detailImg input[type=file]").on("change", function() {
-			$("#subimg").html("서브이미지 선택!! 최대5개 ");
-			for (var i = 2; i < 7; i++) {
-				var file = "<input type='file' name='f_img"+i+"'>";
-				$("#subimg").append(file);
-			}
-		});
-	});
-	
-	<%--팝업창을 이용한 찾기를 가져옴--%>
-	function execDaumPostcode() {
-		new daum.Postcode({
-					oncomplete : function(data) {
-						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-						// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						var roadAddr = data.roadAddress; // 도로명 주소 변수
-						var extraRoadAddr = ''; // 참고 항목 변수
-						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-							extraRoadAddr += data.bname;
-						}
-						// 건물명이 있고, 공동주택일 경우 추가한다.
-						if (data.buildingName !== '' && data.apartment === 'Y') {
-							extraRoadAddr += (extraRoadAddr !== '' ? ', '
-									+ data.buildingName : data.buildingName);
-						}
-						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-						if (extraRoadAddr !== '') {
-							extraRoadAddr = ' (' + extraRoadAddr + ')';
-						}
-						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById("roadAddress").value = roadAddr;
-						document.getElementById("jibunAddress").value = data.jibunAddress;
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b&libraries=services"></script>
 
-					}
-				}).open();
-	}	//execDaumPostcode() 끝
-</script>
+<!-- 다음주소찾기 ... -->
 <body>
 	<c:if test="${session.user_email != null}">
 		<c:set var="user_email" property="${session.user_email}" />
@@ -110,31 +69,92 @@
 					<td><input type="file" name="f_img"></td>
 					<!-- http://bigmark.tistory.com/28 참고 -->
 				</tr>
-				<tr>
-					<td><a onclick="execDaumPostcode();">주소검색(클릭)</a></td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" id="roadAddress" placeholder="도로명주소" name="addr1" class="form-control" readonly><br>
-						<input type="text" id="jibunAddress" placeholder="지번주소" name="addr2" class="form-control"  readonly><br>
-						<input type="text" id="detailAddress" placeholder="상세주소" name="addr3" class="form-control">
-					</td>
-				</tr>
+				
 				<tr>
 					<td><input type="submit" value="업로드"></td>
 				</tr>
 			</table>
-			<h2>추가 이미지업로드</h2>
-			<table id="detailImg">
-				<tr>
-					<td>메인이미지[선택시 서브이미지 선택할수있게나옴]</td>
-					<td id="appendTd">
-						<input type="file" name="f_img1" id="imgname">
-					</td>
-				</tr>
-			</table>
-			<div id='subimg'></div>
+			
+			
+			
+<input type="text" id="sample5_address" placeholder="주소" style="width:1000px;" name="f_addr">
+<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+
+
+<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+
+
+<script>
+
+$(function(){
+	
+	var wedo;
+	var gyungdo;
+	
+	
+});
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        
+                        
+                        // 위도, 경도 값을 가져옴
+                       
+                        gyungdo = result.y;
+                        wedo = result.x;
+                        $("#wedo").val(wedo);
+                        $("#gyungdo").val(gyungdo);
+                        alert($("#wedo").val());
+                        alert($("#gyungdo").val());
+                        
+                        
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+    }
+</script>
+	<input type="hidden" id="wedo" name="Latitude" value=""> <!-- 위도 -->
+	<input type="hidden" id="gyungdo" name="Hardness" value=""> <!-- 경도 -->
 		</form>
-	</c:if>
+		</c:if>
+	
 </body>
 </html>
