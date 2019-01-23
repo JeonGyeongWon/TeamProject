@@ -358,14 +358,11 @@
 				<input type="button" value="등록" onclick="addcomments()"/>
 				
 			</div>
-=======
 			
 			<c:if test="${requestScope.udto !=null }">
-				${udto. }
 			
 			</c:if>
 			
->>>>>>> branch 'master' of https://github.com/JeonGyeongWon/TeamProject
 		
 				 
 		</c:otherwise>

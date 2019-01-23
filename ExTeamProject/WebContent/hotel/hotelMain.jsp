@@ -15,14 +15,7 @@
 <title>호텔메인</title>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script>
-	$(function(){
-		
-		
-		
-	})
 
-</script>
 
 </head>
 <body>
@@ -49,7 +42,7 @@
 </div>
 			<div class="fh5co-narrow-content">
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
-		<c:forEach var = "HotelDTO" items="${requestScope.list}">
+		<c:forEach var = "HotelDTO" items="${requestScope.list}" step="1">
 		
 					<%-- 호텔설명을 간략히 보여줌 --%>
 		

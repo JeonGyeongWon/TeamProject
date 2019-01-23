@@ -40,49 +40,7 @@
 	
 	
 	
-	<script>
-		<!-- 지도 온오프시 -->
-	$(function(){
-			
-		 $("#Daum_map").hide();
-		
-		$('#chmap').change(function() {
-			  var ckmap = ($(this).prop('checked'));	//자바스크립트의 속성을 가져옴
-			  
-			  if(ckmap){
-				  $("#Daum_map").show();
-				  
-			  }else{
-				  $("#Daum_map").hide();
-			  }
-		});
-		
-		
-		// 지도옵션 선택(ajax처리)
-		$("input[name='ckopt']").on("change",function(){
-			
-			var ckopt = $(this).val();
-			
-			if(ckopt==1){	//맛집
-				alert('맛집');
-			
-			}else if(ckopt==2){	//관광지
-				alert('관광지');
-			}else if(ckopt==3){	//호텔
-				alert('호텔');
-			
-				
-			/*
-				
-			
-			*/
-			}
-			
-		});
-		
-	});
 	
-	</script>
 
 </head>
 <body>
@@ -90,6 +48,11 @@
 	<c:if test="${requestScope.list !=null }">
 		<c:set var="list" value="${requestScope.list }"/>
 		널아님
+		
+		<c:forEach	var="d" items="${requestScope.list }" step="1">
+			${d.latitude }
+		</c:forEach>
+		 
 	</c:if>
 	<c:if test="${requestScope.list == null }">
 		널
@@ -139,16 +102,6 @@
 		
 		
 			
-			<script>
-				var container = document.getElementById('Daum_map');
-				var options = {
-					center: new daum.maps.LatLng(35.17944, 129.07556), //최초 위치 부산으로 설정
-					level: 5
-				};
-		
-				var map = new daum.maps.Map(container, options);
-				
-	</script>
 	
 	
 	</div>	
@@ -177,5 +130,122 @@
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
 		
+		<script>
+		<!-- 지도 온오프시 -->
+	$(function(){
+			
+		 $("#Daum_map").hide();
+		 
+		 
+		 
+		
+		//이벤트
+		$('#chmap').change(function() {
+			  var ckmap = ($(this).prop('checked'));	//자바스크립트의 속성을 가져옴
+			  
+			  if(ckmap){
+				  $("#Daum_map").show();
+				  
+				  <%-- 지도찍기... JSTL을 통해 가져왔지만 코드읽기가 불편하므로 ajax처리...를 권유합니다 ....--%>
+				  
+				  <%--!!어차피  메인 페이지에서는 무조건적으로 ajax를 통하여 불러와야합니다. check시!
+				  	그렇지않으면 지도가 3번생성되어 서버가  터집니다
+				  	
+				  	api설명 지도api에서 여러개 좌표는 positions라는 *객체배열*에 담아서 반환합니다.
+				  	자바의 ArrayList값을 바로 자바스크립트에 담을수 없으므로
+				  	JSTL에 foreach문을 돌려 각각의 요소 arr(배열)을 만든후 해당 객체의 속성값을 arr(배열)을 이용하여 만들어서
+				  	객체를 생성후 해당 객체를 배열로 반환합니다 
+				   --%>
+					 var latitude = new Array();	//위도
+					 var hardness = new Array();	//경도
+					 var hotelName = new Array();	//호텔이름
+					 var hotelImgName = new Array();
+					 var hotelImgPath = new Array();
+					 <c:forEach var="hotelDto" items="${list }" step="1">
+					 latitude.push(${hotelDto.latitude }); //위도 이클립스에러로 뜨는 빨간줄입니다 신경안쓰셔도됩니다!
+					 hardness.push(${hotelDto.hardness }); //경도 
+					 hotelName.push('${hotelDto.h_name}');
+					 hotelImgPath.push('${hotelDto.h_imgpath}');
+					 hotelImgName.push('${hotelDto.h_imgname}');
+					 </c:forEach>
+					 
+					 for(var i=0; i<hardness.length; i++){
+					 console.log(i+"번째 위도 : "+hardness[i]);
+					 console.log(i+"번째 경도 : "+latitude[i]);
+					 }
+					 var mapContainer = document.getElementById('Daum_map'), // 지도를 표시할 div  
+					    mapOption = { 
+					        center: new daum.maps.LatLng(37.47,  127.05), // 지도의 중심좌표
+					        level: 7 // 지도의 확대 레벨 낮을수록확대입니다 최대 14	// 
+					    };
+
+					var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				
+					
+					
+					var arr = [];
+					for(var i=0; i<latitude.length; i++){
+						var o = {};
+						o.title = hotelName[i], o.latlng = new daum.maps.LatLng(hardness[i], latitude[i]);
+						arr.push(o);
+					}
+					
+					
+
+					
+					//밑에 positions객체에 담을 값을 만듭니다.
+					var positions = arr;
+					
+					console.log(positions);
+					    
+					for (var i = 0; i < positions.length; i ++) {
+					    
+						var imageSrc ="hotel/"+hotelImgPath[i]+hotelImgName[i];
+					    // 마커 이미지의 이미지 크기 입니다
+					    var imageSize = new daum.maps.Size(24, 35); 
+					    
+					    // 마커 이미지를 생성합니다    
+					    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+					    
+					    // 마커를 생성합니다
+					    var marker = new daum.maps.Marker({
+					        map: map, // 마커를 표시할 지도
+					        position: positions[i].latlng, // 마커를 표시할 위치
+					        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					        image : markerImage // 마커 이미지 
+					    });
+					}
+				  
+			  }else{
+				  $("#Daum_map").hide();
+			  }
+		});
+		
+		
+		// 지도옵션 선택(ajax처리)
+		$("input[name='ckopt']").on("change",function(){
+			
+			var ckopt = $(this).val();
+			
+			if(ckopt==1){	//맛집
+				alert('맛집');
+			
+			}else if(ckopt==2){	//관광지
+				alert('관광지');
+			}else if(ckopt==3){	//호텔
+				alert('호텔');
+			
+				
+			/*
+				
+			
+			*/
+			}
+			
+		});
+		
+	});
+	
+	</script>
 </body>
 </html>

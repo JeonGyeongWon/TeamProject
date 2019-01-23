@@ -33,7 +33,6 @@ public class HotelDAO {
 		
 		ArrayList<HotelDTO> list = new ArrayList<HotelDTO>();
 		String sql = "";
-		HotelDTO dto = new HotelDTO();
 		
 		try{
 			con = pool.getConnection();
@@ -43,6 +42,7 @@ public class HotelDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
+				HotelDTO dto = new HotelDTO();
 				dto.setH_addr(rs.getString("h_addr"));
 				dto.setH_bestcount(rs.getInt("bestcount"));
 				dto.setH_caution(rs.getString("h_caution"));
