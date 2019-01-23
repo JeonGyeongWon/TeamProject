@@ -188,7 +188,7 @@
 							<h2>가격 </h2>
 							<span id="price"></span>
 							날짜<br>
-							<form>
+							<form action="reservation.hotel" method="post">
 							<input type="text" placeholder="체크인" id="ckindate"> -> <input type="text" placeholder="체크아웃" id="ckoutdate">
 							예약자는 : ${udto.user_email } <br>
 							인원<br>

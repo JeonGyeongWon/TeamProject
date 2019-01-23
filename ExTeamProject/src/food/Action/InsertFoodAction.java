@@ -51,15 +51,14 @@ public class InsertFoodAction implements Action {
 			f_addr = addr1 + "/" + addr2;
 		}
 		
-		Enumeration e = multi.getParameterNames();
+		Enumeration e = multi.getFileNames();
 		String fileName = null;
 		while(e.hasMoreElements()){
 			String name = (String) e.nextElement();
-			if(name.equals("f_img")){
+			System.out.println(name);
 				System.out.println("name은 "+name);
 				fileName = multi.getFilesystemName(name);
 				System.out.println("fileName은 " + fileName);	
-			}
 		}
 		
 		FoodDTO fdto = new FoodDTO();
