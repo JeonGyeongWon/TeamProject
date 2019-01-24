@@ -11,13 +11,14 @@ public class FoodDTO {
 	private String f_content;
 	private String f_group;
 	private String f_addr;
-	private String f_addr_latitude;
-	private String f_addr_longitude;
+	private double f_addr_latitude;
+	private double f_addr_longitude;
 	private String f_imgpath;
 	private String f_imgname;
 	private Timestamp f_regdate;
 	private Timestamp f_latestupdate;
 	private int f_bestcount;
+	
 	
 	public int getF_no() {
 		return f_no;
@@ -61,16 +62,16 @@ public class FoodDTO {
 	public void setF_addr(String f_addr) {
 		this.f_addr = f_addr;
 	}
-	public String getF_addr_latitude() {
+	public double getF_addr_latitude() {
 		return f_addr_latitude;
 	}
-	public void setF_addr_latitude(String f_addr_latitude) {
+	public void setF_addr_latitude(double f_addr_latitude) {
 		this.f_addr_latitude = f_addr_latitude;
 	}
-	public String getF_addr_longitude() {
+	public double getF_addr_longitude() {
 		return f_addr_longitude;
 	}
-	public void setF_addr_longitude(String f_addr_longitude) {
+	public void setF_addr_longitude(double f_addr_longitude) {
 		this.f_addr_longitude = f_addr_longitude;
 	}
 	public String getF_imgpath() {

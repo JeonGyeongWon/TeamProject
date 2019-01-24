@@ -13,8 +13,8 @@ CREATE TABLE food(
  f_menu VARCHAR(500) NOT NULL,			-- 추천메뉴
  f_content VARCHAR(4000) NOT NULL,		-- 맛집 상세 설명
  f_addr VARCHAR(1000) NOT NULL,			-- 주소
- f_addr_latitude VARCHAR(100),			-- 주소(위도)
- f_addr_longitude VARCHAR(100),			-- 주소(경도)
+ f_addr_latitude DOUBLE,				-- 주소(위도)
+ f_addr_longitude DOUBLE,				-- 주소(경도)
  f_imgpath VARCHAR(1000),				-- 맛집 이미지 경로
  f_imgname VARCHAR(1000),				-- 맛집 이미지 이름
  f_regdate TIMESTAMP NOT NULL,			-- 게시글 등록일

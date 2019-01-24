@@ -42,6 +42,8 @@ public class InsertFoodAction implements Action {
 		String f_menu = multi.getParameter("f_menu");
 		String f_content = multi.getParameter("f_content");
 		String f_addr =multi.getParameter("f_addr");
+		double f_addr_latitude = Double.parseDouble(multi.getParameter("f_addr_latitude"));
+		double f_addr_longitude = Double.parseDouble(multi.getParameter("f_addr_longitude"));
 	
 		Enumeration e = multi.getFileNames();
 		String fileName = null;
@@ -60,15 +62,21 @@ public class InsertFoodAction implements Action {
 		fdto.setF_menu(f_menu);
 		fdto.setF_content(f_content);
 		fdto.setF_addr(f_addr);
+		fdto.setF_addr_latitude(f_addr_latitude);
+		fdto.setF_addr_longitude(f_addr_longitude);
 		fdto.setF_imgname(fileName);
 		fdto.setF_imgpath("/food/upload");
 		
+		System.out.println("=====넘어온 내용은");
 		System.out.println("user_no: " + user_no);
 		System.out.println("f_name: " + f_name);
 		System.out.println("f_group: " + f_group);
 		System.out.println("f_menu: " + f_menu);
 		System.out.println("f_content: " + f_content);
 		System.out.println("f_addr: " + f_addr);
+		System.out.println("f_addr_latitude: " + f_addr_latitude);
+		System.out.println("f_addr_longitude: " + f_addr_longitude);
+		System.out.println("입니다.=====");
 		
 		FoodDAO fdao = new FoodDAO();
 		int result = fdao.insertFood(fdto);

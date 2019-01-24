@@ -82,8 +82,8 @@ public class FoodDAO {
 			 f_menu VARCHAR(500) NOT NULL,			-- 추천메뉴
 			 f_content VARCHAR(4000) NOT NULL,		-- 맛집 상세 설명
 			 f_addr VARCHAR(1000) NOT NULL,			-- 주소
-			 f_addr_latitude VARCHAR(100),			-- 주소(위도)
-			 f_addr_longitude VARCHAR(100),			-- 주소(경도)
+			 f_addr_latitude DOUBLE,				-- 주소(위도)
+			 f_addr_longitude DOUBLE,				-- 주소(경도)
 			 f_imgpath VARCHAR(1000),				-- 맛집 이미지 경로
 			 f_imgname VARCHAR(1000),				-- 맛집 이미지 이름
 			 f_regdate TIMESTAMP NOT NULL,			-- 게시글 등록일
@@ -98,6 +98,8 @@ public class FoodDAO {
 			String f_addr = fdto.getF_addr();
 			String f_imgname = fdto.getF_imgname();
 			String f_imgpath = fdto.getF_imgpath();
+			double f_addr_latitude = fdto.getF_addr_latitude();
+			double f_addr_longitude = fdto.getF_addr_longitude();
 			
 			pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, user_no);
@@ -106,10 +108,10 @@ public class FoodDAO {
 				pstmt.setString(4, f_menu);
 				pstmt.setString(5, f_content);
 				pstmt.setString(6, f_addr);
-				pstmt.setString(7, "f_addr_latitude");		//주소-위도값 추후 변경
-				pstmt.setString(8, "f_addr_longitude");		//주소-경도값 추후 변경
-				pstmt.setString(9, f_imgpath);				//이미지-경로값 추후 변경
-				pstmt.setString(10, f_imgname);				//이미지-이름값 추후 변경
+				pstmt.setDouble(7, f_addr_latitude);
+				pstmt.setDouble(8, f_addr_longitude);
+				pstmt.setString(9, f_imgpath);
+				pstmt.setString(10, f_imgname);
 				pstmt.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
 				pstmt.setTimestamp(12, new Timestamp(System.currentTimeMillis()));
 				pstmt.setInt(13, 0);
