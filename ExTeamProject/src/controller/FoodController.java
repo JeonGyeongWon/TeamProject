@@ -46,7 +46,9 @@ public class FoodController extends HttpServlet {
 
 		// header.jsp에서 [맛집]을 클릭할 때
 		if (command.equals("/FoodMain.fo")) {
+//			System.out.println("FoodController로 들어왔습니다.");
 			action = new FoodMainAction();
+			System.out.println("FoodController로 다시 돌아왔습니다.");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

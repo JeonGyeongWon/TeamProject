@@ -20,6 +20,102 @@ public class FoodDTO {
 	private int f_bestcount;
 	
 	
+	//**********************************************************충돌 방지용
+	private int h_no;
+	private String h_name;
+	private String h_content;
+	private String h_addr;
+	private String h_caution;
+	private String h_rule;
+	private String h_detail;
+	private Timestamp h_regdate;
+	private String h_imgpath;
+	private String h_imgname;
+	private int h_bestcount;
+	private String latitude;
+	private String hardness;
+	
+	public int getH_no() {
+		return h_no;
+	}
+	public void setH_no(int h_no) {
+		this.h_no = h_no;
+	}
+	public String getH_name() {
+		return h_name;
+	}
+	public void setH_name(String h_name) {
+		this.h_name = h_name;
+	}
+	public String getH_content() {
+		return h_content;
+	}
+	public void setH_content(String h_content) {
+		this.h_content = h_content;
+	}
+	public String getH_addr() {
+		return h_addr;
+	}
+	public void setH_addr(String h_addr) {
+		this.h_addr = h_addr;
+	}
+	public String getH_caution() {
+		return h_caution;
+	}
+	public void setH_caution(String h_caution) {
+		this.h_caution = h_caution;
+	}
+	public String getH_rule() {
+		return h_rule;
+	}
+	public void setH_rule(String h_rule) {
+		this.h_rule = h_rule;
+	}
+	public String getH_detail() {
+		return h_detail;
+	}
+	public void setH_detail(String h_detail) {
+		this.h_detail = h_detail;
+	}
+	public Timestamp getH_regdate() {
+		return h_regdate;
+	}
+	public void setH_regdate(Timestamp h_regdate) {
+		this.h_regdate = h_regdate;
+	}
+	public String getH_imgpath() {
+		return h_imgpath;
+	}
+	public void setH_imgpath(String h_imgpath) {
+		this.h_imgpath = h_imgpath;
+	}
+	public String getH_imgname() {
+		return h_imgname;
+	}
+	public void setH_imgname(String h_imgname) {
+		this.h_imgname = h_imgname;
+	}
+	public int getH_bestcount() {
+		return h_bestcount;
+	}
+	public void setH_bestcount(int h_bestcount) {
+		this.h_bestcount = h_bestcount;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getHardness() {
+		return hardness;
+	}
+	public void setHardness(String hardness) {
+		this.hardness = hardness;
+	}
+	//**********************************************************충돌 방지용
+	
+	
 	public int getF_no() {
 		return f_no;
 	}

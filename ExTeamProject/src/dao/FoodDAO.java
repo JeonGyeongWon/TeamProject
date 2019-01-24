@@ -33,37 +33,63 @@ public class FoodDAO {
 				list = new ArrayList<>();
 				fDTO = new FoodDTO();
 				
-//				private int f_no;
-//				private int user_no;
-//				private String f_name;
-//				private String f_menu;
-//				private String f_content;
-//				private String f_group;
-//				private String f_addr;
-//				private String f_addr_latitude;
-//				private String f_addr_longitude;
-//				private String f_imgpath;
-//				private String f_imgname;
-//				private Timestamp f_regdate;
-//				private Timestamp f_latestupdate;
-//				private int f_bestcount;	
-							
 				int f_no = rs.getInt("f_no");
 				int user_no = rs.getInt("user_no");
-				String f_brand = rs.getString("f_brand");
-				String f_tel = rs.getString("f_tel");
-				String f_group = rs.getString("f_group");
-				String f_title = rs.getString("f_title");
+				String f_name = rs.getString("f_name");
+				String f_menu = rs.getString("f_menu");
 				String f_content = rs.getString("f_content");
-				String f_addr_latitude = rs.getString("");
+				String f_group = rs.getString("f_group");
+				String f_addr = rs.getString("f_addr");
+				double f_addr_latitude = rs.getDouble("f_addr_latitude");
+				double f_addr_longitude = rs.getDouble("f_addr_longitude");
+				String f_imgpath = rs.getString("f_imgpath");
+				String f_imgname = rs.getString("f_imgname");
+				Timestamp f_regdate = rs.getTimestamp("f_regdate");
+				Timestamp f_latestupdate = rs.getTimestamp("f_latestupdate");
+				int f_bestcount = rs.getInt("f_bestcount");
 				
+				
+				//개발자 상태 확인 → 추후 삭제 예정
+				System.out.println("f_no는 " + f_no + "입니다.");
+				System.out.println("user_no는 " + user_no + "입니다.");
+				System.out.println("f_name은 " + f_name + "입니다.");
+				System.out.println("f_menu는 " + f_menu + "입니다.");
+				System.out.println("f_content는 " + f_content + "입니다.");
+				System.out.println("f_group은 " + f_group + "입니다.");
+				System.out.println("f_addr은 " + f_addr + "입니다.");
+				System.out.println("f_addr_latitude는 " + f_addr_latitude + "입니다.");
+				System.out.println("f_longitude는 " + f_addr_longitude + "입니다.");
+				System.out.println("f_imgpath는 " + f_imgpath + "입니다.");
+				System.out.println("f_imgname은 " + f_imgname + "입니다.");
+				System.out.println("f_regdate는 " + f_regdate + "입니다.");
+				System.out.println("f_latestupdate는 " + f_latestupdate + "입니다.");
+				System.out.println("f_bestcount는 " + f_bestcount + "입니다.");
+				//개발자 상태 확인 → 추후 삭제 예정
+				
+				
+				fDTO.setF_no(f_no);
+				fDTO.setUser_no(user_no);
+				fDTO.setF_name(f_name);
+				fDTO.setF_menu(f_menu);
+				fDTO.setF_content(f_content);
+				fDTO.setF_group(f_group);
+				fDTO.setF_addr(f_addr);
+				fDTO.setF_addr_latitude(f_addr_latitude);
+				fDTO.setF_addr_longitude(f_addr_longitude);
+				fDTO.setF_imgpath(f_imgpath);
+				fDTO.setF_imgname(f_imgname);
+				fDTO.setF_regdate(f_regdate);
+				fDTO.setF_latestupdate(f_latestupdate);
+				fDTO.setF_bestcount(f_bestcount);
+				
+				list.add(fDTO);
 			}
 			
 		} catch (Exception e) {
 			System.out.print("allSelectedFood()메서드 내부 오류: ");
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 	
 	public int insertFood(FoodDTO fdto){
@@ -74,22 +100,6 @@ public class FoodDAO {
 					+ " f_imgpath, f_imgname, f_regdate, f_latestupdate, f_bestcount)"
 					+ " values (null, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
-/*
-			 f_no INT PRIMARY KEY AUTO_INCREMENT,	-- 맛집 고유번호
-			 user_no INT NOT NULL,					-- 회원번호(참조: users 테이블)
-			 f_name VARCHAR(100) NOT NULL,			-- 맛집(식당) 이름
-			 f_group VARCHAR(10) NOT NULL,			-- 맛집 분류 카테고리
-			 f_menu VARCHAR(500) NOT NULL,			-- 추천메뉴
-			 f_content VARCHAR(4000) NOT NULL,		-- 맛집 상세 설명
-			 f_addr VARCHAR(1000) NOT NULL,			-- 주소
-			 f_addr_latitude DOUBLE,				-- 주소(위도)
-			 f_addr_longitude DOUBLE,				-- 주소(경도)
-			 f_imgpath VARCHAR(1000),				-- 맛집 이미지 경로
-			 f_imgname VARCHAR(1000),				-- 맛집 이미지 이름
-			 f_regdate TIMESTAMP NOT NULL,			-- 게시글 등록일
-			 f_latestupdate TIMESTAMP NOT NULL,		-- 게시글 최신 수정일
-			 f_bestcount INT NOT NULL default 0		-- 게시글 조회수
-*/
 			int user_no = fdto.getUser_no();
 			String f_name = fdto.getF_name();
 			String f_group = fdto.getF_group();

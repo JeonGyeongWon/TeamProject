@@ -12,6 +12,8 @@ public class FoodMainService {
 		
 		FoodDAO fDAO = new FoodDAO();
 		ArrayList<FoodDTO> list = fDAO.allSelectedFood();
+		System.out.println("DB에서 모든 맛집 정보를 가져오고 있습니다. --- 현재 위치: FoodMainService.java");
+		/*
 		for(int i=0; i<list.size(); i++){
 			FoodDTO fDTO = list.get(i);
 			
@@ -19,6 +21,7 @@ public class FoodMainService {
 				fDTO.setF_content(fDTO.getF_content().substring(30)+"......");
 			}
 		}
+		*/
 		
 		return list;
 	}

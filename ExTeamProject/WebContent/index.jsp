@@ -11,9 +11,8 @@
 
 
 <!-- Modernizr JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b&libraries=services"></script>
+
+
 </head>
 
 
