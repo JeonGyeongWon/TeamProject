@@ -32,7 +32,8 @@ public class InsertFoodAction implements Action {
 		int user_no = umdto.getUser_no();
 		
 //		String path = request.getServletContext().getRealPath("/food/upload");
-		String path = request.getSession().getServletContext().getRealPath("/food/upload");
+	/*	String path = request.getSession().getServletContext().getRealPath("/food/upload");*/
+		String path = "C:/Users/ITWILL/git/TeamProject/ExTeamProject/WebContent/hotel/upload";
 		System.out.println("path는 "+path);
 		MultipartRequest multi = new MultipartRequest(request, path, 10*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
 		
