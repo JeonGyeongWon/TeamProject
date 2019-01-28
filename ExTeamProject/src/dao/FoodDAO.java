@@ -22,17 +22,14 @@ public class FoodDAO {
 	
 		//foodMain.jsp페이지에서 등록된 글을 뿌려주는 메서드(미완)
 		public ArrayList<FoodDTO> allSelectedFood() {
-		ArrayList<FoodDTO> list = null;
-		FoodDTO fDTO = null;
+		ArrayList<FoodDTO> list = new ArrayList<>();
+		FoodDTO fDTO = new FoodDTO();
 		try {
 			con = cp.getConnection();
 			String sql = "select * from food order by f_no desc";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				list = new ArrayList<>();
-				fDTO = new FoodDTO();
-				
 				int f_no = rs.getInt("f_no");
 				int user_no = rs.getInt("user_no");
 				String f_name = rs.getString("f_name");
@@ -84,7 +81,6 @@ public class FoodDAO {
 				
 				list.add(fDTO);
 			}
-			
 		} catch (Exception e) {
 			System.out.print("allSelectedFood()메서드 내부 오류: ");
 			e.printStackTrace();

@@ -24,6 +24,7 @@
 		</script>
 	</c:if>
 	<c:if test="${user_email != null}">
+		<div class="container">
 		<h1>맛집 등록하기</h1>
 		<form action="./insertFoodPro.fo" method="post"
 			enctype="multipart/form-data">
@@ -137,6 +138,7 @@
 			<input type="hidden" id="gyungdo" name="f_addr_longitude" value="">
 			<input type="submit" value="업로드">
 		</form>
+		</div>
 	</c:if>
 </body>
 </html>

@@ -40,15 +40,9 @@ public class FoodController extends HttpServlet {
 		String ctx = request.getContextPath();
 		String command = uri.substring(ctx.length());
 
-		System.out.println("URI는 " + uri + "입니다.");
-		System.out.println("contextPath는 " + ctx + "입니다.");
-		System.out.println("command는 " + command + "입니다.");
-
 		// header.jsp에서 [맛집]을 클릭할 때
 		if (command.equals("/FoodMain.fo")) {
-//			System.out.println("FoodController로 들어왔습니다.");
 			action = new FoodMainAction();
-			System.out.println("FoodController로 다시 돌아왔습니다.");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
