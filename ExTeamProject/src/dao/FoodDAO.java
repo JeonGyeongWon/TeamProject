@@ -84,6 +84,8 @@ public class FoodDAO {
 		} catch (Exception e) {
 			System.out.print("allSelectedFood()메서드 내부 오류: ");
 			e.printStackTrace();
+		} finally {
+			cp.close(con, pstmt, rs);
 		}
 		return list;
 	}

@@ -8,6 +8,9 @@
 
 <title>맛집 메인</title>
 
+<script type="text/javascript">
+	window.reload();
+</script>
 </head>
 <body>
 	<c:if test="${session.user_email != null}">
@@ -17,31 +20,28 @@
 	<c:choose>
 		<c:when test="${list == null}">
 			<div class="container">
-				등록된 맛집 정보가 없습니다. <br/>
-				지금 바로 <a href="./insertFoodPage.fo">등록</a>하러 가기.
+				등록된 맛집 정보가 없습니다. <br /> 지금 바로 <a href="./insertFoodPage.fo">등록</a>하러
+				가기.
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div align="center">
-				<h3>맛집 메인 페이지</h3>
-				<p>
-					<a href="./insertFoodPage.fo">맛집등록</a>
-				</p>
-				<c:forEach var="FoodDTO" items="${list}" step="1">
-					<div id="fh5co-main">
-						<div class="fh5co-narrow-content">
-							<div class="row animate-box" data-animate-effect="fadeInLeft">
+			<div id="fh5co-main">
+				<div class="fh5co-narrow-content">
+					<div class="row animate-box" data-animate-effect="fadeInLeft">
+						<h3>맛집 메인 페이지</h3>
+						<p>
+							<a href="./insertFoodPage.fo">맛집등록</a>
+						</p>
+						<c:forEach var="FoodDTO" items="${list}">
 							<a href="#">
-								<img class="img-responsive" src="/${FoodDTO.f_imgpath}${FoodDTO.f_imgname}">
+								<img class="img-responsive" src=".${FoodDTO.f_imgpath}/${FoodDTO.f_imgname}" style="max-width: 300px;">
 							</a>
-								<h3 class="fh5co-work-title">${FoodDTO.f_name}</h3>
-								<h4>${FoodDTO.f_content}</h4>
-								<p>추천수: ${FoodDTO.f_bestcount}</p>
-							
-							</div>
-						</div>
+							<h3 class="fh5co-work-title">${FoodDTO.f_name}</h3>
+							<h4>${FoodDTO.f_content}</h4>
+							<p>추천수: ${FoodDTO.f_bestcount}</p>
+						</c:forEach>
 					</div>
-				</c:forEach>
+				</div>
 			</div>
 		</c:otherwise>
 	</c:choose>
