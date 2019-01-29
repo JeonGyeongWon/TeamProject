@@ -4,16 +4,23 @@ import java.sql.Timestamp;
 
 public class ReservationDTO {
 
-	int h_no;
-	int h_rno;
-	int user_no;
-	Timestamp begindate;
-	Timestamp enddate;
-	int total_price;
-	int ckprice;
-	Timestamp ckin;
-	Timestamp ckout;
+	private int h_no;
+	private int h_rno;
+	private int user_no;
+	private int total_price;
+	private int ckprice;
+	private Timestamp ckin;
+	private Timestamp ckout;
+	private int personnel;
 	
+	
+	
+	public int getPersonnel() {
+		return personnel;
+	}
+	public void setPersonnel(int personnel) {
+		this.personnel = personnel;
+	}
 	public int getH_no() {
 		return h_no;
 	}
@@ -31,18 +38,6 @@ public class ReservationDTO {
 	}
 	public void setUser_no(int user_no) {
 		this.user_no = user_no;
-	}
-	public Timestamp getBegindate() {
-		return begindate;
-	}
-	public void setBegindate(Timestamp begindate) {
-		this.begindate = begindate;
-	}
-	public Timestamp getEnddate() {
-		return enddate;
-	}
-	public void setEnddate(Timestamp enddate) {
-		this.enddate = enddate;
 	}
 	public int getTotal_price() {
 		return total_price;

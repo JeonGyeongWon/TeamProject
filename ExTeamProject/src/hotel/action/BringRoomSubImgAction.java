@@ -1,6 +1,7 @@
 package hotel.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +29,7 @@ public class BringRoomSubImgAction  {
 		Room_imgDTO subimg = service.bringSubImg(h_rno);
 		//해당 방번호에 맞는 방정보도 들고옴
 		RoomDTO roomDto = service.bringRoomInfo(h_rno);
-		System.out.println("잘들어왔습니다");
+		System.out.println("서브이미지 들고오기 ajax");
 		if(subimg == null){
 			values.append("{\"imgname\":\"" +"왜안될까?" +"\"}");
 		}else{
@@ -43,6 +44,8 @@ public class BringRoomSubImgAction  {
 		values.append("\"weekprice\":\""+roomDto.getWeekend_price()+"\",");
 		values.append("\"weekend_price\":\""+roomDto.getWeekend_price()+"\"}");
 		}
+		
+		
 		System.out.println(values);
 		
  		

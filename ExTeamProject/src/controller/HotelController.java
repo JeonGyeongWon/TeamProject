@@ -16,6 +16,7 @@ import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
 import hotel.action.InsertCommentAction;
 import hotel.action.InsertHotelAction;
+import hotel.action.reservationAction;
 import together.ActionForward;
 import together.Action;
 
@@ -93,6 +94,17 @@ public class HotelController extends HttpServlet{
 			}
 			
 			
+		}else if(command.equals("/reservation.hotel")){
+			action = new reservationAction();
+			try{
+				forward = action.execute(request, response);
+				System.out.println("이동될 페이지는 : "+forward.getPath());
+			}catch(Exception e){
+				System.out.println("/reservation.hotel"+e);
+				e.getMessage();
+			}
+		}else if(command.equals("/comm.hotel")){
+			System.out.println("gogo");
 		}
 			
 		

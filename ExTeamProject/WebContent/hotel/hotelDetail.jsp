@@ -182,35 +182,36 @@
 			<div id="reservation">
 						
 						
-						<c:choose>
-							
-							<c:when test="${sessionScope.user_email !=null }">
-							<h2>가격 </h2>
-							<span id="price"></span>
-							날짜<br>
-							<form action="reservation.hotel" method="post">
-							<input type="text" placeholder="체크인" id="ckindate"> -> <input type="text" placeholder="체크아웃" id="ckoutdate">
-							예약자는 : ${udto.user_email } <br>
-							인원<br>
-							<input type = "hidden" name="h_no" value="">
-							<input type = "hidden" name="h_rno" value=""><!-- ajax사용해서 값을 지정합니다 -->
-							<input type = "hidden" name="user_no" value="${udto.user_no }">
-							<select name="personnel" >
-							</select>
-							<button>예약하기</button><br>
-							<input type = "hidden" name="total_price" value="" id="total_price">
-							<!-- 날짜선택시 표시될 총 가격이 들어갈공간 -->
-							</form>
-							<span id="total_priceSpan"></span>
-							</c:when>
-							<c:otherwise>
-							로그인되지 않았습니다 로그인을 해주세요
-							</c:otherwise>
-						</c:choose>	
-						<br>
+				<c:choose>
+					
+					<c:when test="${sessionScope.user_email !=null }">
+					<h2>가격 </h2>
+					<span id="price"></span>
+					날짜<br>
+					<form action="reservation.hotel" method="post">
+					<input type="text" placeholder="체크인" id="ckindate" name="begindate"> -> 
+					<input type="text" placeholder="체크아웃" id="ckoutdate" name="enddate">
+					예약자는 : ${udto.user_email } <br>
+					인원<br>
+					<input type = "hidden" name="h_no" value="${hdto.h_no }">
+					<input type = "hidden" name="h_rno" value=""><!-- ajax사용해서 값을 지정합니다 -->
+					<input type = "hidden" name="user_no" value="${udto.user_no }">
+					<select name="personnel" >
+					</select>
+					<button>예약하기</button><br>
+					<input type = "hidden" name="total_price" value="" id="total_price">
+					<!-- 날짜선택시 표시될 총 가격이 들어갈공간 -->
+					</form>
+					<span id="total_priceSpan"></span>
+					</c:when>
+					<c:otherwise>
+					로그인되지 않았습니다 <a href="./loginPage.um">로그인</a>을 해주세요
+					</c:otherwise>
+				</c:choose>	
+				<br>
 						
 							
-					</div>
+			</div>
 					
 					
 				<div class="HotelInfoDiv">
@@ -378,6 +379,7 @@
 	<script type="text/javascript">
 	
 		<%--댓글 관련 function--%>
+		<%-- XML방식 AJAX --%>
 		function getXHR(){
 			if(window.XMLHttpRequest){
 				return new XMLHttpRequest();
@@ -387,26 +389,27 @@
 		}
 		
 		var xhr=null;
+		
+		
 		function addComments(){
 			
 			//1. xhr객체 얻기
 			xhr = getXHR();
-			
+			console.log(xhr);
 			//2.콜백 메소드 설정하기 
-			xhr.onreadystatechange=callback;
+			xhr.onreadystatechange=callback();
 			
 			//3. open함수로 초기화 설정
-			xhr.open("POST","comm.do?cmd=insert",true);
+			xhr.open("POST","comm.hotel");
 			
 			//4. send함수로 서버에 요청(post방식일 때)
 			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
 			//사용자가 입력한 아이디와 댓글 얻어오기
 			
-			var user_no = document.getElementById("user_no").value;
-			var h_c_no =document.getElementById("h_c_no").value;
+			var user_no = 1;
 			
-			var param="user_no="+user_no+"&h_c_no="+h_c_no;
+			var param="user_no="+user_no;
 			
 			//send메소드를 호출하면서 파라미터 전송하기
 			xhr.send(param);
@@ -640,9 +643,7 @@
 							}
 							
 							/* 예약관련 type이 hidden 곳에 value값 셋팅하는곳*/
-							$("#reservation [name='h_rno']").val(roomsize.h_rno);
-							$("#reservation [name='h_no']").val(roomsize.h_no);
-							
+							$("#reservation [name='h_rno']").val(roomsubimg.h_rno);
 							
 						},
 						error : function(err){

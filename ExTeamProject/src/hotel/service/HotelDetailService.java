@@ -34,13 +34,28 @@ public class HotelDetailService {
 		return list;
 	}
 
+	//호텔 주인?에 정보를 들고옴
 	public UserManagementDTO bringHotelManageInfo(int user_no) {
 	
 		UserManagementDTO dto = dao.bringHotelManageInfo(user_no);
 		
 		return dto;
 	}
-
+	// reservationAction에서 사용될 방정보 1개의 서브이미지를 들고오는 메서드 
+	public Room_imgDTO getBringRoom_imgInfo(int h_rno){
+		
+		Room_imgDTO r_imgdto = dao.bringRoom_imgDto(h_rno); 
+		return r_imgdto;
+	}
+	
+	// reservationAction에서 사용될 방정보 1개를 들고오는 메서드
+	public RoomDTO getBringRoom(int h_rno){
+		
+		RoomDTO rdto = dao.bringRoomDto(h_rno);
+		return rdto;
+	
+	}
+	
 	
 	
 	
