@@ -350,7 +350,7 @@
 			
 			<%--댓글달기 --%>
 			<div id="commList">
-				아이디 <input text="text"	id="user_no">
+				아이디 <input text="text"	id="user_no"><br>
 				댓글 <textarea rows="3" cols="30" id="content"></textarea>
 				
 				<br>
