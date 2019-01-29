@@ -496,7 +496,6 @@ public class HotelDAO {
 			}finally{
 				pool.close(con, pstmt, rs);
 			}
-			
 			return null;
 		}
 
