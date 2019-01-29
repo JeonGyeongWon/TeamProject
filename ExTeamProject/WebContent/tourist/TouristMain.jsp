@@ -7,6 +7,9 @@
 <title>관광지 메인</title>
 </head>
 <body>
+	<center>
 	<h2>관광지 메인</h2>
+	<a href="./InsertTourist.tourist">관광지 등록</a>
+	</center>
 </body>
 </html>

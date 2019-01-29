@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import together.ActionForward;
+import tourism.Action.InsertTouristAction;
 import tourism.Action.tourismMainAction;
 import together.Action;
 
@@ -42,12 +43,26 @@ public class TouristController extends HttpServlet{
 		
 		if(command.equals("/TouristMain.tourist")){
 			
+			action = new tourismMainAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else if(command.equals("/InsertTourist.tourist")){
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("tourist/TouristMain.jsp");
-			
-		}else if(command.equals("각 요청 액션페이지")){
-			
+			forward.setPath("./index.jsp?center=/tourist/Tourist_InsertForm.jsp");
+		}
+		else if(command.equals("/InsertTouristForm.tourist")){
+			action = new InsertTouristAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
