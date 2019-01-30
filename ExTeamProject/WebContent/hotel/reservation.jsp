@@ -1,7 +1,9 @@
+<%@page import="hotel.dto.Room_imgDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
 	<link rel="stylesheet" href="/ExTeamProject/css/animate.css">
@@ -16,26 +18,45 @@
 	<link rel="stylesheet" href="/ExTeamProject/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	.facilitiesDiv{
+		width : 50%;
+		display : inline-block;
+		float : left;
+	}
+	.HotelMainDiv{	
+		width:100%;
+		height: 40%;
+	}
+	.MainImgDiv{
+		width:50%;
+		height:100%;
+		display: inline-block;
+		float : left;
+	}
+	.subImgDiv{
+		width:25%;
+		height:100%;
+		display: inline-block;
+		float : left;
+	}
+	
+	.subImg{
+		width: 100%;
+		height : 50%;
+		display : inline-block;
+		float : left;
+	}
+</style>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <script>
-	function SMSAuth(){
-		$.ajax({
-			type : "post",
-			url : "SMSAuth.hotel",
-			data : {
-				// 데이터값
-			},
-			dataType :'json',
-			success : function(roomsubimg)
-			
-			
-			)};
-			
-			
+<%-- 휴대폰 인증시 새창을 띄워줌  --%> 
+function fnPhone(user_no){
+	window.open("SMSAuthForm.jsp?user_no="+user_no,
+			"SMSAuth","width=570","height=350","resizable=no","scrollbars=no");
+	}
 
-		
-	
 
 </script>
 
@@ -44,13 +65,6 @@
 	<jsp:include page="../header.jsp"/>
 	
 	
-	<!-- request.setAttribute("hdto", hdto);
-		request.setAttribute("fdto", fdto);
-		request.setAttribute("rdto", rdto);
-		request.setAttribute("r_imgdto", r_imgdto);
-		request.setAttribute("udto", udto);
-		//예약창을 한번더 보여주기위해서 DB에 바로저장하지않고 해당정보만보내줌
-		request.setAttribute("Re_dto", Re_dto); -->
 	<div class="container text-center">
 		
 		<c:set var="hdto" value="${requestScope.hdto }"/>
@@ -60,12 +74,124 @@
 		<c:set var="udto" value="${requestScope.udto }"/>
 		<c:set var="Re_dto" value="${requestScope.Re_dto }"/>
 		
+	
 		<c:choose>
 			
 			<c:when test="${udto.user_phone == ''}">
-				예약, 결제를 하실려면 <a onclick="SMSAuth();">휴대폰 인증</a>을 하셔야합니다.
+				예약, 결제를 하실려면 <a onclick="fnPhone(${udto.user_no});">휴대폰 인증</a>을 하셔야합니다.
 			</c:when>
-		</c:choose>>
+			
+			<c:otherwise>
+				
+				<div>
+					<h2>호텔이름 : ${hdto.h_name }아아아글자수채우기이이이이</h2>
+					<p>호텔설명 : ${hdto.h_content }</p>
+					<p>호텔주의사항 : ${hdto.h_caution }	</p>
+					<p>호텔규칙 : ${hdto.h_rule }</p>
+					<p>세부사항 : ${hdto.h_detail }</p>	
+				</div>
+				
+				<div>
+					<h2 id="facilitiesMainH2">편의시설</h2>
+				<c:if test="${fdto.wifi == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"와이파이" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.shampoo == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"샴푸무료제공 ..?" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.closet == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"옷장" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.tv == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"tv" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.aircon == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"에어컨" }</h3>
+					</div>	
+				</c:if>
+				<c:if test="${fdto.hairdry == 1}">
+					<div class="facilitiesDiv">
+						<h3>${"헤어드라이기" }</h3>
+					</div>	
+				</c:if>
+				<c:if test="${fdto.swim == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"수영장" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.wash_dry == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"세탁기" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.parking == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"주차장" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.elevator == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"엘리베이터" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.health == 1 }">
+					<div class="facilitiesDiv">
+						<h3>${"헬스장" }</h3>
+					</div>
+				</c:if>
+				<c:if test="${fdto.etc != null }">
+					<div class="facilitiesDiv">
+						<p>${fdto.etc }</p>
+					</div>
+				</c:if>
+				
+				</div>
+				<!-- 편의시설 정보 끝 -->
+
+				<!-- 방이미지 뿌려주는곳  -->	
+				 <!-- fn:split -> 문자열자르기 -->
+				<c:set var="imgname" value="${r_imgdto.imgname }"/>
+											<!-- ${}말고 바로 변수값 적어주면된다 뻘짓했다... -->
+				<c:set var = "r_subimg" value = "${fn:split(imgname, ',')}"/>
+			
+								
+				<div class="HotelMainDiv" >
+				
+				<div class="MainImgDiv" id="img1">
+					<img src="hotel/${rdto.imgpath }${rdto.imgname}">
+				</div>
+				
+				<div class="subImgDiv">
+					<div class="subImg" id="img2">
+						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[0]}">	
+					</div>
+					<div class="subImg" id="img3">
+						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[1]}">
+					</div>
+				</div>
+				
+				<div class="subImgDiv">
+					<div class="subImg" id="img4">
+						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[2]}">
+					</div>
+					<div class="subImg" id="img5">
+						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[3]}">
+					</div>
+				</div>
+				
+				<hr/>
+			</div>
+			</c:otherwise>
+		</c:choose>
 		
 	
 	</div>
