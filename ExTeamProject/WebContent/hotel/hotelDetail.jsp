@@ -193,6 +193,7 @@
 					<input type="text" placeholder="체크아웃" id="ckoutdate" name="enddate">
 					예약자는 : ${udto.user_email } <br>
 					인원<br>
+					<input type = "hidden" name="ckreservation" value="0"><!-- 예약하기와, 예약정보뿌려주기를 나누는 플래그 action가보시면압니당. -->
 					<input type = "hidden" name="h_no" value="${hdto.h_no }">
 					<input type = "hidden" name="h_rno" value=""><!-- ajax사용해서 값을 지정합니다 -->
 					<input type = "hidden" name="user_no" value="${udto.user_no }">

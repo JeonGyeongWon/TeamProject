@@ -47,6 +47,15 @@
 		display : inline-block;
 		float : left;
 	}
+	
+	.subimgDiv img{
+		width:100%;
+		height: 100%;
+	}
+	.MainImgDiv img{
+		width: 100%;
+		height: 100%;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
@@ -56,6 +65,9 @@ function fnPhone(user_no){
 	window.open("SMSAuthForm.jsp?user_no="+user_no,
 			"SMSAuth","width=570","height=350","resizable=no","scrollbars=no");
 	}
+	
+	
+		
 
 
 </script>
@@ -159,36 +171,75 @@ function fnPhone(user_no){
 
 				<!-- 방이미지 뿌려주는곳  -->	
 				 <!-- fn:split -> 문자열자르기 -->
-				<c:set var="imgname" value="${r_imgdto.imgname }"/>
-											<!-- ${}말고 바로 변수값 적어주면된다 뻘짓했다... -->
-				<c:set var = "r_subimg" value = "${fn:split(imgname, ',')}"/>
-			
+				
+				<c:set var="subimgname" value="${r_imgdto.imgname }"/>
+				
+				<c:set var="subimg" value="${fn:split(subimgname,',') }"/>	
+				
+				
 								
+								<br>
 				<div class="HotelMainDiv" >
 				
+				<h3> 방정보</h3>
+				
 				<div class="MainImgDiv" id="img1">
-					<img src="hotel/${rdto.imgpath }${rdto.imgname}">
+					<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}"/>
 				</div>
 				
 				<div class="subImgDiv">
 					<div class="subImg" id="img2">
-						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[0]}">	
+					<img src="hotel/${r_imgdto.imgpath}${subimg[0]}"/>
 					</div>
 					<div class="subImg" id="img3">
-						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[1]}">
+					<img src="hotel/${r_imgdto.imgpath}${subimg[1]}"/>
 					</div>
 				</div>
 				
 				<div class="subImgDiv">
 					<div class="subImg" id="img4">
-						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[2]}">
+					<img src="hotel/${r_imgdto.imgpath}${subimg[2]}"/>
 					</div>
 					<div class="subImg" id="img5">
-						<img src="hotel/${r_imgdto.imgpath }${r_sumimg[3]}">
+					<img src="hotel/${r_imgdto.imgpath}${subimg[3]}"/>
 					</div>
 				</div>
 				
-				<hr/>
+				<%-- 
+					private int h_no;
+					private int h_rno;
+					private int user_no;
+					private int total_price;
+					private int ckprice;
+					private Timestamp ckin;
+					private Timestamp ckout;
+					private int personnel;
+				 --%>
+				
+				<div class="HotelMainDiv"> 
+				<br>
+				체크인 날짜는 : ${Re_dto.ckin } <br>
+				체크아웃 날짜는 : ${Re_dto.ckout }<br>
+				총 금액은 : ${Re_dto.total_price }<br>
+				예약번호는 : ${udto.user_phone }<br>
+				
+				위 사항이 맞습니다.<input type="checkbox"> 
+				</div>
+				<form action="reservation.hotel" method="post"> 
+					<input type="hidden" name ="h_no" value="${Re_dto.h_no }">
+					<input type="hidden" name ="h_rno" value="${Re_dto.h_rno }">
+					<input type="hidden" name ="user_no" value="${Re_dto.user_no }">
+					<input type="hidden" name ="total_price" value="${Re_dto.total_price }">
+					<input type="hidden" name ="ckprice" value="${Re_dto.ckprice }">
+					<input type="hidden" name ="begindate" value="${Re_dto.ckin }">
+					<input type="hidden" name ="enddate" value="${Re_dto.ckout }">
+					<input type="hidden" name ="personnel" value="${Re_dto.personnel }">
+					<input type="hidden" name ="ckreservation" value="1">
+					<input type="submit" value="예약하기">
+				</form>
+				
+				
+				
 			</div>
 			</c:otherwise>
 		</c:choose>

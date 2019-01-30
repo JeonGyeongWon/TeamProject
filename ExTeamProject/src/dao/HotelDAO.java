@@ -15,6 +15,7 @@ import db.ConnectionPool;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
 import hotel.dto.Hotel_commentDTO;
+import hotel.dto.ReservationDTO;
 import hotel.dto.RoomDTO;
 import hotel.dto.Room_imgDTO;
 import dto.UserManagementDTO;
@@ -569,6 +570,36 @@ public class HotelDAO {
 			return list;
 			
 		} //getCommentList()메서드 끝
+
+
+		public int insertReservation(ReservationDTO dto) {
+
+			int result=0;
+			String sql = "insert into hotel_reservation(h_no,h_rno,user_no,"
+					+ "total_price,ckprice,personnel,date,ckout,ckin)"
+					+ "values(?,?,?,?,?,?,?,?,?)";
+			try{
+				con = pool.getConnection();
+				pstmt= con.prepareStatement(sql);
+				pstmt.setInt(1, dto.getH_no());
+				pstmt.setInt(2, dto.getH_rno());
+				pstmt.setInt(3, dto.getUser_no());
+				pstmt.setInt(4, dto.getTotal_price());
+				pstmt.setInt(5, dto.getCkprice());
+				pstmt.setInt(6, dto.getPersonnel());
+				pstmt.setTimestamp(7,null);
+				pstmt.setTimestamp(8,dto.getCkout());
+				pstmt.setTimestamp(9,dto.getCkin());
+				
+				result = pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				System.out.println("inserReservation에서" +e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			return result;
+		}
 		
 		
 		

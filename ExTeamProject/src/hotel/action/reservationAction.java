@@ -15,6 +15,7 @@ import hotel.dto.ReservationDTO;
 import hotel.dto.RoomDTO;
 import hotel.dto.Room_imgDTO;
 import hotel.service.HotelDetailService;
+import hotel.service.reservationService;
 import together.Action;
 import together.ActionForward;
 
@@ -24,15 +25,58 @@ public class reservationAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
+		//예약 관련 정보들을 dto에 담는과정
+		ReservationDTO Re_dto = new ReservationDTO();
+		ActionForward forward = new ActionForward();
+		// 예약정보보여주기와 예약하기를 나누는 플래그 
+		int ckreservation =Integer.parseInt(request.getParameter("ckreservation"));
+		if(ckreservation == 1){
+			Re_dto.setCkprice(Integer.parseInt(request.getParameter("ckprice")));
+			Re_dto.setH_no(Integer.parseInt(request.getParameter("h_no")));
+			Re_dto.setH_rno(Integer.parseInt(request.getParameter("h_rno")));
+			Re_dto.setPersonnel(Integer.parseInt(request.getParameter("personnel")));
+			Re_dto.setTotal_price(Integer.parseInt(request.getParameter("total_price")));
+			Re_dto.setUser_no(Integer.parseInt(request.getParameter("user_no")));
+			
+			String tempdate = request.getParameter("begindate");
+			System.out.println(tempdate);
+			
+			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(tempdate);
+			
+			
+			Timestamp begindate = new Timestamp(date.getTime());
+			
+			Re_dto.setCkin(begindate);
+			
+			tempdate = request.getParameter("enddate");
+			
+			date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(tempdate);
+			
+			Timestamp enddate = new Timestamp(date.getTime());
+			
+			Re_dto.setCkout(enddate);
+			
+			reservationService service = new reservationService();
+			
+			service.insertReservation(Re_dto);
+			
+			//결제 페이지에서 보여지기위해 예약정보를 들고감
+			request.setAttribute("re_dto", Re_dto);
+			forward.setPath("payment.hotel");
+			forward.setRedirect(false);
+			
+			return forward;
+		}
+		
+		else{
 		HttpSession session = request.getSession();
 		String user_email = (String)session.getAttribute("user_email");
 		
-		ActionForward forward = new ActionForward();
+		
 		int h_no = Integer.parseInt(request.getParameter("h_no"));	//호텔정보
 		int h_rno = Integer.parseInt(request.getParameter("h_rno"));	//방정보
 		
-		//예약 관련 정보들을 dto에 담는과정
-		ReservationDTO Re_dto = new ReservationDTO();
+		
 		
 		//시작 날짜 종료날짜 받아오는부분 !! -> timestamp로 지정했기에 date에서 timestamp캐스팅이 되지않습니다... 임의로 10시 체크인 2시체크아웃 추가합니다.
 		String tempdate = request.getParameter("begindate");
@@ -43,6 +87,7 @@ public class reservationAction implements Action {
 		String[] tempdate2 = tempdate.split("-");
 		
 		int year = Integer.parseInt(tempdate2[0]);
+		System.out.println(year);
 		int month = Integer.parseInt(tempdate2[1]);
 		int date = Integer.parseInt(tempdate2[2]);
 		int hour = Integer.parseInt(tempdate2[3]);
@@ -50,6 +95,9 @@ public class reservationAction implements Action {
 		int second = Integer.parseInt(tempdate2[5]);
 		
 		Timestamp begindate = new Timestamp(year, month, date, hour, minute, second, 0);
+		
+		begindate.setYear(begindate.getYear()-1900);
+		
 		
 		Re_dto.setCkin(begindate);
 		
@@ -68,6 +116,7 @@ public class reservationAction implements Action {
 		 
 		Timestamp enddate = new Timestamp(year, month, date, hour, minute, second, 0);
 		
+		enddate.setYear(enddate.getYear()-1900);
 		Re_dto.setCkout(enddate);
 		Re_dto.setCkprice(0);	//결제여부확인 최초0
 		Re_dto.setH_no(h_no);
@@ -100,6 +149,7 @@ public class reservationAction implements Action {
 		forward.setRedirect(false);
 		forward.setPath("./hotel/reservation.jsp");
 		return forward;
+		}
 	}
 
 }

@@ -103,8 +103,6 @@ public class HotelController extends HttpServlet{
 				System.out.println("/reservation.hotel"+e);
 				e.getMessage();
 			}
-		}else if(command.equals("/comm.hotel")){
-			System.out.println("gogo");
 		}
 			
 		
