@@ -17,41 +17,51 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<!-- 결제 api에 사용에 추가해야할 자바스크립트 링크 --> 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 
+var nowpay = confirm("지금 결제를 바로 하시겠습니까?");
+if(!nowpay){
+	alert('당일결제가 가능하며 선결제를 원할시 마이페이지에서 가능합니다.');
+	location.href='HotelMain.hotel';
+}
+
+$(function(){
 IMP.init('imp11756047');
 IMP.request_pay({
     pg : 'html5_inicis',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
-    name : '주문명:결제테스트',
-    amount : 14000,
+    name : '호텔명:${hdto.h_name}',
+    amount : ${re_dto.total_price},	// 돈이 실제로 빠져나가고 익일 00시에 다시들어옵니다 테스트시에는 최소단위인 100으로 테스트해주세요
     buyer_email : 'iamport@siot.do',
-    buyer_name : '구매자이름',
-    buyer_tel : '010-1234-5678',
-    buyer_addr : '서울특별시 강남구 삼성동',
-    buyer_postcode : '123-456'
+    buyer_tel : '${udto.user_phone}',
 }, function(rsp) {
     if ( rsp.success ) {
         var msg = '결제가 완료되었습니다.';
-        msg += '고유ID : ' + rsp.imp_uid;
-        msg += '상점 거래ID : ' + rsp.merchant_uid;
-        msg += '결제 금액 : ' + rsp.paid_amount;
-        msg += '카드 승인번호 : ' + rsp.apply_num;
+        alert('마이페이지에서 확인 하실수 있습니다.');
+        location.href='payment.hotel?user_no=${Re_dto.user_no}&total_price=${Re_dto.total_price}&h_rno=${re_dto.h_rno}';
     } else {
         var msg = '결제에 실패하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
+        alert('F5를 눌러서 재결제를 해주세요');
     }
-
-    alert(msg);
+});
 });
 
 </script>
 </head>
 <body>
-	
+request.setAttribute("hdto", hdto);
+			request.setAttribute("rdto", rdto);
+			request.setAttribute("udto", udto);
+	<c:set var="re_dto" value="${Re_dto }"/>
+	<c:set var="hdto" value="${hdto }"/>
+	<c:set var="rdto" value="${rdto }"/>
+	<c:set var="udto" value="${udto }"/>
 </body>
 </html>

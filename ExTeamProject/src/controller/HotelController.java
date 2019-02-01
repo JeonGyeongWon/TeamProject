@@ -16,6 +16,7 @@ import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
 import hotel.action.InsertCommentAction;
 import hotel.action.InsertHotelAction;
+import hotel.action.paymentAction;
 import hotel.action.reservationAction;
 import together.ActionForward;
 import together.Action;
@@ -98,11 +99,22 @@ public class HotelController extends HttpServlet{
 			action = new reservationAction();
 			try{
 				forward = action.execute(request, response);
-				System.out.println("이동될 페이지는 : "+forward.getPath());
 			}catch(Exception e){
 				System.out.println("/reservation.hotel"+e);
 				e.getMessage();
 			}
+		}else if(command.equals("/paymentForm.hotel")){
+			forward=new ActionForward();
+			forward.setPath("hotel/payment.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/payment.hotel")){
+			action = new paymentAction();
+			try{
+				action.execute(request, response);
+			}catch(Exception e){
+				System.out.println("payment에서 Action에서.. "+e);
+			}
+			
 		}
 			
 		

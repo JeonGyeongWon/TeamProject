@@ -600,11 +600,64 @@ public class HotelDAO {
 			}
 			return result;
 		}
+
+
+		public void inserPayment(int user_no, int total_price, int h_rno) {
+			
+			try{
+				int ckprice = 0;
+				con =pool.getConnection();
+				updateCkprice(user_no, h_rno);
+				String sql = "select ckprice * hotel_reservation "
+						+ " where user_no = ? and total_price = ? and h_rno = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, user_no);
+				pstmt.setInt(2, total_price);
+				pstmt.setInt(3, h_rno);
+				
+				rs = pstmt.executeQuery();
+				
+				// 글정보가 있다면  ckprice값을 가져옴 
+				if(rs.next()){
+					ckprice = rs.getInt("ckprice");
+				}
+				
+				// 삽입
+				
+				sql = "insert into hotel_payment(user_no,total_price,ckprice "
+						+ "values(?,?,?)";
+				pstmt.setInt(1, user_no);
+				pstmt.setInt(2, total_price);
+				pstmt.setInt(3, ckprice);
+				
+				pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				System.out.println("inserPayment에서"+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+		}
 		
-		
-		
-		
-		
+		public void updateCkprice(int user_no, int h_rno){
+			String sql = "update hotel_reservation set ckprice = 1 "
+					+ "where h_rno=? and user_no = "
+					+ "(select user_no from users where user_no =? and ckprice=0)";
+			try{
+				con = pool.getConnection();
+				con.setAutoCommit(false); 	// ckprice가 1이 됬는데 결제가 실패하면 문제가 생긴다 자동커밋을 하지않고 위에서 한다.
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, h_rno);
+				pstmt.setInt(2, user_no);
+				
+				pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				System.out.println("updateCkprice에서"+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+		}
 		
 	}
 

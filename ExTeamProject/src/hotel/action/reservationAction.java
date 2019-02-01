@@ -2,6 +2,7 @@ package hotel.action;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.io.PrintWriter;
 import java.sql.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,13 +57,26 @@ public class reservationAction implements Action {
 			
 			Re_dto.setCkout(enddate);
 			
+			//예약정보 삽입
 			reservationService service = new reservationService();
-			
 			service.insertReservation(Re_dto);
+
+			//호텔정보와 방정보, 유저정보를 가져옴
+			HotelDetailService service2 = new HotelDetailService();
+			HotelDTO hdto= service2.getBringoneHotelInfo(Re_dto.getH_no());
+			RoomDTO rdto = service2.getBringRoom(Re_dto.getH_rno());
+			UserManagementDAO udao = new UserManagementDAO();
+			
+			HttpSession session = request.getSession();
+			
+			UserManagementDTO udto = udao.getUserInfo((String)session.getAttribute("user_email"));
 			
 			//결제 페이지에서 보여지기위해 예약정보를 들고감
 			request.setAttribute("re_dto", Re_dto);
-			forward.setPath("payment.hotel");
+			request.setAttribute("hdto", hdto);
+			request.setAttribute("rdto", rdto);
+			request.setAttribute("udto", udto);
+			forward.setPath("paymentForm.hotel");
 			forward.setRedirect(false);
 			
 			return forward;
