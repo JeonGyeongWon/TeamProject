@@ -13,8 +13,17 @@
 	//<form>태그로 전송할 값의 유효성 검사
 	function checkValue() {
 
+		var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+	    var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//email 정규식
+	    var date_pattern = /(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$/;// 생년월일 정규식
+	    
 		if (!document.userInfo.user_email.value) {
 			alert("이메일을 입력하세요.");
+			document.userInfo.user_email.focus();
+			return false;
+		}
+		if (!re2.test(document.userInfo.user_email.value)) {
+			alert("적합하지 않은 이메일 형식입니다.");
 			document.userInfo.user_email.focus();
 			return false;
 		}
@@ -23,8 +32,8 @@
 			document.userInfo.user_pass.focus();
 			return false;
 		}
-		if (document.userInfo.user_pass.value.length < 4) {
-			alert("비밀번호는 4자이상 이어야합니다.");
+		if (!re.test(document.userInfo.user_pass.value)) {
+			alert("패스워드는 4~12자의 영문 대소문자와 숫자로만 입력");
 			document.userInfo.user_pass.focus();
 			return false;
 		}
@@ -39,9 +48,19 @@
 			document.userInfo.user_nickname.focus();
 			return false;
 		}
+		if (!re.test(document.userInfo.user_nickname.value)) {
+			alert("닉네임은 4~12자의 영문 대소문자와 숫자로만 입력");
+			document.userInfo.user_pass.focus();
+			return false;
+		}
 		if (!document.userInfo.user_birth.value) {
 			alert("생년월일을 입력하세요.");
 			document.userInfo.user_birth.focus();
+			return false;
+		}
+		if (!date_pattern.test(document.userInfo.user_birth.value)) {
+			alert("적합하지않은 생년월일입니다.");
+			document.userInfo.user_pass.focus();
 			return false;
 		}
 		if (isNaN(document.userInfo.user_birth.value)) {
@@ -117,7 +136,7 @@
 							<button class="btn btn-primary" onclick="openIdChk();"
 								type="button">중복체크</button> <!-- 아이디중복체크했는지 하지 않았는지에 대한 값  0:하지 않음, 1:함 -->
 							<input type="hidden" name="idDuplication" id="user_emailCheck"
-							value="user_emailuncheck" />
+							value="user_emailuncheck"/>
 						</td>
 					</tr>
 					<tr>
@@ -126,7 +145,7 @@
 						</td>
 						<td colspan="2"><input class="form-control" type="password"
 							id="user_pass" name="user_pass" maxlength="20"
-							placeholder="비밀번호를 입력해주세요"></td>
+							placeholder="비밀번호를 입력해주세요" ></td>
 					</tr>
 					<tr>
 						<td style="width: 110px;">
@@ -134,7 +153,7 @@
 						</td>
 						<td colspan="2"><input class="form-control" type="password"
 							id="user_passcheck" name="user_passcheck" maxlength="20"
-							placeholder="비밀번호 확인을 입력해주세요"></td>
+							placeholder="비밀번호 확인을 입력해주세요" maxlength="12"></td>
 					</tr>
 					<tr>
 						<td style="width: 110px;">
@@ -142,14 +161,14 @@
 						</td>
 						<td colspan="2"><input class="form-control" type="text"
 							id="user_nickname" name="user_nickname" maxlength="20"
-							placeholder="닉네임을 입력해주세요"></td>
+							placeholder="닉네임을 입력해주세요" maxlength="12"></td>
 					</tr>
 					<tr>
 						<td style="width: 110px;">
 							<h5>생년월일</h5>
 						</td>
 						<td colspan="2"><input class="form-control" type="text"
-							id="user_birth" name="user_birth" maxlength="20"
+							id="user_birth" name="user_birth" maxlength="6"
 							placeholder="생년월일을 입력해주세요"ex)941111></td>
 					</tr>
 					<tr>

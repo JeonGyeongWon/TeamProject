@@ -11,16 +11,29 @@
 	//로그인 유효성 검사를 위한 자바스크립트(추후 ajax로 변경 예정)
 	function check() { //<form>태그(name=login_form)의 submit 발생 시
 		var login_form = document.login_form;
+		var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+		var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//email 정규식
+	
 		if (!login_form.user_email.value) { //user_email의 입력값이 없을 때
-			alert("이메일 주소를 입력해주십시오.");
+			alert("이메일을 입력하세요.");
 			login_form.user_email.focus();
 
 			return false;
 		}
+		if (!re2.test(document.userInfo.user_email.value)) {
+			alert("적합하지 않은 이메일 형식입니다.");
+			document.userInfo.user_email.focus();
+			return false;
+		}
 		if (!login_form.user_pass.value) { //user_pass의 입력값이 없을 때
-			alert("비밀번호를 입력해주십시오.");
+			alert("비밀번호를 입력하세요.");
 			login_form.user_pass.focus();
 
+			return false;
+		}
+		if (!re.test(document.userInfo.user_pass.value)) {
+			alert("패스워드는 4~12자의 영문 대소문자와 숫자로만 입력");
+			document.userInfo.user_pass.focus();
 			return false;
 		}
 		location.href = "./loginPro.um"; //user_email과 user_pass 모두 입력값이 있을 때
