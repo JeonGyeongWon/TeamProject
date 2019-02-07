@@ -13,36 +13,19 @@
 <!--Ajax를 위해서 공식사이트 에서 제공하는 jquery를 가져온다.  -->
 <script src="./js/bootstrap.js"></script>
 <script type="text/javascript">
-	function checkValue() {
-		if (!document.editUserInfo.user_pass.value) {
-			alert("비밀번호를 입력하세요.");
+	//<form>태그로 전송할 값의 유효성 검사 //
+	function checkValue2() {
+		
+		var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식 1	    	
+		
+		
+		if (!re.test(document.editUserInfo.user_pass.value)) {
+			alert("패스워드는 4~12자의 영문 대소문자와 숫자로만 입력");
 			document.editUserInfo.user_pass.focus();
 			return false;
 		}
-		if (document.editUserInfo.user_pass.value.length < 4) {
-			alert("비밀번호는 4자이상 이어야합니다.");
-			document.editUserInfo.user_pass.focus();
-			return false;
-		}
-		if (!document.editUserInfo.user_nickname.value) {
-			alert("닉네임을 입력하세요.");
-			document.editUserInfo.user_nickname.focus();
-			return false;
-		}
-		if (!document.editUserInfo.user_birth.value) {
-			alert("생년월일을 입력하세요.");
-			return false;
-		}
-		if (isNaN(document.editUserInfo.user_birth.value)) {
-			alert("생년월일은 반드시 숫자로만 입력해야 합니다. ex)941111");
-			document.editUserInfo.user_birth.focus();
-			return false;
-		}
-		if (document.editUserInfo.user_birth.value.length != 6) {
-			alert("생년월일은 반드시 6자 입력해야 합니다. ex)941111");
-			document.editUserInfo.user_birth.focus();
-			return false;
-		}
+		
+		
 	}
 </script>
 </head>
@@ -60,7 +43,7 @@
 	<c:if test="${user_email != null}">
 		<div class="container">
 			<form method="post" action="./editPro.um" name="editUserInfo"
-				onsubmit="return checkValue()">
+				onsubmit="return checkValue2()">
 				<table class="table table-bordered table-hover"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
