@@ -18,6 +18,7 @@ import hotel.action.InsertCommentAction;
 import hotel.action.InsertHotelAction;
 import hotel.action.paymentAction;
 import hotel.action.reservationAction;
+import hotel.action.showCommentAction;
 import together.ActionForward;
 import together.Action;
 
@@ -93,7 +94,13 @@ public class HotelController extends HttpServlet{
 				System.out.println("InsertComment작업 중"+e);
 				e.printStackTrace();
 			}
-			
+		}else if(command.equals("/commentList.hotel")){
+			action = new showCommentAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				System.out.println("showComment 작업 중");
+			}
 			
 		}else if(command.equals("/reservation.hotel")){
 			action = new reservationAction();

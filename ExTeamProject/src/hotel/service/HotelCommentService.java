@@ -12,15 +12,19 @@ public class HotelCommentService {
 		boolean isInsertComment = false;
 		int result = dao.insertComment(cdto);
 		
-		System.out.println("insertComment 서비스 메서드 실행");
+		System.out.println("insertCommentService 메서드 실행");
 		
 		if(result > 0){
 			isInsertComment = true;
 			System.out.println("dao성공");
 		}
-	
 		return isInsertComment;
-
-	}	
+	}
+	
+	public void getCommentList(Hotel_commentDTO cdto){
+		
+		dao.getCommentList();
+		
+	}
 	
 }

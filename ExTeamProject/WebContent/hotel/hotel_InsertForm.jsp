@@ -122,9 +122,6 @@ function execDaumPostcode() {
 					<input type="checkbox" name="health" id="health" value="1">피트니스센터
 				</td>
 			</tr>
-			<tr>
-				<td><input type="submit" value="업로드"></td>
-			</tr>
 			
 		
 			
@@ -133,16 +130,18 @@ function execDaumPostcode() {
 	
 	
 		<h2>방설정</h2>
-		<table id="room">
+		
+		<div id="room">
+		<table>
 			<tr>
 				<td>적정인원</td>
 				<td>
-				<select name="personnel">
-					<option value="2">2인이하</option>
-					<option value="4">4인이하</option>
-					<option value="6">6인이하</option>
-					<option value="8">8인이상</option>
-				</select>
+					<select name="personnel">
+						<option value="2">2인이하</option>
+						<option value="4">4인이하</option>
+						<option value="6">6인이하</option>
+						<option value="8">8인이상</option>
+					</select>
 				</td>
 				<td>침대갯수</td>
 				<td><input type="text" name="bed"></td>
@@ -150,13 +149,17 @@ function execDaumPostcode() {
 				<td><input type="text" name="bathroom"></td>
 				<td>방사이즈</td>
 				<td>
-				<select name="roomsize">
-					<option value="싱글">싱글</option>
-					<option value="더블">더블</option>
-					<option value="트윈">트윈</option>
-					<option value="스위트">스위트</option>
-				</select>
+					<select name="roomsize">
+						<option value="싱글">싱글</option>
+						<option value="더블">더블</option>
+						<option value="트윈">트윈</option>
+						<option value="스위트">스위트</option>
+					</select>
 				</td>
+			</tr>
+			
+			<!-- 줄바꿈 해야되는데 안됨 -->
+			<tr>
 				<td>주중가</td>
 				<td><input type="text" name="weekprice"></td>
 				<td>주말가</td>
@@ -164,11 +167,12 @@ function execDaumPostcode() {
 				
 				<td>메인이미지[선택시 서브이미지 선택할수있게나옴]</td>
 				<td id="appendTd"><input type="file" name="h_img1" id="imgname" ></td>
-				
 			</tr>
+			
 	
-		
+			
 		</table>
+		</div>
 		
 		<div id='subimg'>
 		
@@ -179,6 +183,7 @@ function execDaumPostcode() {
 
 
 <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+	<input type="submit" value="업로드">
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b&libraries=services"></script>
