@@ -62,9 +62,158 @@ function execDaumPostcode() {
     }
 
 </script>
+<script type="text/javascript">
+	//<form>태그로 전송할 값의 유효성 검사
+	function checkValue3() {
+		var re1 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,45}$/ // 한글영문숫자대소문 적합한지 검사할 정규식 1~45
+		var re2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,300}$/ //1~300
+		var re3 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,100}$/ //1~100
+		var re4 = /^[0-9]{1,10}$/ //숫자로만 정규식
+		var re5 = /\.(gif|jpg|jpeg|tiff|png)$///이미지 파일만 정규식
+		
+		if (!re1.test(document.userInfo.h_name.value)) {
+			alert("45자이내로 입력하여야 합니다.");
+			document.userInfo.h_name.focus();
+			return false;
+		}
+		
+		if (!re2.test(document.userInfo.h_content.value)) {
+			alert("300자이내로 입력하여야 합니다.");
+			document.userInfo.h_name.focus();
+			return false;
+		}
+		
+		if (!re3.test(document.userInfo.h_rule.value)) {
+			alert("100자이내로 입력하여야 합니다.");
+			document.userInfo.h_rule.focus();
+			return false;
+		}
+		if (!re3.test(document.userInfo.h_detail.value)) {
+			alert("100자이내로 입력하여야 합니다.");
+			document.userInfo.h_detail.focus();
+			return false;
+		}
+		
+		if (!re4.test(document.userInfo.bed.value)) {
+			alert("침대 갯수는 숫자로만 입력");
+			document.userInfo.bed.focus();
+			return false;
+		}
+		
+		if (!re4.test(document.userInfo.bathroom.value)) {
+			alert("화장실 갯수는 숫자로만 입력");
+			document.userInfo.bathroom.focus();
+			return false;
+		}
+		
+		if (!re4.test(document.userInfo.weekprice.value)) {
+			alert("주중가는 숫자로만 입력");
+			document.userInfo.weekprice.focus();
+			return false;
+		}
+		
+		if (!re4.test(document.userInfo.weekend_price.value)) {
+			alert("주말가는 숫자로만 입력");
+			document.userInfo.weekend_price.focus();
+			return false;
+		}
+
+		if (!document.userInfo.h_img0.value) {
+			alert("호텔 이미지를 선택를 해주세요.");
+			document.userInfo.h_img0.focus();
+			return false;
+		}
+		
+		if (!re5.test(document.userInfo.h_img0.value)) {
+			alert("이미지는 gif,jpg,jpeg,tiff,png 파일만 사용 가능합니다.");
+			document.userInfo.h_img0.focus();
+			return false;
+		}
+		
+		
+		if (!document.userInfo.imgname.value) {
+			alert("메인 이미지를 선택해주세요.");
+			document.userInfo.imgname.focus();
+			return false;
+		}
+		
+		if (!re5.test(document.userInfo.imgname.value)) {
+			alert("이미지는 gif,jpg,jpeg,tiff,png 파일만 사용 가능합니다.");
+			document.userInfo.imgname.focus();
+			return false;
+		}
+		
+		if (!document.userInfo.addr.value){
+			alert("주소를 검색해 주세요.");
+			document.userInfo.addr.focus();
+			return false;
+		}
+			
+		if (!document.userInfo.h_img2.value) {
+			alert("서브 이미지는 모두 선택하여야 합니다.");
+			document.userInfo.h_img2.focus();
+			return false;
+		}
+		
+		if (!document.userInfo.h_img3.value) {
+			alert("서브 이미지는 모두 선택하여야 합니다.");
+			document.userInfo.h_img3.focus();
+			return false;
+		}
+		if (!document.userInfo.h_img4.value) {
+			alert("서브 이미지는 모두 선택하여야 합니다.");
+			document.userInfo.h_img4.focus();
+			return false;
+		}
+		if (!document.userInfo.h_img5.value) {
+			alert("서브 이미지는 모두 선택하여야 합니다.");
+			document.userInfo.h_img5.focus();
+			return false;
+		}
+		if (!document.userInfo.h_img6.value) {
+			alert("서브 이미지는 모두 선택하여야 합니다.");
+			document.userInfo.h_img6.focus();
+			return false;
+		}
+		
+		
+		if (!re5.test(document.userInfo.h_img2.value)) {
+			alert("이미지는 gif,jpg,jpeg,tiff,png 파일만 사용 가능합니다.");
+			document.userInfo.h_img2.focus();
+			return false;
+		}
+
+		if (!re5.test(document.userInfo.h_img3.value)) {
+			alert("이미지는 gif,jpg,jpeg,tiff,png 파일만 사용 가능합니다.");
+			document.userInfo.h_img3.focus();
+			return false;
+		}
+
+		if (!re5.test(document.userInfo.h_img4.value)) {
+			alert("이미지는 gif,jpg,jpeg,tiff,png 파일만 사용 가능합니다.");
+			document.userInfo.h_img4.focus();
+			return false;
+		}
+
+		if (!re5.test(document.userInfo.h_img5.value)) {
+			alert("이미지는 gif,jpg,jpeg,tiff,png 파일만 사용 가능합니다.");
+			document.userInfo.h_img5.focus();
+			return false;
+		}
+
+		if (!re5.test(document.userInfo.h_img6.value)) {
+			alert("이미지는 gif,jpg,jpeg,tiff,png 파일만 사용 가능합니다.");
+			document.userInfo.h_img6.focus();
+			return false;
+		}
+
+	}
+
+
+</script>		 
 <body>
 	<h1> 호텔로 등록하기</h1>
-	<form action="./InsertHotel.hotel" method="post" enctype="multipart/form-data">
+	<form action="./InsertHotel.hotel" method="post" enctype="multipart/form-data" name="userInfo" onsubmit="return checkValue3()">
 	
 	
 	<table>
@@ -72,27 +221,27 @@ function execDaumPostcode() {
 			
 			<tr>
 				<td>호텔 이름</td>
-				<td><input type="text" name="h_name" id="h_name" required="required"></td>
+				<td><input type="text" name="h_name" id="h_name" required="required" autofocus required></td>
 			</tr>
 			<tr>
 				<td>호텔 설명</td>
-				<td><input type="text" name="h_content" id="h_content"></td>
+				<td><input type="text" name="h_content" id="h_content" required></td>
 			</tr>
 			<tr>
 				<td>주의사항</td>
-				<td><input type="text" name="h_caution" id="h_caution"></td>
+				<td><input type="text" name="h_caution" id="h_caution" required></td>
 			</tr>
 			<tr>
 				<td>이용규칙</td>
-				<td><input type="text" name="h_rule" id="h_rule"></td>
+				<td><input type="text" name="h_rule" id="h_rule" required></td>
 			</tr>
 			<tr>
 				<td>세부사항</td>
-				<td><input type="text" name="h_detail" id="h_detail"></td>
+				<td><input type="text" name="h_detail" id="h_detail" required></td>
 			</tr>
 			<tr>
 				<td>호텔 이미지</td> <!-- 메인이미지 -->
-				<td><input type="file" name="h_img0"> </td>
+				<td><input type="file" name="h_img0" id ="imgCheck"> </td>
 				<!-- http://bigmark.tistory.com/28 참고 -->
 			</tr>
 			
@@ -144,9 +293,9 @@ function execDaumPostcode() {
 					</select>
 				</td>
 				<td>침대갯수</td>
-				<td><input type="text" name="bed"></td>
+				<td><input type="text" name="bed" required></td>
 				<td>화장실개수</td>
-				<td><input type="text" name="bathroom"></td>
+				<td><input type="text" name="bathroom" required></td>
 				<td>방사이즈</td>
 				<td>
 					<select name="roomsize">
@@ -161,9 +310,9 @@ function execDaumPostcode() {
 			<!-- 줄바꿈 해야되는데 안됨 -->
 			<tr>
 				<td>주중가</td>
-				<td><input type="text" name="weekprice"></td>
+				<td><input type="text" name="weekprice" required></td>
 				<td>주말가</td>
-				<td><input type="text" name="weekend_price"></td>
+				<td><input type="text" name="weekend_price" required></td>
 				
 				<td>메인이미지[선택시 서브이미지 선택할수있게나옴]</td>
 				<td id="appendTd"><input type="file" name="h_img1" id="imgname" ></td>
@@ -178,7 +327,7 @@ function execDaumPostcode() {
 		
 		</div>
 		
-		<input type="text" id="sample5_address" placeholder="주소" style="width:1000px;" name="addr">
+		<input type="text" id="sample5_address" placeholder="주소" style="width:1000px;" name="addr" readonly>
 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 
 
