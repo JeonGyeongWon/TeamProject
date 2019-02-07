@@ -631,6 +631,7 @@ public class HotelDAO {
 				pstmt.setInt(3, ckprice);
 				
 				pstmt.executeUpdate();
+				con.commit();
 				
 			}catch(Exception e){
 				System.out.println("inserPayment에서"+e);

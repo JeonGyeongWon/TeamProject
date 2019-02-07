@@ -134,7 +134,6 @@
 	
 	</style>	
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -350,23 +349,7 @@
 			</div>
 			<%-- 종료 --%>
 			
-			<c:if test="${requestScope.udto != null }">
-				$
-			</c:if>
-			
-			<%--댓글 --%>
-			<%@ include file="comment.jsp"%>
-			
-			
-			
-			
-			
-			<c:if test="${requestScope.udto !=null }">
-			
-			</c:if>
-			
-		
-				 
+			<jsp:include page="comment.jsp"/>
 		</c:otherwise>
 		
 	</c:choose>	
