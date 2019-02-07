@@ -94,14 +94,16 @@ public class HotelController extends HttpServlet{
 				System.out.println("InsertComment작업 중"+e);
 				e.printStackTrace();
 			}
+			
 		}else if(command.equals("/commentList.hotel")){
 			action = new showCommentAction();
-			try{
+			try {
 				forward = action.execute(request, response);
-			}catch(Exception e){
-				System.out.println("showComment 작업 중");
+			} catch (Exception e) {
+				System.out.println("commentList 작업 중"+e);
+				e.printStackTrace();
 			}
-			
+								
 		}else if(command.equals("/reservation.hotel")){
 			action = new reservationAction();
 			try{
@@ -123,8 +125,6 @@ public class HotelController extends HttpServlet{
 			}
 			
 		}
-			
-		
 		
 		
 		if(forward != null){

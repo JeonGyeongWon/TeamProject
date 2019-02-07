@@ -22,7 +22,7 @@
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div>
                                 <a href='/commentList.hotel' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
@@ -32,7 +32,7 @@
                 </table>
             </div>
         </div>
-        <input type="hidden" id="b_code" name="b_code" value="${result.code }" />        
+        <input type="hidden" id="h_no" name="h_no" value="${result.code }" />        
     </form>
 </div>
 <div class="container">
@@ -82,7 +82,7 @@ function getCommentList(){
     
     $.ajax({
         type:'GET',
-        url : "<c:url value='/board/commentList.do'/>",
+        url : "<c:url value='/commentList.hotel'/>",
         dataType : "json",
         data:$("#commentForm").serialize(),
         contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
