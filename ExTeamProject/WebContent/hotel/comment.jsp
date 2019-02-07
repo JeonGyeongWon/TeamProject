@@ -25,7 +25,7 @@
                             <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div>
-                                <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
+                                <a href='/commentList.hotel' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
                             </div>
                         </td>
                     </tr>
