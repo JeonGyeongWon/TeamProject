@@ -666,7 +666,7 @@ public class HotelDAO {
 		
 		public int getTotalCount(){
 			int total = 0;
-			String sql = "select count(*) from board";
+			String sql = "select count(*) from hotel";
 			try{
 				con = pool.getConnection();
 				pstmt= con.prepareStatement(sql);

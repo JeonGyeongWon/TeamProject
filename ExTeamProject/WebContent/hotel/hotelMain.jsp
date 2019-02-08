@@ -15,7 +15,13 @@
 <title>호텔메인</title>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+function PageMove(page){
+    location.href = "HotelMain.hotel?page="+page;
+}
 
+
+</script>
 
 </head>
 <body>
@@ -63,6 +69,30 @@
 				</div>
 			</div>
 		</div>	
+		
+<div class="toolbar-bottom container">
+  <div class="toolbar mt-lg">
+    <div class="sorter">
+      <ul class="pagination">
+        <li><a href="javascript:PageMove(${paging.firstPageNo})">처음</a></li>
+        <li><a href="javascript:PageMove(${paging.prevPageNo})">이전</a></li>
+        	<c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1">
+                  <c:choose>
+                      <c:when test="${i eq paging.pageNo}">
+                <li class="active"><a href="javascript:PageMove(${i})">${i}</a></li>
+                      </c:when>
+                      <c:otherwise>
+                        <li><a href="javascript:PageMove(${i})">${i}</a></li>
+                      </c:otherwise>
+                  </c:choose>
+             </c:forEach>     
+        <li><a href="javascript:PageMove(${paging.nextPageNo})">다음</a></li>
+        <li><a href="javascript:PageMove(${paging.finalPageNo})">마지막</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 	</c:otherwise>
 
 </c:choose>	

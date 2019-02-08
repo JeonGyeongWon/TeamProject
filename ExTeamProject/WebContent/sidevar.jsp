@@ -47,15 +47,6 @@
 	
 	<c:if test="${requestScope.list !=null }">
 		<c:set var="list" value="${requestScope.list }"/>
-		널아님
-		
-		<c:forEach	var="d" items="${requestScope.list }" step="1">
-			${d.latitude }
-		</c:forEach>
-		 
-	</c:if>
-	<c:if test="${requestScope.list == null }">
-		널
 	</c:if>
 	
 	<!-- sidebar -->
@@ -168,7 +159,6 @@
 					        center: new daum.maps.LatLng(37.47,  127.05), // 지도의 중심좌표
 					        level: 7 // 지도의 확대 레벨 낮을수록확대입니다 최대 14	// 
 					    };
-
 					var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 				
 					
@@ -181,7 +171,6 @@
 					}
 					
 					
-
 					
 					//밑에 positions객체에 담을 값을 만듭니다.
 					var positions = arr;

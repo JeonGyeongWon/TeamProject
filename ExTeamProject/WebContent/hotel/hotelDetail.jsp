@@ -347,7 +347,9 @@
 				<%-- ajax를 통해 뿌려주는부분 --%>			
 				</div>
 			</div>
-			<%-- 종료 --%>
+			<%-- 종료 --%>	
+				
+			<div class="container text-center"><button class="btn btn-primary">추천하기</button></div>
 			
 			<jsp:include page="comment.jsp?${h_no }"/>
 		</c:otherwise>
@@ -504,10 +506,6 @@
 					});
 			});
 			
-			//예약버튼 클릭시..
-			$("#reservation button").on("click",function(){
-				
-			});
 			
 		});
 	
