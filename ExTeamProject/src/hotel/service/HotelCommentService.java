@@ -1,5 +1,7 @@
 package hotel.service;
 
+import java.util.ArrayList;
+
 import dao.HotelDAO;
 import hotel.dto.Hotel_commentDTO;
 
@@ -21,10 +23,11 @@ public class HotelCommentService {
 		return isInsertComment;
 	}
 	
-	public void getCommentList(Hotel_commentDTO cdto){
+	public ArrayList<Hotel_commentDTO> getCommentList(int h_c_no){
 		
-		dao.getCommentList();
+		ArrayList<Hotel_commentDTO> list = dao.getCommentList(h_c_no);
 		
+		return list;
 	}
 	
 }

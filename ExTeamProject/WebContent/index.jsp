@@ -16,6 +16,9 @@
 </head>
 
 
+
+
+
 <body>
 	<c:set var="center" value="${param.center}" />
 

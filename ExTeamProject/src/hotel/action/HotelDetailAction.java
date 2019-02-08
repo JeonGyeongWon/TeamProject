@@ -45,7 +45,6 @@ public class HotelDetailAction implements Action {
 		FacilitiesDTO fdto = service.getBringAllFacilities(h_no);
 		ArrayList<RoomDTO> rlist = service.getBringAllRoomInfo(h_no);
 		
-		
 		// 호텔번호를 이용해 해당 판매자의 정보를 가져옴 ! -> 서브쿼리사용했어요
 		int user_no = hdto.getUser_no();
 		

@@ -25,7 +25,7 @@
                             <textarea style="width: 1100px" rows="3" cols="30" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div>
-                                <a href='/commentList.hotel' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
+                                <a href='/commentList.hotel' onClick="fn_comment()" class="btn pull-right btn-success">등록</a>
                             </div>
                         </td>
                     </tr>
@@ -46,7 +46,9 @@
 /*
  * 댓글 등록하기(Ajax)
  */
-function fn_comment(code){
+ var h_no;
+ 
+function fn_comment(){
     
     $.ajax({
         type:'POST',
@@ -72,6 +74,7 @@ function fn_comment(code){
 $(function(){
     
     getCommentList();
+    h_no = ${param.h_no}
     
 });
  
@@ -82,9 +85,9 @@ function getCommentList(){
     
     $.ajax({
         type:'GET',
-        url : "<c:url value='/commentList.hotel'/>",
+        url : "commentList.hotel",
         dataType : "json",
-        data:$("#commentForm").serialize(),
+        data:$("#commentForm").serialize(), h_no : h_no, 
         contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
         success : function(data){
             

@@ -349,7 +349,7 @@
 			</div>
 			<%-- 종료 --%>
 			
-			<jsp:include page="comment.jsp"/>
+			<jsp:include page="comment.jsp?${h_no }"/>
 		</c:otherwise>
 		
 	</c:choose>	

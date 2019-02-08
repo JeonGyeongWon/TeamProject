@@ -536,8 +536,8 @@ public class HotelDAO {
 			
 		}//insertComment()메소드 끝
 		
-		
-		public ArrayList<Hotel_commentDTO> getCommentList(){
+	
+		public ArrayList<Hotel_commentDTO> getCommentList(int h_c_no){
 			
 			ArrayList<Hotel_commentDTO> list = new ArrayList<>();
 				
@@ -703,6 +703,9 @@ public class HotelDAO {
 			
 			return list;
 		}
+
+
+		
 		
 	}
 
