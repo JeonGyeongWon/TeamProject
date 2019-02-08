@@ -7,11 +7,11 @@ import hotel.dto.HotelDTO;
 
 public class HotelMainService {
 	
-	public ArrayList<HotelDTO>getBringAllHotelInfo(){
+	public ArrayList<HotelDTO>getBringAllHotelInfo(int startRow, int endRow){
 		
 		HotelDAO dao = new HotelDAO();
 		
-		ArrayList<HotelDTO> list = dao.allselectedHotel();
+		ArrayList<HotelDTO> list = dao.allselectedHotel(startRow, endRow);
 		for(int i =0; i<list.size(); i++){
 			HotelDTO dto = list.get(i);
 			
@@ -23,13 +23,19 @@ public class HotelMainService {
 		
 	}
 
-	public ArrayList<HotelDTO> getBringSearch(int key, String word) {
+	public ArrayList<HotelDTO> getBringSearch(int key, String word, int startRow, int endRow) {
 		
 		HotelDAO dao = new HotelDAO();
-		ArrayList<HotelDTO> list = dao.getSearchHotel(key,word);
-		
+		ArrayList<HotelDTO> list = dao.getSearchHotel(key,word,startRow, endRow);
 		return list;
 		
+	}
+
+	public int getTotalCount() {
+		// TODO Auto-generated method stub
+		HotelDAO dao = new HotelDAO();
+		
+		return dao.getTotalCount();
 	}
 	
 }

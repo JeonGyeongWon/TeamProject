@@ -29,16 +29,18 @@ public class HotelDAO {
 	
 	
 	
-	// 모든 호텔 정보를 가져오는 메서드 
-	public ArrayList<HotelDTO> allselectedHotel(){
+	// 모든 호텔 정보를 가져오는 메서드 					//페이징
+	public ArrayList<HotelDTO> allselectedHotel(int startRow, int endRow){
 		
 		ArrayList<HotelDTO> list = new ArrayList<HotelDTO>();
 		String sql = "";
 		
 		try{
 			con = pool.getConnection();
-			sql = "select * from hotel order by h_no desc";
+			sql = "select * from hotel order by h_no desc limit ?,?";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rs = pstmt.executeQuery();
 			
@@ -659,21 +661,44 @@ public class HotelDAO {
 				pool.close(con, pstmt, rs);
 			}
 		}
+		
+		//페이징 처리를 위한 전체글 들고오기
+		
+		public int getTotalCount(){
+			int total = 0;
+			String sql = "select count(*) from board";
+			try{
+				con = pool.getConnection();
+				pstmt= con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					total = rs.getInt(1);
+				}
+			}catch(Exception e){
+				System.out.println("글정보 가져오기에서...");
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			return total;
+		}
 
 
-		public ArrayList<HotelDTO> getSearchHotel(int key, String word) {
+		public ArrayList<HotelDTO> getSearchHotel(int key, String word, int startRow, int endRow) {
 			ArrayList<HotelDTO> list = new ArrayList<>();
 			String sql = "";
 			if(key == 0 ){
 				//호텔이름
-				sql = "select * from hotel where h_name like '%?%'";
-			}else{//지역구
-				sql = "select * from hotel where h_addr like '%?%'";
+				sql = "select * from hotel where h_name like '%"+word+"%' limit ?,?";
+			}else if(key == 1){//지역구
+				sql = "select * from hotel where h_addr like '%"+word+"%' limit ?,?";
 			}
 			try{
+				
 				con = pool.getConnection();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, word);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()){
@@ -695,7 +720,7 @@ public class HotelDAO {
 					list.add(dto);
 				}
 			}catch(Exception e){
-				System.out.println("updateCkprice에서"+e);
+				System.out.println("getSearchHotel에서"+e);
 			}finally{
 				pool.close(con, pstmt, rs);
 			}
