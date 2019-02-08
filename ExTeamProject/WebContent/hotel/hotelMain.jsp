@@ -43,7 +43,12 @@ function PageMove(page){
 <%-- 마지막에 최근등록순, 별점높은순, 댓글갯수 많은순 등등으로 설정--%>
 		<div id="fh5co-main">
 		<div id ="mainTag">
+	<c:if test="${user_email != null }">
 	<a href="InsertHotelForm.hotel">호텔등록</a>
+	</c:if>
+	<c:if test="${user_email == null }">
+	로그인 이후 이용해주시기 바랍니다.
+	</c:if>
 	<h2>호텔메인</h2>
 </div>
 			<div class="fh5co-narrow-content">

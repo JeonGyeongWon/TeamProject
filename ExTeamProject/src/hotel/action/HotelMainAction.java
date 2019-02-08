@@ -28,10 +28,10 @@ public class HotelMainAction implements Action {
 		     
 	    pagingDto paging = new pagingDto();
 	    paging.setPageNo(page); //get방식의 parameter값으로 반은 page변수, 현재 페이지 번호
-	    paging.setPageSize(8); // 한페이지에 불러낼 게시물의 개수 지정
+	    paging.setPageSize(4); // 한페이지에 불러낼 게시물의 개수 지정
 	    paging.setTotalCount(totalCount);
 		     
-	    page = (page - 1) * 8; //select해오는 기준을 구한다.
+	    page = (page - 1) * 4; //select해오는 기준을 구한다.
 	    System.out.println("스타트페이지"+paging.getStartPageNo());
 	    System.out.println("앤드페이지"+paging.getEndPageNo());
 		//검색관련 

@@ -116,7 +116,24 @@
 	<script src="js/main.js"></script>
 		
 		<script>
-		<!-- 지도 온오프시 -->
+		
+		
+		
+		// 인포윈도우를 열어주는 함수입니다.
+		function makeOverListener(map, marker, infowindow) {
+		    return function() {
+		        infowindow.open(map, marker);
+		    };
+		}
+
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+		    return function() {
+		        infowindow.close();
+		    };
+		}
+		
+		
 	$(function(){
 			
 		 $("#Daum_map").hide();
@@ -142,18 +159,17 @@
 					 var hotelName = new Array();	//호텔이름
 					 var hotelImgName = new Array();
 					 var hotelImgPath = new Array();
+					 var hotelH_no = new Array();
 					 <c:forEach var="hotelDto" items="${list }" step="1">
 					 latitude.push(${hotelDto.latitude }); //위도 이클립스에러로 뜨는 빨간줄입니다 신경안쓰셔도됩니다!
 					 hardness.push(${hotelDto.hardness }); //경도 
 					 hotelName.push('${hotelDto.h_name}');
 					 hotelImgPath.push('${hotelDto.h_imgpath}');
 					 hotelImgName.push('${hotelDto.h_imgname}');
+					 hotelH_no.push('${hotelDto.h_no}');
 					 </c:forEach>
 					 
-					 for(var i=0; i<hardness.length; i++){
-					 console.log(i+"번째 위도 : "+hardness[i]);
-					 console.log(i+"번째 경도 : "+latitude[i]);
-					 }
+					 
 					 var mapContainer = document.getElementById('Daum_map'), // 지도를 표시할 div  
 					    mapOption = { 
 					        center: new daum.maps.LatLng(37.47,  127.05), // 지도의 중심좌표
@@ -166,7 +182,8 @@
 					var arr = [];
 					for(var i=0; i<latitude.length; i++){
 						var o = {};
-						o.title = hotelName[i], o.latlng = new daum.maps.LatLng(hardness[i], latitude[i]);
+						o.title = hotelName[i],
+						o.latlng = new daum.maps.LatLng(hardness[i], latitude[i]),
 						arr.push(o);
 					}
 					
@@ -178,7 +195,6 @@
 					console.log(positions);
 					    
 					for (var i = 0; i < positions.length; i ++) {
-					    
 						var imageSrc ="hotel/"+hotelImgPath[i]+hotelImgName[i];
 					    // 마커 이미지의 이미지 크기 입니다
 					    var imageSize = new daum.maps.Size(24, 35); 
@@ -193,8 +209,28 @@
 					        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 					        image : markerImage // 마커 이미지 
 					    });
-					}
-				  
+					    
+					   
+					    
+					 	// 마커에 표시할 인포윈도우를 생성합니다 
+					    var infowindow = new daum.maps.InfoWindow({
+					        content: positions[i].title // 인포윈도우에 표시할 내용
+					    });
+
+					    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+					    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+					    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+					    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+					    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+					    
+					    
+					    daum.maps.event.addListener(marker, 'click', function(){
+					    
+					    });
+					    
+			  }
+					
+		
 			  }else{
 				  $("#Daum_map").hide();
 			  }
