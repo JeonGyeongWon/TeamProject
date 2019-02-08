@@ -63,7 +63,7 @@
 <%-- 휴대폰 인증시 새창을 띄워줌  --%> 
 function fnPhone(user_no){
 	window.open("SMSAuthForm.jsp?user_no="+user_no,
-			"SMSAuth","width=570","height=350","resizable=no","scrollbars=no");
+			"hotel/SMSAuthForm.jsp","width=570","height=350","resizable=no","scrollbars=no");
 	}
 	
 	
@@ -204,17 +204,6 @@ function fnPhone(user_no){
 					<img src="hotel/${r_imgdto.imgpath}${subimg[3]}"/>
 					</div>
 				</div>
-				
-				<%-- 
-					private int h_no;
-					private int h_rno;
-					private int user_no;
-					private int total_price;
-					private int ckprice;
-					private Timestamp ckin;
-					private Timestamp ckout;
-					private int personnel;
-				 --%>
 				
 				<div class="HotelMainDiv"> 
 				<br>

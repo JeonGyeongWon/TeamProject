@@ -16,16 +16,30 @@ public class HotelMainAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		//검색관련 
 		ActionForward forward = new ActionForward();
-		
 		HotelMainService service = new HotelMainService();
-		ArrayList<HotelDTO> list = service.getBringAllHotelInfo();
+		ArrayList<HotelDTO> list = null;
+		if(request.getParameter("key")!= null){	//검색시
+			
+			int key = Integer.parseInt(request.getParameter("key"));
+			if(key==0){	//호텔이름
+				String word = request.getParameter("word");
+				list = service.getBringSearch(key,word);
+			}else{//지역구관련
+				
+			}
+			
+			
+		}else{ //미검색시
 		
+		list = service.getBringAllHotelInfo();
 		request.setAttribute("list", list);
 		
 		forward.setRedirect(false);
 		
 		forward.setPath("./index.jsp?center=hotel/hotelMain.jsp");
+		}
 		return forward;
 		
 	}

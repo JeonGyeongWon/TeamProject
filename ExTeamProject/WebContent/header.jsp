@@ -73,17 +73,14 @@
           
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-            	
+            <form action="HotelMain.hotel" method="post">
               <div class="form-row">
-              	<select class="col-md-3">
-              		<option selected>검색키워드</option>
-            		<option>ㅇㅇ</option>
-            		<option>ㅇㅇ</option>
-            		<option>ㅇㅇ</option>
+              	<select class="col-md-3" name="key">
+            		<option value="0">호텔이름</option>	<!-- 검색키워드구분 -->
+            		<option value="1">지역구</option>
             	</select>
                 <div class="col-12 col-md-6 mb-2 mb-md-0">
-                  <input type="email" class="form-control form-control-lg" placeholder="부산지역검색">
+                  <input type="text" class="form-control form-control-lg" placeholder="부산지역검색" name="word">
                 </div>
                 <div class="col-12 col-md-3 " >
                   <button type="submit" class="btn btn-block btn-lg btn-primary">검색</button> <br><br>

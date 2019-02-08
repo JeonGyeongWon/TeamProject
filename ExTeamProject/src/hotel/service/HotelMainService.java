@@ -22,5 +22,14 @@ public class HotelMainService {
 		return list;
 		
 	}
+
+	public ArrayList<HotelDTO> getBringSearch(int key, String word) {
+		
+		HotelDAO dao = new HotelDAO();
+		ArrayList<HotelDTO> list = dao.getSearchHotel(key,word);
+		
+		return list;
+		
+	}
 	
 }

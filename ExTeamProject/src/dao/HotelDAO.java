@@ -659,6 +659,50 @@ public class HotelDAO {
 				pool.close(con, pstmt, rs);
 			}
 		}
+
+
+		public ArrayList<HotelDTO> getSearchHotel(int key, String word) {
+			ArrayList<HotelDTO> list = new ArrayList<>();
+			String sql = "";
+			if(key == 0 ){
+				//호텔이름
+				sql = "select * from hotel where h_name like '%?%'";
+			}else{//지역구
+				sql = "select * from hotel where h_addr like '%?%'";
+			}
+			try{
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, word);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					HotelDTO dto = new HotelDTO();
+					dto.setH_addr(rs.getString("h_addr"));
+					dto.setH_bestcount(rs.getInt("bestcount"));
+					dto.setH_caution(rs.getString("h_caution"));
+					dto.setH_content(rs.getString("h_content"));
+					dto.setH_detail(rs.getString("h_detail"));
+					dto.setH_imgname(rs.getString("imgname"));
+					dto.setH_imgpath(rs.getString("imgpath"));
+					dto.setH_name(rs.getString("h_name"));
+					dto.setH_no(rs.getInt("h_no"));
+					dto.setH_regdate(rs.getTimestamp("regdate"));
+					dto.setH_rule(rs.getString("h_rule"));
+					dto.setUser_no(rs.getInt("user_no"));
+					dto.setHardness(rs.getDouble("Hardness"));
+					dto.setLatitude(rs.getDouble("Latitude"));
+					list.add(dto);
+				}
+			}catch(Exception e){
+				System.out.println("updateCkprice에서"+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			
+			return list;
+		}
 		
 	}
 

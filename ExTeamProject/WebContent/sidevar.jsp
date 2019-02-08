@@ -98,12 +98,6 @@
 	
 			 <!-- 다음 api지도 -->	
 		<div id="Daum_map" class="col-md-12"></div>
-		
-		
-		
-			
-	
-	
 	</div>	
 		<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
@@ -135,10 +129,6 @@
 	$(function(){
 			
 		 $("#Daum_map").hide();
-		 
-		 
-		 
-		
 		//이벤트
 		$('#chmap').change(function() {
 			  var ckmap = ($(this).prop('checked'));	//자바스크립트의 속성을 가져옴
@@ -234,12 +224,6 @@
 				alert('관광지');
 			}else if(ckopt==3){	//호텔
 				alert('호텔');
-			
-				
-			/*
-				
-			
-			*/
 			}
 			
 		});
