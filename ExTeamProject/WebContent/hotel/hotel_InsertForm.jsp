@@ -6,6 +6,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+th {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+table{
+	width:700px;
+	align: center;
+	margin: 10px auto;
+}
+
+td { padding:10px 20px;}
+
+tr td:Nth-of-type(1){
+	width: 150px;
+	text-align: center;
+	background-color:  #eee;
+	color: #ff4d4d;
+	font-weight: bold;
+}
+
+#upload {  text-align: center !important; }
+
+td input {
+	 padding:5px 10px !important;
+}
+
+#checkbox { font-size: 12px;}
+</style>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음주소찾기 ... -->
@@ -18,7 +49,7 @@ $(function(){
 		
 		
 		
-		$("#subimg").html("서브이미지 선택!! 최대5개 ");
+		$("#subimg").html("서브이미지 선택(5개) ");
 		
 		for(var i=2; i<7; i++ ){
 		var file = "<input type='file' name='h_img"+i+"'>";
@@ -182,13 +213,12 @@ $(function(){
 
 </script>		 
 <body>
-	<h1> 호텔로 등록하기</h1>
 	<form action="./InsertHotel.hotel" method="post" enctype="multipart/form-data" name="userInfo" onsubmit="return checkValue3()">
 	
 	
 	<table>
-	
-			
+		
+			<tr><th colspan="2"><h1>호텔 등록하기</h1></th></tr>
 			<tr>
 				<td>호텔 이름</td>
 				<td><input type="text" name="h_name" id="h_name" required="required" autofocus required></td>
@@ -222,36 +252,37 @@ $(function(){
 			 -->
 			 <tr>
 			 	<td><a onclick="execDaumPostcode();">주소찾기</a></td>
+			 	<td><input type="text" id="sample5_address" placeholder="주소를 입력하세요" style="width:300px;" name="addr" readonly>
+					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br></td>
 			 </tr>
 			
 		
 			<tr>
 				<td>편의시설</td>
 				<td>
-					<input type="checkbox" name="wifi" id="wifi" value="1">무선인터넷
+					<p id="checkbox">
+					<input type="checkbox" name="wifi" id="wifi" value="1">WIFI
 					<input type="checkbox" name="tv" id="tv" value="1">TV
 					<input type="checkbox" name="aircon" id="aircon" value="1">에어컨
 					<input type="checkbox" name="wash_dry" id="wash_dry" value="1">세탁기
 					<input type="checkbox" name="closet" id="closet" value="1">옷장
 					<input type="checkbox" name="shampoo" id="shampoo" value="1">욕실용품
 					<input type="checkbox" name="hairdry" id="hairdry" value="1">헤어드라이어
+					<br>
 					<input type="checkbox" name="parking" id="parking" value="1">건물 내 무료 주차
 					<input type="checkbox" name="elevator" id="elevator" value="1">엘리베이터
 					<input type="checkbox" name="swim" id="swim" value="1">수영장
-					<input type="checkbox" name="health" id="health" value="1">피트니스센터
+					<input type="checkbox" name="health" id="health" value="1">피트니스 센터
+					</p>
 				</td>
 			</tr>
-			
-		
-			
-			
 	</table>
 	
 	
-		<h2>방설정</h2>
 		
 		<div id="room">
 		<table>
+			<tr><th colspan="4"><h3>방 정보 입력하기</h3></th></tr>
 			<tr>
 				<td>적정인원</td>
 				<td>
@@ -262,10 +293,16 @@ $(function(){
 						<option value="8">8인이상</option>
 					</select>
 				</td>
+			</tr>
+			<tr>
 				<td>침대갯수</td>
 				<td><input type="text" name="bed" required></td>
+			</tr>
+			<tr>
 				<td>화장실개수</td>
 				<td><input type="text" name="bathroom" required></td>
+			</tr>
+			<tr>
 				<td>방사이즈</td>
 				<td>
 					<select name="roomsize">
@@ -281,28 +318,35 @@ $(function(){
 			<tr>
 				<td>주중가</td>
 				<td><input type="text" name="weekprice" required></td>
+			</tr>
+			<tr>
 				<td>주말가</td>
 				<td><input type="text" name="weekend_price" required></td>
-				
-				<td>메인이미지[선택시 서브이미지 선택할수있게나옴]</td>
+			</tr>
+			
+			<tr>
+				<td>메인이미지</td>
 				<td id="appendTd"><input type="file" name="h_img1" id="imgname" ></td>
 			</tr>
+			
 			
 	
 			
 		</table>
+		 <div id="upload">
+		  <input type="submit" value="업로드">
+		 </div>
 		</div>
 		
 		<div id='subimg'>
 		
 		</div>
 		
-		<input type="text" id="sample5_address" placeholder="주소" style="width:1000px;" name="addr" readonly>
-<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 
 
-<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-	<input type="submit" value="업로드">
+<div id="map" style="width:300px;height:300px;margin-top:10px;display:none;"></div>
+	
+	
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b&libraries=services"></script>

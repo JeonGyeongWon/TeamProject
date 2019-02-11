@@ -21,10 +21,12 @@
 	<!-- Modernizr JS -->
 	<script src="/ExTeamProject/js/modernizr-2.6.2.min.js"></script>
 
+
+	
 </head>
 <body>
 	
-	<footer class="footer bg-light">
+	<footer class="footer bg-light" >
 	      <div class="container">
 	        <div class="row">
 	          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">

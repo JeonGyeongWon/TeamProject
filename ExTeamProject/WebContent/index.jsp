@@ -12,9 +12,18 @@
 
 <!-- Modernizr JS -->
 
+<style>
+.enter{ height:54px;}
+.enter option{ height:54px;}
+#searchBtn {height:54px;}
+
+	
+	
+
+
+</style>
 
 </head>
-
 
 
 

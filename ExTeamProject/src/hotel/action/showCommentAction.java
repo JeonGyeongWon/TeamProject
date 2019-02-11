@@ -17,7 +17,7 @@ public class showCommentAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		int h_c_no = Integer.parseInt("h_c_no");
+		int h_c_no = Integer.parseInt(request.getParameter("h_c_no"));
 		HttpSession session = request.getSession();
 		
 		ArrayList<Hotel_commentDTO> cdto = null;

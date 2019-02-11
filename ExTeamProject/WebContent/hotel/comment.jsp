@@ -32,7 +32,7 @@
                 </table>
             </div>
         </div>
-        <input type="hidden" id="h_no" name="h_no" value="${result.code }" />        
+        <input type="hidden" id="h_no" name="h_no" value="${param.h_no}" />        
     </form>
 </div>
 <div class="container">
@@ -52,7 +52,7 @@ function fn_comment(){
     
     $.ajax({
         type:'POST',
-        url : "<c:url value='/InsertComment.hotel'/>",
+        url : "<c:url value='InsertComment.hotel'/>",
         data:$("#commentForm").serialize(),
         success : function(data){
             if(data=="success")

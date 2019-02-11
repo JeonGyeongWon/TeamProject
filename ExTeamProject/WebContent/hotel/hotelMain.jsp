@@ -44,12 +44,11 @@ function PageMove(page){
 		<div id="fh5co-main">
 		<div id ="mainTag">
 	<c:if test="${user_email != null }">
-	<a href="InsertHotelForm.hotel">호텔등록</a>
+	<a href="InsertHotelForm.hotel" margin="10px auto;">&nbsp;&nbsp; 호텔 등록 페이지로 가기</a>
 	</c:if>
 	<c:if test="${user_email == null }">
-	로그인 이후 이용해주시기 바랍니다.
+	로그인 후 이용해주시기 바랍니다.
 	</c:if>
-	<h2>호텔메인</h2>
 </div>
 			<div class="fh5co-narrow-content">
 				<div class="row animate-box" data-animate-effect="fadeInLeft">

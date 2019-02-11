@@ -28,6 +28,9 @@
 	<script src="js/modernizr-2.6.2.min.js"></script>
 </head>
 
+
+
+
 <script>
 	function fnHotel(url){
 		location.href =	url+'';
@@ -75,7 +78,7 @@
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form action="HotelMain.hotel" method="post">
               <div class="form-row">
-              	<select class="col-md-3" name="key">
+              	<select class="col-md-3 enter" name="key">
             		<option value="0">호텔이름</option>	<!-- 검색키워드구분 -->
             		<option value="1">지역구</option>
             	</select>
@@ -83,7 +86,7 @@
                   <input type="text" class="form-control form-control-lg" placeholder="부산지역검색" name="word">
                 </div>
                 <div class="col-12 col-md-3 " >
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">검색</button> <br><br>
+                  <button type="submit" class="btn btn-block btn-lg btn-primary" id="searchBtn">검색</button> <br><br>
                 </div>
               </div>
             </form>
