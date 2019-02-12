@@ -351,7 +351,36 @@
 				
 			<div class="container text-center"><button class="btn btn-primary">추천하기</button></div>
 			
-			<jsp:include page="comment.jsp?${h_no }"/>
+			<div class="container">
+    <form id="commentForm" name="commentForm" method="post">
+    <br><br>
+        <div>
+            <div>
+                <span><strong>댓글</strong></span> <span id="cCnt"></span>
+            </div>
+            <div>
+                <table class="table">                    
+                    <tr>
+                        <td>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
+                            <br>
+                            <div>
+                                <a href='/commentList.hotel' id="insertcomment" class="btn pull-right btn-success">등록</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="h_no" name="h_no" value="${param.h_no}" />        
+    </form>
+</div>
+<div class="container">
+    <form id="commentListForm" name="commentListForm" method="post">
+        <div id="commentList">
+        </div>
+    </form>
+</div>
 		</c:otherwise>
 		
 	</c:choose>	
@@ -366,11 +395,7 @@
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 	
-		
-
 	
-		<%-- ajax처리를 통한 서브이미지 들고오기 --%>
-		$(function(){
 			
 			// 나중에 주말가 주중가 구분하여 계산하는 식 작성 현재는 주중가로 취급
 			var total_price;

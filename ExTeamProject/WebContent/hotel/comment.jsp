@@ -25,7 +25,7 @@
                             <textarea style="width: 1100px" rows="3" cols="30" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div>
-                                <a href='/commentList.hotel' onClick="fn_comment()" class="btn pull-right btn-success">등록</a>
+                                <a href='/commentList.hotel' id="insertcomment" class="btn pull-right btn-success">등록</a>
                             </div>
                         </td>
                     </tr>
@@ -46,83 +46,18 @@
 /*
  * 댓글 등록하기(Ajax)
  */
- var h_no;
- 
-function fn_comment(){
-    
-    $.ajax({
-        type:'POST',
-        url : "<c:url value='InsertComment.hotel'/>",
-        data:$("#commentForm").serialize(),
-        success : function(data){
-            if(data=="success")
-            {
-                getCommentList();
-                $("#comment").val("");
-            }
-        },
-        error:function(request,status,error){
-            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-       }
-        
-    });
-}
- 
-/**
- * 초기 페이지 로딩시 댓글 불러오기
- */
-$(function(){
-    
-    getCommentList();
-    h_no = ${param.h_no}
-    
+$.ajaxSetup({
+	type : "post",
+	async: true,
+	dataType:"json",
+	error:function(xhr){
+		console.log("error html = "+xhr.statusText);
+	}
 });
- 
-/**
- * 댓글 불러오기(Ajax)
- */
-function getCommentList(){
-    
-    $.ajax({
-        type:'GET',
-        url : "commentList.hotel",
-        dataType : "json",
-        data:$("#commentForm").serialize(), h_no : h_no, 
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-        success : function(data){
-            
-            var html = "";
-            var cCnt = data.length;
-            
-            if(data.length > 0){
-                
-                for(i=0; i<data.length; i++){
-                    html += "<div>";
-                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
-                    html += data[i].comment + "<tr><td></td></tr>";
-                    html += "</table></div>";
-                    html += "</div>";
-                }
-                
-            } else {
-                
-                html += "<div>";
-                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-                html += "</table></div>";
-                html += "</div>";
-                
-            }
-            
-            $("#cCnt").html(cCnt);
-            $("#commentList").html(html);
-            
-        },
-        error:function(request,status,error){
-            
-       }
-        
-    });
-}
+
+$(function(){
+	$("#comment")
+});
  
 </script>
  
