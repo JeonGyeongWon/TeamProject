@@ -12,6 +12,7 @@ import dao.UserManagementDAO;
 import dto.UserManagementDTO;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
+import hotel.dto.Hotel_commentDTO;
 import hotel.dto.RoomDTO;
 import hotel.dto.UsersDTO;
 import hotel.service.HotelDetailService;
@@ -44,7 +45,7 @@ public class HotelDetailAction implements Action {
 		HotelDTO hdto = service.getBringoneHotelInfo(h_no);
 		FacilitiesDTO fdto = service.getBringAllFacilities(h_no);
 		ArrayList<RoomDTO> rlist = service.getBringAllRoomInfo(h_no);
-		
+		ArrayList<Hotel_commentDTO> commentlist = service.getBringComment(h_no);
 		// 호텔번호를 이용해 해당 판매자의 정보를 가져옴 ! -> 서브쿼리사용했어요
 		int user_no = hdto.getUser_no();
 		
@@ -59,6 +60,7 @@ public class HotelDetailAction implements Action {
 		request.setAttribute("hdto", hdto);
 		request.setAttribute("fdto", fdto);
 		request.setAttribute("rlist", rlist);
+		request.setAttribute("commentList", commentlist);
 		
 		forward.setRedirect(false);
 		forward.setPath("hotel/hotelDetail.jsp");

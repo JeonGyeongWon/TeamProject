@@ -7,6 +7,7 @@ import dao.UserManagementDAO;
 import dto.UserManagementDTO;
 import hotel.dto.FacilitiesDTO;
 import hotel.dto.HotelDTO;
+import hotel.dto.Hotel_commentDTO;
 import hotel.dto.RoomDTO;
 import hotel.dto.Room_imgDTO;
 import hotel.dto.UsersDTO;
@@ -54,6 +55,12 @@ public class HotelDetailService {
 		RoomDTO rdto = dao.bringRoomDto(h_rno);
 		return rdto;
 	
+	}
+
+	public ArrayList<Hotel_commentDTO> getBringComment(int h_no) {
+
+		ArrayList<Hotel_commentDTO> comment= dao.getCommentList(h_no);
+		return comment;
 	}
 	
 	

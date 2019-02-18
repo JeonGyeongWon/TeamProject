@@ -503,50 +503,49 @@ public class HotelDAO {
 		}
 
 		public int insertComment(Hotel_commentDTO cdto){
-			con=pool.getConnection();
-			PreparedStatement pstmt = null;
-					
-			String sql = "INSERT INTO hotel_comment(h_no, h_o_no,subject,content,regdate,bestcount,user_no)"
-					+ "VALUES(?,?,?,?,?,?,?)";
+			
+			int result = 0;
+			String sql = "INSERT INTO hotel_comment(h_no,subject,content,regdate,bestcount,user_no)"
+					+ "VALUES(?,?,?,?,?,?)";
 			
 			try {
+				con=pool.getConnection();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, cdto.getH_no());
-				pstmt.setInt(2, cdto.getH_c_no());
-				pstmt.setString(3, cdto.getSubject());
-				pstmt.setString(4, cdto.getContent());
-				pstmt.setTimestamp(5, null);
-				pstmt.setInt(6, cdto.getBestcount());
-				pstmt.setInt(7, cdto.getUser_no());
+				pstmt.setString(2, cdto.getSubject());
+				pstmt.setString(3, cdto.getContent());
+				pstmt.setTimestamp(4, null);
+				pstmt.setInt(5, cdto.getBestcount());
+				pstmt.setInt(6, cdto.getUser_no());
+				pstmt.executeUpdate();
 				
-				int request = pstmt.executeUpdate();
-
-				return request;
+				sql = "select h_cno from hotel_comment order by h_cno desc limit 0,1";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					result = rs.getInt(1);
+				}
 				
 			} catch (SQLException e) {
-				System.out.println("insertComment()메서드 내에서 오류 +e");
-				return -1;
-				
+				System.out.println("insertComment()메서드 내에서 오류 "+e);
 			}finally{
-				try {
-					pstmt.close();
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				pool.close(con, pstmt, rs);
 			}
+			return result;
 			
 		}//insertComment()메소드 끝
 		
 	
-		public ArrayList<Hotel_commentDTO> getCommentList(int h_c_no){
+		public ArrayList<Hotel_commentDTO> getCommentList(int h_no){
 			
 			ArrayList<Hotel_commentDTO> list = new ArrayList<>();
 				
 			try {
 				con=pool.getConnection();
-				String sql = "SELECT * FROM hotel_comment";
+				String sql = "SELECT * FROM hotel_comment where h_no = ?";
 				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, h_no);
 				rs=pstmt.executeQuery();
 				
 				
@@ -554,7 +553,7 @@ public class HotelDAO {
 					Hotel_commentDTO cdto = new Hotel_commentDTO();
 					
 					cdto.setH_no(rs.getInt("h_no"));
-					cdto.setH_c_no(rs.getInt("h_c_no"));
+					cdto.setH_c_no(rs.getInt("h_cno"));
 					cdto.setSubject(rs.getString("subject"));
 					cdto.setContent(rs.getString("content"));
 					cdto.setRegdate(rs.getTimestamp("regdate"));
@@ -727,6 +726,35 @@ public class HotelDAO {
 			
 			
 			return list;
+		}
+
+
+		public Hotel_commentDTO getComment(int h_cno) {
+			
+			Hotel_commentDTO dto = new Hotel_commentDTO();
+			String sql = "select * from hotel_comment where h_cno = ?";
+			try{
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, h_cno);
+				
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()){
+					dto.setBestcount(rs.getInt("bestcount"));
+					dto.setContent(rs.getString("content"));
+					dto.setH_c_no(rs.getInt("h_cno"));
+					dto.setH_no(rs.getInt("h_no"));
+					dto.setRegdate(rs.getTimestamp("regdate"));
+					dto.setSubject(rs.getString("subject"));
+					dto.setUser_no(rs.getInt("user_no"));
+				}
+			}catch(Exception e){
+				System.out.println("getComment에서"+e);
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			return dto;
 		}
 
 

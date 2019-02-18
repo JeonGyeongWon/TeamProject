@@ -14,11 +14,11 @@ import com.oreilly.servlet.MultipartRequest;
 import hotel.action.BringRoomSubImgAction;
 import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
-import hotel.action.InsertCommentAction;
 import hotel.action.InsertHotelAction;
+import hotel.action.getCommentListAction;
+import hotel.action.insertcommentAction;
 import hotel.action.paymentAction;
 import hotel.action.reservationAction;
-import hotel.action.showCommentAction;
 import together.ActionForward;
 import together.Action;
 
@@ -86,25 +86,29 @@ public class HotelController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/InsertComment.hotel")){
-			action = new InsertCommentAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				System.out.println("InsertComment작업 중"+e);
-				e.printStackTrace();
-			}
 			
-		}else if(command.equals("/commentList.hotel")){
-			action = new showCommentAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				System.out.println("commentList 작업 중"+e);
-				e.printStackTrace();
+		}	else if(command.equals("/insertcomment.hotel")){
+				insertcommentAction ajax = new insertcommentAction();
+				try{
+					String comment = ajax.execute(request, response);
+					response.setContentType("text/html;charset=UTF-8");
+					response.getWriter().write(comment);
+				}catch(Exception e){
+					System.out.println("insertcomment에서"+e);
+				}
+			}else if(command.equals("/getCommentList.hotel")){
+				getCommentListAction ajax = new getCommentListAction();
+				try{
+					String commentList = ajax.execute(request, response);
+					response.setContentType("text/html;charset=UTF-8");
+					response.getWriter().write(commentList);
+				}catch(Exception e){
+					System.out.println("getCommentListAction에서"+e);
+				}finally{
+		
+				}
 			}
-								
-		}else if(command.equals("/reservation.hotel")){
+			else if(command.equals("/reservation.hotel")){
 			action = new reservationAction();
 			try{
 				forward = action.execute(request, response);

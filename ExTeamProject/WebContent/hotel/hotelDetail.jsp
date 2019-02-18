@@ -149,6 +149,10 @@
 		<c:set var ="udto" value="${requestScope.udto}" />
 	</c:if>
 	
+	<c:if test="${commentList != null }">
+		<c:set var ="commentList" value="${requestScope.commentList }"/>
+	</c:if>
+	
 	
 	<c:choose>
 		<c:when test="${hdto == null }">
@@ -352,36 +356,43 @@
 			<div class="container text-center"><button class="btn btn-primary">추천하기</button></div>
 			
 			<div class="container">
-    <form id="commentForm" name="commentForm" method="post">
     <br><br>
         <div>
             <div>
                 <span><strong>댓글</strong></span> <span id="cCnt"></span>
+                
+                	<div id="commentList">
+                <c:forEach var="comment" items="${commentList }" varStatus="ss">
+                	<div class="commentList2">
+                	댓글번호 :${ss.index+1}번 <br>
+                	제목 : ${comment.subject } <br>
+                	내용 : ${comment.content } <br>
+                	작성날짜 : ${comment.regdate } <br>
+                	추천수 : ${comment.bestcount } <br><br>
+                	</div>
+                </c:forEach>
+                	</div>
             </div>
             <div>
                 <table class="table">                    
                     <tr>
+                    	<td>
+                    		<textarea style="width: 200px" rows="3" cols="30" id="comment_subject" name="content" placeholder="댓글 제목을 입력하세요"></textarea>
+                    	</td>
                         <td>
-                            <textarea style="width: 1100px" rows="3" cols="30" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
+                            <textarea style="width: 900px" rows="3" cols="30" id="comment_content" name="content" placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div>
-                                <a href='/commentList.hotel' id="insertcomment" class="btn pull-right btn-success">등록</a>
+                                <button id="insertcomment" class="btn pull-right btn-success">등록</button>
                             </div>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
-        <input type="hidden" id="h_no" name="h_no" value="${param.h_no}" />        
-    </form>
-</div>
-<div class="container">
-    <form id="commentListForm" name="commentListForm" method="post">
-        <div id="commentList">
-        </div>
-    </form>
-</div>
-		</c:otherwise>
+       </div>
+        
+	</c:otherwise>
 		
 	</c:choose>	
 	
@@ -396,6 +407,67 @@
 	<script type="text/javascript">
 	
 	
+	function fngetCommentList(h_cno){
+		$.ajax({
+			type : "post",
+			url : "getCommentList.hotel",
+			data : {
+				h_cno : h_cno
+			},
+			success : function(commentDto){
+				var s= JSON.parse(commentDto);
+				var sd= $(".commentList2").length+1;
+				
+				$("#commentList").append("<div>");
+				$("#commentList").append("댓글번호 : "+sd +"<br>" );
+				$("#commentList").append("제목 : "+s.subject+"<br>");
+				$("#commentList").append("내용 : "+s.content+"<br>");
+				$("#commentList").append("작성날짜 : "+s.regdate+"<br>");
+				$("#commentList").append("추천수 : "+s.bestcount+"<br><br>");
+				$("#commentList").append("</div>");
+				
+			},
+			error : function(errorList){
+				console.log(errorList);
+			} 
+		})
+	}
+	
+			$(function(){
+				
+			$("#insertcomment").on("click",function(){
+				var comment = new Object();
+				comment.h_no = ${h_no};
+				comment.user_no = ${udto.user_no};
+				comment.subject = $("#comment_subject").val();
+				comment.content = $("#comment_content").val();
+				if(comment.subject == "" || comment.content == ""){
+					alert("댓글 제목이나 내용이 미입력되었습니다.");
+					return false;
+				}
+				comment.regdate = null;
+				comment.bestcount = 0;
+				
+				// JSON.stringify()는 json을 String으로 변경시켜주는 것
+				var commentJson = JSON.stringify(comment);
+				
+				
+				 $.ajax({
+					type : "post",
+					url : "insertcomment.hotel",
+					data : {
+						commentJson : commentJson
+					},
+					dataType :'json',
+					success : function(successcomment){
+						alert("댓글을 달았습니다.");
+						var h_cno = parseInt(successcomment.h_cno);
+						fngetCommentList(h_cno);
+					},
+					error : function(errorList){
+					} 
+				}); 
+			})
 			
 			// 나중에 주말가 주중가 구분하여 계산하는 식 작성 현재는 주중가로 취급
 			var total_price;
