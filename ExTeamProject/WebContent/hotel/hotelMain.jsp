@@ -26,6 +26,8 @@ function PageMove(page){
 </head>
 <body>
 
+	<jsp:include page="/header.jsp" />
+	<jsp:include page="/sidevar.jsp" />
 	
 <c:set var="list" value="${requestScope.list }"></c:set>
 
@@ -97,9 +99,18 @@ function PageMove(page){
   </div>
 </div>
 
+
 	</c:otherwise>
 
 </c:choose>	
+
+<jsp:include page="/footer.jsp" />
+
+<script src="js/modernizr-2.6.2.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+	<script
+		src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 		
 		
 	

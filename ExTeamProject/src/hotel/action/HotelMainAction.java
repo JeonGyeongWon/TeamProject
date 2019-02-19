@@ -48,7 +48,7 @@ public class HotelMainAction implements Action {
 		request.setAttribute("paging", paging);
 		forward.setRedirect(false);
 		
-		forward.setPath("./index.jsp?center=hotel/hotelMain.jsp");
+		forward.setPath("./hotel/hotelMain.jsp");
 		return forward;
 		
 	}

@@ -55,6 +55,10 @@ public class HotelController extends HttpServlet{
 				System.out.println("HotelMain.hotel(서블릿)"+e);
 			}
 			///InsertHotel.hotel
+		}else if(command.equals("/index.jsp")){
+			forward = new ActionForward();
+			forward.setRedirect(true);
+			forward.setPath("./HotelMain.hotel");
 		}else if(command.equals("/InsertHotelForm.hotel")){ //호텔 등록 폼으로 이동
 			forward = new ActionForward();	//위와 같음
 			forward.setRedirect(true);

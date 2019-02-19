@@ -29,29 +29,10 @@
 
 
 <body>
-	<c:set var="center" value="${param.center}" />
-
-	<c:out value="${center}" />
-
-	<c:if test="${center == null}">
-		<c:set var="center" value="Main.jsp" />
-	</c:if>
-
-	<jsp:include page="header.jsp" />
-	<jsp:include page="sidevar.jsp" />
-	<jsp:include page="${center}" />
-	<jsp:include page="footer.jsp" />
-
-
-
-
-	<%-- 토글 버튼을 위한 링크 --%>
-	<!-- MAIN JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
-	<script
-		src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
+	<%
+		response.sendRedirect("HotelMain.hotel");
+	%>
 
 </body>
 

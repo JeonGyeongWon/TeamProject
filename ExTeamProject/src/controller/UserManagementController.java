@@ -53,7 +53,7 @@ public class UserManagementController extends HttpServlet{
 			//단순 페이지 이동
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("index.jsp?center=/userManagement/login.jsp"); 
+			forward.setPath("/userManagement/login.jsp"); 
 		}
 		
 		//login.jsp에서 [확인]버튼을 클릭했을 때
@@ -83,7 +83,7 @@ public class UserManagementController extends HttpServlet{
 			//단순 페이지 이동
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("index.jsp?center=/userManagement/join.jsp");
+			forward.setPath("/userManagement/join.jsp");
 		}
 		
 		//join.jsp에서 [등록]버튼을 클릭했을 때

@@ -61,15 +61,13 @@
 			</label>
 		</div>
 		<div class="text-center">
-			<input type="checkbox" name="ckopt" value="1">맛집
-			<input type="checkbox" name="ckopt" value="2">관광지
 			<input type="checkbox" name="ckopt" value="3">호텔
 		</div>
 		<br>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
-					<li class="fh5co-active"><a href="index.html">Home</a></li>
-					<li><a href="portfolio.html">Portfolio</a></li>
+					<li class="fh5co-active"><a href="index.html">부산지역호텔보기</a></li>
+					<li><a href="portfolio.html">사이트입니다 지도를 눌러 위치를 확인해보세요</a></li>
 					<li><a href="about.html">About</a></li>
 					<li><a href="contact.html">Contact</a></li>
 				</ul>

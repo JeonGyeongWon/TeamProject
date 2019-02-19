@@ -48,7 +48,14 @@ IMP.request_pay({
     } else {
         var msg = '결제에 실패하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
-        alert('F5를 눌러서 재결제를 해주세요');
+        
+        var ques = confirm("나중에 결제 하시겠습니까?");
+        if(ques){
+        	location.href="/index.jsp";
+        }else{
+        	alert('F5를 눌러서 재결제를 해주세요');
+        }
+        
     }
 });
 });
