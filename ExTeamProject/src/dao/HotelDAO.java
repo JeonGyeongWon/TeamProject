@@ -758,7 +758,32 @@ public class HotelDAO {
 		}
 
 
-		
+		public int upBestCount(int h_no) {
+			String sql = "update hotel set bestcount = bestcount+1 where h_no = ?";
+			int result = 0;
+			try{
+				
+				con = pool.getConnection();
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, h_no);
+				pstmt.executeUpdate();
+				
+				sql = "select bestcount from hotel where h_no = ?";
+				
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, h_no);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					result = rs.getInt(1);
+				}
+			}catch(Exception e){
+				
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			return result;
+		}
 		
 	}
 

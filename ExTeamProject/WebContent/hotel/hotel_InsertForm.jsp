@@ -66,21 +66,21 @@ $(function(){
 <script type="text/javascript">
 	//<form>태그로 전송할 값의 유효성 검사
 	function checkValue3() {
-		var re1 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,45}$/ // 한글영문숫자대소문 적합한지 검사할 정규식 1~45
-		var re2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,300}$/ //1~300
-		var re3 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,100}$/ //1~100
+		var re1 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*|\s]{1,80}$/ // 한글영문숫자대소문 적합한지 검사할 정규식 1~45
+		var re2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*|\s]{1,300}$/ //1~300
+		var re3 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*|\s]{1,100}$/ //1~100
 		var re4 = /^[0-9]{1,10}$/ //숫자로만 정규식
-		var re5 = /\.(gif|jpg|jpeg|tiff|png)$///이미지 파일만 정규식
+		var re5 = /\.(gif|jpg|jpeg|tiff|png|webp)$///이미지 파일만 정규식
 		
 		if (!re1.test(document.userInfo.h_name.value)) {
-			alert("45자이내로 입력하여야 합니다.");
+			alert("80자이내로 입력하여야 합니다.");
 			document.userInfo.h_name.focus();
 			return false;
 		}
 		
 		if (!re2.test(document.userInfo.h_content.value)) {
 			alert("300자이내로 입력하여야 합니다.");
-			document.userInfo.h_name.focus();
+			document.userInfo.h_content.focus();
 			return false;
 		}
 		
@@ -221,23 +221,23 @@ $(function(){
 			<tr><th colspan="2"><h1>호텔 등록하기</h1></th></tr>
 			<tr>
 				<td>호텔 이름</td>
-				<td><input type="text" name="h_name" id="h_name" required="required" autofocus required></td>
+				<td><input type="text" name="h_name" id="h_name" required="required" autofocus required maxlength="45"></td>
 			</tr>
 			<tr>
 				<td>호텔 설명</td>
-				<td><input type="text" name="h_content" id="h_content" required></td>
+				<td><textarea cols="70" rows="5" name="h_content" id="h_content" required maxlength="300"></textarea></td>
 			</tr>
 			<tr>
 				<td>주의사항</td>
-				<td><input type="text" name="h_caution" id="h_caution" required></td>
+				<td><input type="text" name="h_caution" id="h_caution" required maxlength="45"></td>
 			</tr>
 			<tr>
 				<td>이용규칙</td>
-				<td><input type="text" name="h_rule" id="h_rule" required></td>
+				<td><input type="text" name="h_rule" id="h_rule" required maxlength="45"></td>
 			</tr>
 			<tr>
 				<td>세부사항</td>
-				<td><input type="text" name="h_detail" id="h_detail" required></td>
+				<td><input type="text" name="h_detail" id="h_detail" required maxlength="45"></td>
 			</tr>
 			<tr>
 				<td>호텔 이미지</td> <!-- 메인이미지 -->

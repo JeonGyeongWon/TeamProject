@@ -176,8 +176,8 @@
 		<div class="container">
 		
 			<div class="HotelInfoDiv">
-					<h2>호텔이름 : ${hdto.h_name }아아아글자수채우기이이이이</h2>
-					<h3>${hdto.h_bestcount }명이 해당 호텔을 추천했습니다!</h3>
+					<h2>호텔이름 : ${hdto.h_name }</h2>
+					<h3 id="bestcount">${hdto.h_bestcount }명이 해당 호텔을 추천했습니다!</h3>
 					<p>호텔설명 : ${hdto.h_content }</p>
 					<p>호텔주의사항 : ${hdto.h_caution }	</p>
 					<p>호텔규칙 : ${hdto.h_rule }</p>
@@ -353,7 +353,7 @@
 			</div>
 			<%-- 종료 --%>	
 				
-			<div class="container text-center"><button class="btn btn-primary">추천하기</button></div>
+			<div class="container text-center"><button class="btn btn-primary" onclick="fnUpCount(${h_no});">추천하기</button></div>
 			
 			<div class="container">
     <br><br>
@@ -362,6 +362,7 @@
                 <span><strong>댓글</strong></span> <span id="cCnt"></span>
                 
                 	<div id="commentList">
+                	<hr>
                 <c:forEach var="comment" items="${commentList }" varStatus="ss">
                 	<div class="commentList2">
                 	댓글번호 :${ss.index+1}번 <br>
@@ -369,6 +370,7 @@
                 	내용 : ${comment.content } <br>
                 	작성날짜 : ${comment.regdate } <br>
                 	추천수 : ${comment.bestcount } <br><br>
+                	<hr>
                 	</div>
                 </c:forEach>
                 	</div>
@@ -405,6 +407,23 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript">
+	
+	
+	function fnUpCount(h_no){
+		$.ajax({
+			url : "upbestcount.hotel",
+			type : "post",
+			data : {
+				h_no : h_no
+			},
+			dataType :'json',
+			success : function(bestcount){
+				alert("추천되었습니다.")
+				$("#bestcount").html(bestcount.bestcount+"명이 해당 호텔을 추천했습니다!");
+			}
+		})
+	}
+	
 	
 	
 	function fngetCommentList(h_cno){

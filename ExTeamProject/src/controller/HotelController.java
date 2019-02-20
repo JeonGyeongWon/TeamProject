@@ -9,16 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
 
 import hotel.action.BringRoomSubImgAction;
 import hotel.action.HotelDetailAction;
 import hotel.action.HotelMainAction;
 import hotel.action.InsertHotelAction;
+import hotel.action.UseraddPhoneAction;
 import hotel.action.getCommentListAction;
 import hotel.action.insertcommentAction;
 import hotel.action.paymentAction;
 import hotel.action.reservationAction;
+import hotel.action.upbestcount;
 import together.ActionForward;
 import together.Action;
 
@@ -73,7 +74,17 @@ public class HotelController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/HotelDetail.hotel")){
+		}else if(command.equals("/hotel/UseraddPhone.hotel")){
+			try {
+				ajax = new UseraddPhoneAction().execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.getWriter().write(ajax);
+		}
+		
+		else if(command.equals("/HotelDetail.hotel")){
 			action = new HotelDetailAction();
 			try{
 				forward = action.execute(request, response);
@@ -124,6 +135,14 @@ public class HotelController extends HttpServlet{
 			forward=new ActionForward();
 			forward.setPath("hotel/payment.jsp");
 			forward.setRedirect(false);
+		}else if(command.equals("/upbestcount.hotel")){
+			try{
+				String ajax = new upbestcount().execute(request, response);
+				response.getWriter().write(ajax);
+			}catch(Exception e){
+				System.out.println("오류");
+			}
+			
 		}else if(command.equals("/payment.hotel")){
 			action = new paymentAction();
 			try{

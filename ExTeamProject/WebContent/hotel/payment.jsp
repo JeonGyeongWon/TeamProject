@@ -51,7 +51,7 @@ IMP.request_pay({
         
         var ques = confirm("나중에 결제 하시겠습니까?");
         if(ques){
-        	location.href="/index.jsp";
+        	location.href="./index.jsp";
         }else{
         	alert('F5를 눌러서 재결제를 해주세요');
         }

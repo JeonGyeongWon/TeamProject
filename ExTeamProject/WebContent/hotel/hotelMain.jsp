@@ -61,9 +61,8 @@ function PageMove(page){
 					<div class="col-md-3 work-item">
 						<a href="HotelDetail.hotel?h_no=${HotelDTO.h_no }" target="_blank">
 							<img src="hotel/${HotelDTO.h_imgpath}${HotelDTO.h_imgname}" alt="" class="img-responsive">
-							<h3 class="fh5co-work-title">${HotelDTO.h_name } <-호텔 이름부분</h3> 
-							<h4>${HotelDTO.h_content } <- 호텔내용부분 30자이상이면 자르게설정해놨음<h4>
-							<h4>이방의 평균가격은 [추후설정]</h4>
+							<h3 class="fh5co-work-title">${HotelDTO.h_name } </h3> 
+							<h4>${HotelDTO.h_content } <h4>
 							<p>추천수 : ${HotelDTO.h_bestcount }</p>
 						</a>
 					</div>

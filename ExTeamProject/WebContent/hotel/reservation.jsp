@@ -62,7 +62,7 @@
 <script>
 <%-- 휴대폰 인증시 새창을 띄워줌  --%> 
 function fnPhone(user_no){
-	window.open("SMSAuthForm.jsp?user_no="+user_no,
+	window.open("hotel/SMSAuthForm.jsp?user_no="+user_no,
 			"hotel/SMSAuthForm.jsp","width=570","height=350","resizable=no","scrollbars=no");
 	}
 	

@@ -134,7 +134,7 @@ public class UserManagementController extends HttpServlet{
 		/*사용자 요청에 대한 응답을 보여주는 View페이지로 이동*/
 		if(forward != null){
 			if(forward.isRedirect()){	//이동방식 여부 값이 true일 때 → Response.sendRedirect()방식
-									
+								
 				response.sendRedirect(forward.getPath());
 			
 			}else{						//이동방식 여부값이 false일 때 → RequestDispatcher의 forward()방식 

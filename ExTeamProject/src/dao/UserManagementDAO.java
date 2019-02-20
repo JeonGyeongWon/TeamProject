@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import org.apache.tomcat.jni.Pool;
+
 import db.ConnectionPool;
 import dto.UserManagementDTO;
 import together.ActionForward;
@@ -197,5 +199,22 @@ public class UserManagementDAO {
 			cp.close(con, pstmt, rs);
 		}
 		return findPw;
+	}
+
+	public void updateUserPhoneNumber(String user_email, String user_phone) {
+		
+		String sql = "update users set user_phone = ? where user_email = ?";
+		try{
+			con =cp.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user_phone);
+			pstmt.setString(2, user_email);
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.getMessage();
+		}finally{
+			cp.close(con, pstmt, rs);
+		}
+		
 	}
 }
