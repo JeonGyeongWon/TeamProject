@@ -11,102 +11,107 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=906e68dba1adb50425e650ad46575c5b&libraries=services"></script>
 
 <!-- Animate.css -->
-	<link rel="stylesheet" href="/ExTeamProject/css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="/ExTeamProject/css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="/ExTeamProject/css/bootstrap.css">
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="/ExTeamProject/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/ExTeamProject/css/owl.theme.default.min.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="/ExTeamProject/css/style.css">
-	
-	
+   <link rel="stylesheet" href="/ExTeamProject/css/animate.css">
+   <!-- Icomoon Icon Fonts-->
+   <link rel="stylesheet" href="/ExTeamProject/css/icomoon.css">
+   <!-- Bootstrap  -->
+   <link rel="stylesheet" href="/ExTeamProject/css/bootstrap.css">
+   <!-- Owl Carousel -->
+   <link rel="stylesheet" href="/ExTeamProject/css/owl.carousel.min.css">
+   <link rel="stylesheet" href="/ExTeamProject/css/owl.theme.default.min.css">
+   <!-- Theme style  -->
+   <link rel="stylesheet" href="/ExTeamProject/css/style.css">
+   
+   
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+   <!-- Modernizr JS -->
+   <script src="js/modernizr-2.6.2.min.js"></script>
 </head>
 
+<style>
+#searchBox { height:45px;}
+#searchSelect{ height:45px;}
+#searchBtn{ height:45px;}
+
+
+</style>
 
 
 
 <script>
-	function fnHotel(url){
-		location.href =	url+'';
-	}
+   function fnHotel(url){
+      location.href =   url+'';
+   }
 </script>
+
 
 <body>
 
 <!-- 맨위 navbar -->
-	<c:if test="${session.user_email!=null}">
-		<c:set var="user_email" property="${session.user_email}"/>
-		<c:set var="user_no" property="${session.user_no}"/>				<!-- 다른 작업에 참조키로 사용할 수 있도록 user_no를 세션에 저장한다. -->
-		<c:set var="user_nickname" property="${session.user_nickname}"/>
-	</c:if>
-	<nav class="navbar navbar-expand-sm bg-light">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav navbar-right">
-				<c:if test="${user_email == null}">
-					<li class="nav-item"><a href="#">이미지업로드</a></li>
-					<li class="nav-item"><a href="./loginPage.um">로그인</a></li>
-					<li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
-				</c:if>
-				<c:if test="${user_email != null}">
-					<li class="nav-item">${user_nickname}(${user_email})님 환영합니다.</li>
-					<li class="nav-item"><a href="#">이미지업로드</a></li>
-					<li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
-					<li class="nav-item"><a href="./editPage.um">회원정보수정</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</nav>
-		
-		<!-- 검색 버튼 및 각 페이지 이동 버튼 -->
-		 <div class="container">
+   <c:if test="${session.user_email!=null}">
+      <c:set var="user_email" property="${session.user_email}"/>
+      <c:set var="user_no" property="${session.user_no}"/>            <!-- 다른 작업에 참조키로 사용할 수 있도록 user_no를 세션에 저장한다. -->
+      <c:set var="user_nickname" property="${session.user_nickname}"/>
+   </c:if>
+   <nav class="navbar navbar-expand-sm bg-light">
+      <div class="container-fluid">
+         <ul class="nav navbar-nav navbar-right">
+            <c:if test="${user_email == null}">
+               <li class="nav-item"><a href="#">이미지업로드</a></li>
+               <li class="nav-item"><a href="./loginPage.um">로그인</a></li>
+               <li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
+            </c:if>
+            <c:if test="${user_email != null}">
+               <li class="nav-item">${user_nickname}(${user_email})님 환영합니다.</li>
+               <li class="nav-item"><a href="#">이미지업로드</a></li>
+               <li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
+               <li class="nav-item"><a href="./editPage.um">회원정보수정</a></li>
+            </c:if>
+         </ul>
+      </div>
+   </nav>
+      
+      <!-- 검색 버튼 및 각 페이지 이동 버튼 -->
+       <div class="container">
           <div class="col-xl-9 mx-auto com-md-4">
           
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form action="HotelMain.hotel" method="post">
               <div class="form-row">
-              	<select class="col-md-3 enter" name="key">
-            		<option value="0">호텔이름</option>	<!-- 검색키워드구분 -->
-            		<option value="1">지역구</option>
-            	</select>
+                 <select class="col-md-3 enter" name="key" id="searchSelect">
+                  <option value="0">호텔이름</option>   <!-- 검색키워드구분 -->
+                  <option value="1">지역구</option>
+               </select>
                 <div class="col-12 col-md-6 mb-2 mb-md-0">
-                  <input type="text" class="form-control form-control-lg" placeholder="부산지역검색" name="word">
+                  <input type="text" class="form-control form-control-lg" placeholder="부산지역검색" name="word" id="searchBox">
                 </div>
                 <div class="col-12 col-md-3 " >
-                  <button type="submit" class="btn btn-block btn-lg btn-primary" id="searchBtn">검색</button> <br><br>
+                  <button type="submit" class="btn btn-block btn-lg btn-primary" id="searchBtn" >검색</button> <br><br>
                 </div>
               </div>
             </form>
           </div>
-          	<div class="btn-group col-sm-8">
-				<button class="btn btn-primary col-sm-3 " onclick="fnHotel('HotelMain.hotel');">호텔</button>
-			</div>
-			</div>
+      </div>
       <br>
       <!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- Stellar -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Counters -->
-	<script src="js/jquery.countTo.js"></script>
-	
-	
-	<!-- MAIN JS -->
-	<script src="js/main.js"></script>
+   <script src="js/jquery.min.js"></script>
+   <!-- jQuery Easing -->
+   <script src="js/jquery.easing.1.3.js"></script>
+   <!-- Bootstrap -->
+   <script src="js/bootstrap.min.js"></script>
+   <!-- Carousel -->
+   <script src="js/owl.carousel.min.js"></script>
+   <!-- Stellar -->
+   <script src="js/jquery.stellar.min.js"></script>
+   <!-- Waypoints -->
+   <script src="js/jquery.waypoints.min.js"></script>
+   <!-- Counters -->
+   <script src="js/jquery.countTo.js"></script>
+   
+   
+   <!-- MAIN JS -->
+   <script src="js/main.js"></script>
       
 </body>
 </html>

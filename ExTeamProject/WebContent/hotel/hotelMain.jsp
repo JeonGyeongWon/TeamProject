@@ -14,8 +14,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>호텔메인</title>
 
+<style>
+#mainTag {text-align: center;
+      color:red;
+      }
+
+</style>
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
+
+
 function PageMove(page){
     location.href = "HotelMain.hotel?page="+page;
 }
