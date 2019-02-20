@@ -71,6 +71,8 @@
 	.MainHotelImgDiv{
 		width : 70%;
 		height : 30%;
+		margin-left: auto;
+		margin-right: auto;
 	}
 	
 	.MainHotelImgDiv img{
@@ -172,6 +174,9 @@
 					<img src="hotel/${hdto.h_imgpath}${hdto.h_imgname}">
 				</div>	 
 			</div>
+			<br>
+			<br>
+			<br>
 			
 		<div class="container">
 		
@@ -580,12 +585,12 @@
 							//위에 작업이후 roomInfo가 필요하다는걸 느껴서 변수는 그냥 roomsubimg로 통일했습니다. -> 실제로는 room정보도 같이넘어옵니다~
 							//action참고
 							//방정보넣는곳
-							roomInfo.html("침대개수 : "+roomsubimg.bed);
+							/* roomInfo.html("침대개수 : "+roomsubimg.bed);
 							roomInfo.append("화장실개수 : "+roomsubimg.bathroom);
 							roomInfo.append("방의 갯수 : "+roomsubimg.roomsize+"<br>");
 							roomInfo.append("<h2>주중가 : "+roomsubimg.weekprice+"</h2><br>");
 							roomInfo.append("<h2>주말가 : "+roomsubimg.weekend_price+"</h2>");
-							
+ */							
 							//예약관련 정보넣는곳
 							$("#reservation #price").html("현재 선택하신 호텔의 주중가는 :"+roomsubimg.weekprice+"원 입니다.<br>");
 							$("#reservation #price").append("주말가는 : "+roomsubimg.weekend_price+"원 입니다<br>");

@@ -32,7 +32,7 @@
 #searchBox { height:45px;}
 #searchSelect{ height:45px;}
 #searchBtn{ height:45px;}
-
+#keeeee{padding-left: 280px;}
 
 </style>
 
@@ -57,13 +57,11 @@
       <div class="container-fluid">
          <ul class="nav navbar-nav navbar-right">
             <c:if test="${user_email == null}">
-               <li class="nav-item"><a href="#">이미지업로드</a></li>
                <li class="nav-item"><a href="./loginPage.um">로그인</a></li>
                <li class="nav-item"><a href="./joinPage.um">회원가입</a></li>
             </c:if>
             <c:if test="${user_email != null}">
                <li class="nav-item">${user_nickname}(${user_email})님 환영합니다.</li>
-               <li class="nav-item"><a href="#">이미지업로드</a></li>
                <li class="nav-item"><a href="./logoutPro.um">로그아웃</a></li>
                <li class="nav-item"><a href="./editPage.um">회원정보수정</a></li>
             </c:if>
@@ -78,8 +76,8 @@
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form action="HotelMain.hotel" method="post">
-              <div class="form-row">
-                 <select class="col-md-3 enter" name="key" id="searchSelect">
+              <div class="form-row" id="keeeee">
+                 <select class="col-md-4 enter" name="key" id="searchSelect">
                   <option value="0">호텔이름</option>   <!-- 검색키워드구분 -->
                   <option value="1">지역구</option>
                </select>
