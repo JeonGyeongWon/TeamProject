@@ -16,6 +16,7 @@
  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
  
  	<script type="text/javascript">
+ 	
             function setPhoneNumber(val) {
                 var numList = val.split("-");
                 document.smsForm.sphone1.value = numList[0];
@@ -79,7 +80,7 @@
 
 	<!-- 필요없는것들 지울려고했는데 지우면 안된다. 그냥 다 hidden처리해서 안보이게했다. -->
     <body onload="loadJSON()">
-    <form method="post" name="smsForm" action="SMSAuthProc.jsp">
+    <form method="post" name="smsForm" action="SMSAuthProc.jsp" id="phoneAuth">
     	<%-- 인증번호를 히든으로보내줌 --%>
     	
         <input type="hidden" name="action" value="go"> 
@@ -95,7 +96,7 @@
         <br />
         <br />
         <br />받는 번호 -붙여주세요 꼭!
-        <input type="text" name="rphone" value="">   <input type="submit" value="전송" >
+        <input type="text" name="rphone" value="" id="rphone">   <input type="submit" value="전송" >
         <br />
         <input type="hidden" name="destination" value="" size=80>
         <br /> 

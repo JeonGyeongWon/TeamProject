@@ -261,7 +261,8 @@ public class InsertHotelAction implements Action {
     		out.println("<script>");
     		out.println("alert('호텔 및 방을 등록하였습니다')");
     		out.println("</script>");
-    		forward.setPath("../HotelMain.hotel");
+    		forward.setRedirect(true);
+    		forward.setPath("/ExTeamProject/HotelMain.hotel");
     	}else{	//수정
     		PrintWriter out = response.getWriter();
     		out.println("<script>");

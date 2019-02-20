@@ -75,6 +75,7 @@ public class HotelController extends HttpServlet{
 			}
 			
 		}else if(command.equals("/hotel/UseraddPhone.hotel")){
+			String ajax = null;
 			try {
 				ajax = new UseraddPhoneAction().execute(request, response);
 			} catch (Exception e) {

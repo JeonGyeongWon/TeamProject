@@ -6,7 +6,6 @@
     String AuthNumberValue = (String)session.getAttribute("RandomAuthNumber");
      System.out.print(AuthNumberValue);
     int msgCk = Integer.parseInt(AuthNumberValue);
-    String rphoneCK =(String)session.getAttribute("phoneNumber");
     %>
     <script>
     
@@ -25,7 +24,7 @@
 	   			url : "UseraddPhone.hotel",
 	   			data : {
 	   				user_email : "<%=session.getAttribute("user_email")%>",
-	   				user_phone : "010-3453-0091"
+	   				user_phone : "인증된휴대폰입니다."
 	   			},
 	   			type : "post",
 	   			dataType :'json',
