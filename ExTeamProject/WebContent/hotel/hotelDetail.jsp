@@ -237,7 +237,7 @@
 				</c:if>
 				<c:if test="${fdto.shampoo == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"샴푸무료제공 ..?" }</h3>
+						<h3>${"어매니티 제공" }</h3>
 					</div>
 				</c:if>
 				<c:if test="${fdto.closet == 1 }">
@@ -384,7 +384,7 @@
                 <table class="table">                    
                     <tr>
                     	<td>
-                    		<textarea style="width: 200px" rows="3" cols="30" id="comment_subject" name="content" placeholder="댓글 제목을 입력하세요"></textarea>
+                    		<textarea style="width: 200px" rows="3" cols="30" id="comment_subject" name="content" placeholder="제목"></textarea>
                     	</td>
                         <td>
                             <textarea style="width: 900px" rows="3" cols="30" id="comment_content" name="content" placeholder="댓글을 입력하세요"></textarea>

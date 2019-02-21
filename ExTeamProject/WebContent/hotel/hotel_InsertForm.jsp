@@ -49,7 +49,7 @@ $(function(){
       
       
       
-      $("#subimg").html("서브이미지를 다선택해주세요 ");
+      $("#subimg").html("서브이미지 5개 필수 ");
       
       for(var i=2; i<7; i++ ){
       var file = "<input type='file' name='h_img"+i+"'>";
@@ -65,7 +65,7 @@ $(function(){
 </script>
 <script type="text/javascript">
    //<form>태그로 전송할 값의 유효성 검사
-   function checkValue3() {
+ /*   function checkValue3() {
       var re1 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,45}$/ // 한글영문숫자대소문 적합한지 검사할 정규식 1~45
       var re2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,300}$/ //1~300
       var re3 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,100}$/ //1~100
@@ -209,7 +209,7 @@ $(function(){
       }
 
    }
-
+ */
 
 </script>       
 <body>
