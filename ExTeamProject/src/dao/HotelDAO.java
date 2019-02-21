@@ -784,6 +784,39 @@ public class HotelDAO {
 			}
 			return result;
 		}
+
+
+		public ArrayList getReservationRoomList(int user_no) {
+			// TODO Auto-generated method stub
+			String sql = "select * from hotel_reservation where user_no = ?";
+			ArrayList list = new ArrayList<>();
+			try{
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, user_no);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					ReservationDTO dto = new ReservationDTO();
+					dto.setCkin(rs.getTimestamp("ckin"));
+					dto.setCkout(rs.getTimestamp("ckout"));
+					dto.setCkprice(rs.getInt("ckprice"));
+					dto.setH_no(rs.getInt("h_no"));
+					dto.setH_rno(rs.getInt("h_rno"));
+					dto.setPersonnel(rs.getInt("personnel"));
+					dto.setTotal_price(rs.getInt("total_price"));
+					dto.setUser_no(rs.getInt("user_no"));
+					list.add(dto);
+				}
+			}catch(Exception e){
+				System.out.println("예약정보가져오기 오류");
+			}finally{
+				pool.close(con, pstmt, rs);
+			}
+			
+			return list;
+		
+		}
 		
 	}
 

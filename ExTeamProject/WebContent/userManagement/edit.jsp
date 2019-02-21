@@ -123,37 +123,52 @@
 							</td>
 						</tr>
 						
-						<br>
-						<br>
-						<br>
-						<br>
-						
-						
 						
 						
 					</tbody>
 				</table >
+				<br><br><br><br><br>
 			</form>
 					<table class="table table-bordered table-hover"
 					style="text-align: center; border: 1px solid #dddddd">
 						<thead>
 							<tr>
-								<th colspan="4"><h4 align="center">예약정보</h4></th>
+								<th colspan="6"><h4 align="center">예약정보</h4></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr align="center">
-								<th style="width: 110px;" align="center">ID</th>
-								<th align="center">예약호텔</th>
+								<th style="width: 110px;" align="center">Email</th>
+								<th align="center">예약호텔번호</th>
 								<th align="center">결제유무</th>
 								<th align="center">총가격</th>
+								<th align="center">체크인시간</th>
+								<th align="center">체크아웃시간</th>
 							</tr>
+							
+							
+							
+						
+							
+						<c:forEach var="reser" items="${list }">
 							<tr align="center">
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>${user_email }</td>
+								<td>${reser.h_no }</td>
+								<td>
+							<c:choose>
+								<c:when test="${reser.ckprice ==0 }">
+									<span style="color=red;">미결제</span>
+								</c:when>
+								
+								<c:otherwise>
+									결제
+								</c:otherwise>
+							</c:choose></td>
+								<td>${reser.total_price }</td>
+								<td>${reser.ckin }</td>
+								<td>${reser.ckout }</td>
 							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 						
