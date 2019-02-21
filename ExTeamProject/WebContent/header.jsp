@@ -32,7 +32,7 @@
 #searchBox { height:45px;}
 #searchSelect{ height:45px;}
 #searchBtn{ height:45px;}
-#keeeee{padding-left: 280px;}
+/* #keeeee{padding-left: 280px;} */
 
 </style>
 
@@ -74,16 +74,17 @@
           <div class="col-xl-9 mx-auto com-md-4">
           
           </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form action="HotelMain.hotel" method="post">
-              <div class="form-row" id="keeeee">
-                 <select class="col-md-4 enter" name="key" id="searchSelect">
-                  <option value="0">호텔이름</option>   <!-- 검색키워드구분 -->
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto" style="border:1px solid skyblue;">
+            <form action="HotelMain.hotel" method="post" style="border:1px solid blue;">
+              <div class="form-row" id="keeeee" style=" display: inline-block !important; ">
+            <!--      <select class="col-md-4 enter" name="key" id="searchSelect" style="width: 100px !important;">
+                  <option value="0">호텔이름</option>   검색키워드구분
                   <option value="1">지역구</option>
-               </select>
-                <div class="col-12 col-md-6 mb-2 mb-md-0">
-                  <input type="text" class="form-control form-control-lg" placeholder="부산지역검색" name="word" id="searchBox">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary" id="searchBtn" >검색</button>
+               </select> -->
+                <div class="col-12 col-md-6 mb-2 mb-md-0" style="border:1px solid orange; width: 800px;">
+                  <input type="text" class="form-control form-control-lg" placeholder="부산지역검색" name="word" id="searchBox" 
+                  style="border:1px solid red; width: 400px; display: inline-block !important;">
+                  <button type="submit" class="btn btn-block btn-lg btn-primary" id="searchBtn" style="width: 100px; display: inline-block !important;">검색</button>
                 </div>
                 <div class="col-12 col-md-3" >
                 </div>

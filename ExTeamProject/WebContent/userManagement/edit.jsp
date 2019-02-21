@@ -122,9 +122,42 @@
 								class="btn btn-primary pull-right" type="submit" value="수정">
 							</td>
 						</tr>
+						
+						<br>
+						<br>
+						<br>
+						<br>
+						
+						
+						
+						
 					</tbody>
-				</table>
+				</table >
 			</form>
+					<table class="table table-bordered table-hover"
+					style="text-align: center; border: 1px solid #dddddd">
+						<thead>
+							<tr>
+								<th colspan="4"><h4 align="center">예약정보</h4></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr align="center">
+								<th style="width: 110px;" align="center">ID</th>
+								<th align="center">예약호텔</th>
+								<th align="center">결제유무</th>
+								<th align="center">총가격</th>
+							</tr>
+							<tr align="center">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+						
+						
 		</div>
 	</c:if>
 </body>
