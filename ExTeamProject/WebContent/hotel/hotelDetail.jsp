@@ -122,7 +122,8 @@
 		text-align: center;
 		display : inline-block;
 		float :right;
-		border: 1px solid red;
+		font-size: medium;
+		border: 1px dashed black;	
 	}
 	
 	#reservation input{
@@ -198,14 +199,15 @@
 				<c:choose>
 					
 					<c:when test="${sessionScope.user_email !=null }">
-					<h2>가격 </h2>
+					
 					<span id="price"></span>
-					날짜<br>
+					<br>날짜<br>
 					<form action="reservation.hotel" method="post">
-					<input type="text" placeholder="체크인" id="ckindate" name="begindate"> -> 
-					<input type="text" placeholder="체크아웃" id="ckoutdate" name="enddate">
-					예약자는 : ${udto.user_email } <br>
-					인원<br>
+					<input type="text" placeholder="체크인" id="ckindate" name="begindate" text-align="center"> -> 
+					<input type="text" placeholder="체크아웃" id="ckoutdate" name="enddate" text-align="center"><br>
+					
+					<!--  예약자는 : ${udto.user_email } <br>-->
+					<br>인원 선택<br>
 					<input type = "hidden" name="ckreservation" value="0"><!-- 예약하기와, 예약정보뿌려주기를 나누는 플래그 action가보시면압니당. -->
 					<input type = "hidden" name="h_no" value="${hdto.h_no }">
 					<input type = "hidden" name="h_rno" value=""><!-- ajax사용해서 값을 지정합니다 -->
@@ -232,57 +234,57 @@
 				<h2 id="facilitiesMainH2">편의시설</h2>
 				<c:if test="${fdto.wifi == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"와이파이" }</h3>
+						<h5>${"와이파이" }</h5>
 					</div>
 				</c:if>
 				<c:if test="${fdto.shampoo == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"어매니티 제공" }</h3>
+						<h5>${"어매니티 제공" }</h5>
 					</div>
 				</c:if>
 				<c:if test="${fdto.closet == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"옷장" }</h3>
+						<h5>${"옷장" }</h3>
 					</div>
 				</c:if>
 				<c:if test="${fdto.tv == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"tv" }</h3>
+						<h5>${"tv" }</h3>
 					</div>
 				</c:if>
 				<c:if test="${fdto.aircon == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"에어컨" }</h3>
+						<h5>${"에어컨" }</h5>
 					</div>	
 				</c:if>
 				<c:if test="${fdto.hairdry == 1}">
 					<div class="facilitiesDiv">
-						<h3>${"헤어드라이기" }</h3>
+						<h5>${"헤어드라이기" }</h5>
 					</div>	
 				</c:if>
 				<c:if test="${fdto.swim == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"수영장" }</h3>
+						<h5>${"수영장" }</h5>
 					</div>
 				</c:if>
 				<c:if test="${fdto.wash_dry == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"세탁기" }</h3>
+						<h5>${"세탁기" }</h5>
 					</div>
 				</c:if>
 				<c:if test="${fdto.parking == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"주차장" }</h3>
+						<h5>${"주차장" }</h5>
 					</div>
 				</c:if>
 				<c:if test="${fdto.elevator == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"엘리베이터" }</h3>
+						<h5>${"엘리베이터" }</h5>
 					</div>
 				</c:if>
 				<c:if test="${fdto.health == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"헬스장" }</h3>
+						<h5>${"헬스장" }</h5>
 					</div>
 				</c:if>
 				<c:if test="${fdto.etc != null }">
@@ -296,8 +298,8 @@
 		<div id="roomInfo">	
 				
 					<hr>							
-					<h2>방정보</h2>
-					<p>클릭시 방정보와 서브이미가 나옴</p>
+					<h3>사진을 클릭하시면 큰 사진을 보실 수 있습니다.</h3>
+					
 		</div>
 				<!-- 페이징처리해야함! -->
 				<!-- 지금은 임의로 5개 만들어놨음 나중에 1개만  -->	
@@ -592,8 +594,8 @@
 							roomInfo.append("<h2>주말가 : "+roomsubimg.weekend_price+"</h2>");
  */							
 							//예약관련 정보넣는곳
-							$("#reservation #price").html("현재 선택하신 호텔의 주중가는 :"+roomsubimg.weekprice+"원 입니다.<br>");
-							$("#reservation #price").append("주말가는 : "+roomsubimg.weekend_price+"원 입니다<br>");
+							$("#reservation #price").html("현재 선택하신 숙소의 주중가:"+roomsubimg.weekprice+"원,<br>");
+							$("#reservation #price").append("주말가는 : "+roomsubimg.weekend_price+"원 입니다.<br>");
 							weekend_price = parseInt(roomsubimg.weekend_price); //String -> Int값 변경
 							
 							

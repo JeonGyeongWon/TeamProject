@@ -83,9 +83,9 @@
                </select>
                 <div class="col-12 col-md-6 mb-2 mb-md-0">
                   <input type="text" class="form-control form-control-lg" placeholder="부산지역검색" name="word" id="searchBox">
+                  <button type="submit" class="btn btn-block btn-lg btn-primary" id="searchBtn" >검색</button>
                 </div>
-                <div class="col-12 col-md-3 " >
-                  <button type="submit" class="btn btn-block btn-lg btn-primary" id="searchBtn" >검색</button> <br><br>
+                <div class="col-12 col-md-3" >
                 </div>
               </div>
             </form>

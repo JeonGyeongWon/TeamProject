@@ -74,7 +74,7 @@ function PageMove(page){
 						<a href="HotelDetail.hotel?h_no=${HotelDTO.h_no }" target="_blank">
 							<img src="hotel/${HotelDTO.h_imgpath}${HotelDTO.h_imgname}" alt="" class="img-responsive">
 							<h3 class="fh5co-work-title">${HotelDTO.h_name } </h3> 
-							<h4>${HotelDTO.h_content } <h4>
+							<%-- <h5>${HotelDTO.h_content } <h5> --%>
 							<p>추천수 : ${HotelDTO.h_bestcount }</p>
 						</a>
 					</div>
