@@ -234,57 +234,57 @@
 				<h2 id="facilitiesMainH2">편의시설</h2>
 				<c:if test="${fdto.wifi == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"와이파이" }</h3>
+						<p>${"와이파이" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.shampoo == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"어매니티 제공" }</h3>
+						<p>${"어매니티 제공" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.closet == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"옷장" }</h3>
+						<p>${"옷장" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.tv == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"tv" }</h3>
+						<p>${"tv" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.aircon == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"에어컨" }</h3>
+						<p>${"에어컨" }</p>
 					</div>	
 				</c:if>
 				<c:if test="${fdto.hairdry == 1}">
 					<div class="facilitiesDiv">
-						<h3>${"헤어드라이기" }</h3>
+						<p>${"헤어드라이기" }</p>
 					</div>	
 				</c:if>
 				<c:if test="${fdto.swim == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"수영장" }</h3>
+						<p>${"수영장" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.wash_dry == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"세탁기" }</h3>
+						<p>${"세탁기" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.parking == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"주차장" }</h3>
+						<p>${"주차장" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.elevator == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"엘리베이터" }</h3>
+						<p>${"엘리베이터" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.health == 1 }">
 					<div class="facilitiesDiv">
-						<h3>${"헬스장" }</h3>
+						<p>${"헬스장" }</p>
 					</div>
 				</c:if>
 				<c:if test="${fdto.etc != null }">
