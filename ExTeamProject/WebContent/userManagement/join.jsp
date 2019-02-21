@@ -6,14 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="./css/bootstrap.css">
+<link rel="stylesheet" href="./css/login.css">
 <title></title>
+
 <!-- jQuery -->
 	<script src="/ExTeamProject/js/jquery.min.js"></script>	
 	
 	<script src="/ExTeamProject/js/bootstrap.min.js"></script>
 	
 <script type="text/javascript">
-<script type="text/javascript">
+
 	//<form>태그로 전송할 값의 유효성 검사
 	function checkValue() {
 
@@ -102,6 +104,26 @@
 	}
 </script>
 </head>
+<style>
+.signUpTitle:before {
+   content: '';
+   position: absolute;
+   top: 0px;
+   left: 0;
+   right: 0;
+   height: 8px;
+   background: #C4E17F;
+   border-radius: 5px 5px 0 0;
+   background-image: -webkit-linear-gradient(left, #C4E17F, #C4E17F 12.5%, #F7FDCA 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #db9CBE 62.5%, #C49CDE 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62C2E4 87.5%, #62C2E4);
+   background-image: -moz-linear-gradient(left, #c4e17f, #C4E17F 12.5%, #F7FDCA 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #DB9CBE 62.5%, #C49CDE 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62C2E4 87.5%, #62C2E4);
+   background-image: -o-linear-gradient(left, #C4E17F, #C4E17F 12.5%, #F7FDCC 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #DB9DBE 62.5%, #C49CDE 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62C2E4 87.5%, #62C2E4);
+   background-image: linear-gradient(to right, #C4E17F, #C4E17F 12.5%, #F7FDCA 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #DB9CBE 62.5%, #c49cde 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62c2e4 87.5%, #62C2E4);
+}
+.mem { position: relative;
+  top: 50px;
+}
+
+</style>
 <body>
 	<!-- 로그인 세션 -->
 	<c:if test="${session.user_email != null}">
@@ -119,12 +141,13 @@
 	<div class="container">
 
 		<form method="post" action="./joinAction.um" name="userInfo"
-			onsubmit="return checkValue()">
+			onsubmit="return checkValue()" class="mem">
+			<h4 align="center" class="signUpTitle" style="margin: 0 !important;padding-top:30px !important;">회원가입</h4>
 			<table class="table table-bordered table-hover"
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="3"><h4 align="center">회원가입</h4></th>
+						<th colspan="3"></th>
 					</tr>
 				</thead>
 				<tbody>
