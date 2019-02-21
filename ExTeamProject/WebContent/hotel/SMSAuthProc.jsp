@@ -30,14 +30,15 @@
 	   			dataType :'json',
 	   			success : function(){
 	   				alert("인증되었습니다");
-	   				window.close();
-	   				opener.reload();
+	   				
 	   			}
 	   
 	   		});
 	   		
     		
     	}
+    	window.close();
+    	opener.location.reload();
     }
     </script>
     <%!
