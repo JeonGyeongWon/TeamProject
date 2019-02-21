@@ -24,7 +24,7 @@ public class getUserInfoAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("index.jsp?center=/userManagement/edit.jsp");
+		forward.setPath("/userManagement/edit.jsp");
 		
 		return forward;				//결과값을 컨트롤러(UserManagementController)의 "/editPage.um"로 리턴해 action변수에 저장한다.
 		
