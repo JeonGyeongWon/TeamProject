@@ -7,8 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="./css/bootstrap.css">
 <title></title>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="./js/bootstrap.js"></script>
+<!-- jQuery -->
+	<script src="/ExTeamProject/js/jquery.min.js"></script>	
+	
+	<script src="/ExTeamProject/js/bootstrap.min.js"></script>
+	
+<script type="text/javascript">
 <script type="text/javascript">
 	//<form>태그로 전송할 값의 유효성 검사
 	function checkValue() {
