@@ -265,5 +265,5 @@
     }
     %>
     
-    인증번호 : <input type="text" id="ckSMS" > <button onclick="AuthSMS();" value="확인"></button>
+    인증번호 : <input type="text" id="ckSMS" > <button onclick="AuthSMS();" value="확인">확인</button>
  	               

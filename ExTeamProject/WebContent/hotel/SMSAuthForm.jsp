@@ -13,6 +13,13 @@
  	//카페24에서 값을 처리할떄 (Proc)페이지는 요청값을 전부 null로 바꾼뒤 처리한다 때문에 session영역에 Random을 저장해서 처리--
  	session.setAttribute("RandomAuthNumber", RandomAuthNumber);
  %>
+ 
+ <style>
+ 
+ 	#sendPhoneList{
+ 		left: -9999px; 		
+ 	}
+ </style>
  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
  
  	<script type="text/javascript">

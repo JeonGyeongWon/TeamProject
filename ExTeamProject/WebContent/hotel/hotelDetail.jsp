@@ -210,14 +210,15 @@
 					<br>인원 선택<br>
 					<input type = "hidden" name="ckreservation" value="0"><!-- 예약하기와, 예약정보뿌려주기를 나누는 플래그 action가보시면압니당. -->
 					<input type = "hidden" name="h_no" value="${hdto.h_no }">
-					<input type = "hidden" name="h_rno" value="" id="res_h_rno"><!-- ajax사용해서 값을 지정합니다 -->
+					<input type = "hidden" name="h_rno" value="0" id="res_h_rno"><!-- ajax사용해서 값을 지정합니다 -->
 					<input type = "hidden" name="user_no" value="${udto.user_no }" >
 					<select name="personnel" id="res_personnel">
 					</select>
-					<button onclick="CkReser();">예약하기</button><br>
-					<input type = "hidden" name="total_price" value="" id="total_price">
+					
+					<input type = "hidden" name="total_price" value="0" id="total_price">
 					<!-- 날짜선택시 표시될 총 가격이 들어갈공간 -->
 					</form>
+					<button onclick="CkReser();">예약하기</button><br>
 					<span id="total_priceSpan"></span>
 					</c:when>
 					<c:otherwise>
@@ -421,17 +422,17 @@
 		res_personnel
 		total_price */
 	function CkReser(){
-		if($("#ckindate").val()==null){
+		if($("#ckindate").val().length==0){
 			alert("체크인 날짜를 정해주세요");
 			return false;
-		}else if($("#ckoutdate").val()==null){
+		}else if($("#ckoutdate").val().length==0){
 			alert("체크아웃 날짜를 정해주세요");
 			return false;
-		}else if($("#res_h_rno").val() == null){
-			alert("예약하려는 방정보를 입력해 주세요");
+		}else if($("#res_h_rno").val() == 0){
+			alert("예약하려는 방정보를 클릭해 주세요");
 			return false;
-		}else if($("#total_price").val() == null){
-			alert("예약하려는 방정보를 입력해 주세요");
+		}else if($("#total_price").val() == 0){
+			alert("예약하려는 방정보를 클릭해 주세요");
 			return false;
 		}else{
 			$("#res_form").submit();
